@@ -1,1 +1,51 @@
+- content_for :page_title do
+  User Management
+
+.section.management
+  .page-header
+    %h1
+      Overview
+      %small User Management
+  .container
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Code
+          %th First name
+          %th Last name
+          %th Email
+          %th Role
+          %th Activated?
+          %th Last update
+          %th Action
+      %tbody
+        - null_value = '--'
+        - @users.each do |user|
+          %tr
+            %td
+              = user.code
+              = null_value if user.code.blank?
+            %td
+              = user.first_name
+              = null_value if user.first_name.blank?
+            %td
+              = user.last_name
+              = null_value if user.last_name.blank?
+            %td
+              = user.email
+              = null_value if user.email.blank?
+            %td
+              = user.role
+              = null_value if user.role.blank?
+            %td
+              = user.activated ? fa_icon('check') : fa_icon('times')
+            %td
+              = user.updated_at
+              = null_value if user.updated_at.blank?
+            %td
+              = link_to fa_icon('pencil-square', class: 'fa-2x'), edit_user_path(user)
+              = link_to fa_icon('trash', class: 'fa-2x'), user_path(user), method: :delete, data: {confirm: 'Are you sure?'}
+    .row
+      .col-md-12
+        = link_to 'New User', new_user_path
 

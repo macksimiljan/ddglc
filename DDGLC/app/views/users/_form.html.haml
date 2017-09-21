@@ -1,0 +1,13 @@
+= bootstrap_form_for(@user, layout: :horizontal, label_col: 'col-md-1', control_col: 'col-md-3') do |f|
+  = f.text_field :code, placeholder: 'JoDo', help: 'Take the first two letters of the first and last name, respectively.'
+  = f.text_field :first_name, placeholder: 'John'
+  = f.text_field :last_name, placeholder: 'Doe'
+  = f.email_field :email, placeholder: 'john.doe@example.com'
+  = f.select :role, %w(Guest Employee Manager Admin), help: 'Rights management by different roles.'
+  = f.form_group :activated, label: {text: 'Activation'}, help: 'Only users with activated accounts can be login.' do
+    = f.check_box :activated, label: 'activated', checked: true
+  = f.password_field :password, placeholder: 'ddglc123', size: 3, help: 'Must be 5-15 characters long.'
+  = f.password_field :password_confirmation, placeholder: 'ddglc123'
+  %br
+  = f.form_group do
+    = f.submit 'Submit'
