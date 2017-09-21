@@ -22,7 +22,7 @@
             = navbar_item 'User Management', users_path
     = navbar_group align: 'right' do
       - if logged_in?
-        = navbar_item 'Logout', logout_path, method: :delete
+        = navbar_item "Log out #{fa_icon('sign-out')}", logout_path, method: :delete
       - else
-        = navbar_item 'Login', login_path
+        = navbar_item "#{fa_icon('sign-in')} Log in", login_path
 
