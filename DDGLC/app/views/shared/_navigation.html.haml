@@ -13,15 +13,16 @@
         = navbar_item 'foo', '/foo'
       = navbar_dropdown 'Bibliography' do
         = navbar_item 'foo', '/foo'
-      = navbar_dropdown 'Account' do
-        = navbar_item 'Settings', '/settings'
-        - if true # check if user is admin, maybe like "if current_user.try(:admin?)"
-          = navbar_dropdown_divider
-          = navbar_item "Admin Dashboard", '/admin'
-          = navbar_item 'User Management', users_path
+      - if logged_in?
+        = navbar_dropdown 'Account' do
+          = navbar_item 'Settings', '/settings'
+          - if logged_in_as_admin?
+            = navbar_dropdown_divider
+            = navbar_item "Admin Dashboard", '/admin'
+            = navbar_item 'User Management', users_path
     = navbar_group align: 'right' do
-      - if true # check if user is logged in, maybe like "if current_user.present?"
-        = navbar_item "Log Out", '/logout'
+      - if logged_in?
+        = navbar_item 'Logout', logout_path, method: :delete
       - else
-        = navbar_item "Log In", '/login'
+        = navbar_item 'Login', login_path
 

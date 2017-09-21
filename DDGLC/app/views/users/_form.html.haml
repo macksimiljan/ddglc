@@ -6,7 +6,7 @@
   = f.select :role, %w(Guest Employee Manager Admin), help: 'Rights management by different roles.'
   = f.form_group :activated, label: {text: 'Activation'}, help: 'Only users with activated accounts can be login.' do
     = f.check_box :activated, label: 'activated', checked: true
-  = f.password_field :password, placeholder: 'ddglc123', size: 3, help: 'Must be 5-15 characters long.'
+  = f.password_field :password, placeholder: 'ddglc123', help: 'Must be 5-15 characters long.'
   = f.password_field :password_confirmation, placeholder: 'ddglc123'
   %br
   = f.form_group do

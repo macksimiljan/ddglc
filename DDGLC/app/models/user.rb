@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
 
   has_secure_password
+
+  def admin?
+    role == 'Admin'
+  end
 end
