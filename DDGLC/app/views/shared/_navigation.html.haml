@@ -13,6 +13,10 @@
         = navbar_item 'foo', '/foo'
       = navbar_dropdown 'Bibliography' do
         = navbar_item 'foo', '/foo'
+      = navbar_dropdown 'Project' do
+        = navbar_item 'About',   project_about_path
+        = navbar_item 'Staff',   project_staff_path
+        = navbar_item 'Contact', project_contact_path
       - if logged_in?
         = navbar_dropdown 'Account' do
           = navbar_item 'Settings', '/settings'
