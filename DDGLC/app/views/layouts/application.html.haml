@@ -1,8 +1,11 @@
 !!!
 %html
   %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}
     %title
       DDGLC
+      - if content_for? :page_title
+        = "| #{yield(:page_title)}"
     = csrf_meta_tags
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -11,4 +14,8 @@
   %body{:class => "#{controller_name} #{action_name}"}
     = render 'shared/navigation'
     = yield
-    = render 'shared/footer'
+    - flash.each do |message_type, message|
+      %div{class: "alert alert-#{message_type}"}
+        = message
+    = yield
+  = render 'shared/footer'

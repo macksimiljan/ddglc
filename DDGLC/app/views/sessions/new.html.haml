@@ -1,0 +1,14 @@
+- content_for :page_title do
+  Login
+
+.section
+  .container
+    .row
+      .col-md-6.col-md-offset-3
+        .page-header
+          %h1 Login
+        = bootstrap_form_for(:session, url: login_url) do |f|
+          = f.text_field :code, icon: 'user', label: 'Your abbreviation', placeholder: 'JoDo'
+          = f.password_field :password, icon: 'lock', placeholder: 'password'
+          = f.form_group do
+            = f.submit 'Log in', class: 'btn btn-primary'
