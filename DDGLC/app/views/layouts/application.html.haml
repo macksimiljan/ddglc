@@ -13,7 +13,6 @@
 
   %body{:class => "#{controller_name} #{action_name}"}
     = render 'shared/navigation'
-    = yield
     - flash.each do |message_type, message|
       %div{class: "alert alert-#{message_type}"}
         = message
