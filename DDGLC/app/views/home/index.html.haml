@@ -1,27 +1,28 @@
 %header#intro.overview-section
   .container
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         = image_tag 'logo2.jpg', class: 'img-rounded', alt: 'logo', height: '150'
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         %h1.overview-header
           Database and Dictionary of Greek Loanwords in Coptic
-    .row
-      .col-md-10
-        %p.overview-text
+    .row.overview-text
+      .col-md-10.col-md-offset-1
+        %p
           The DDGLC project is hosted by the Egyptological Institute -Georg Steindorff- of the University of Leipzig and
           funded by the Deutsche Forschungsgemeinschaft as a long-term project with a projected lifespan ranging through 2024.
-        %p.overview-text
+        %p
           The DDGLC project seeks to produce a systematic, comprehensive and detailed lexicographical compilation and
           description of Greek loanwords as attested in the entire Coptic corpus through every dialect, each kind of text,
           and in pre-Coptic Egyptian. The project will thus eventually record 1500 years of contact-induced language change
           of the Egyptian-Coptic language. The results of the project shall be made available in an online database
           and in a printed dictionary.
-        %p.overview-text
+        %p
           The core tool of the DDGLC project is currently a relational database designed to connect linguistic and
           extra-linguistic data concerning types and tokens of all identifiable Greek loanwords in Coptic.
-        %br
+    .row
+      .col-md-10.col-md-offset-1
         %a.scroll-button{href: '#lexicon'}
           %button.btn.btn-default.circular
             = fa_icon 'angle-double-down', class: 'fa-2x'
@@ -31,21 +32,24 @@
 %section#lexicon.overview-section
   .container
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         %h2.overview-header
           = fa_icon 'book', class: 'fa-1x'
           Lexicon
-        %p.overview-text
+    .row.overview-text
+      .col-md-10.col-md-offset-1
+        %p
           The lexicon summarizes the morphological and semantic information of the data.
           It is divided into three parts. The first part is the Greek Lemma list, which contains the information
           of the processed donor language lemmas. Currently, there XX lemmas in the database.
-        %p.overview-text
+        %p
           The second part is the Coptic Sublemma list with more than XX entries. Each entry represents the morphological
           and semantic information of a loanword.
-        %p.overview-text
+        %p
           Eventually, the Coptic Usage is the third part. It contains data about ... Within the database, there are
           XX Coptic Usages, on average XX usages per sublemma.
-        %br
+    .row
+      .col-md-10.col-md-offset-1
         %a.scroll-button{href: '#attestation'}
           %button.btn.btn-default.circular
             = fa_icon 'angle-double-down', class: 'fa-2x'
@@ -55,15 +59,18 @@
 %section#attestation.overview-section
   .container
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         %h2.overview-header
           = fa_icon 'pencil-square-o', class: 'fa-1x'
           Attestations
-        %p.overview-text
+    .row.overview-text
+      .col-md-10.col-md-offset-1
+        %p
           Lorem Ipsum.
-        %p.overview-text
+        %p
           Lorem Ipsum.
-        %br
+    .row
+      .col-md-10.col-md-offset-1
         %a.scroll-button{href: '#manuscript-text'}
           %button.btn.btn-default.circular
             = fa_icon 'angle-double-down', class: 'fa-2x'
@@ -73,14 +80,18 @@
 %section#manuscript-text.overview-section
   .container
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         %h2.overview-header
           = fa_icon 'file-text-o', class: 'fa-1x'
           Manuscripts and Texts
-        %p.overview-text
+    .row.overview-text
+      .col-md-10.col-md-offset-1
+        %p
           Lorem Ipsum.
-        %p.overview-text
+        %p
           Lorem Ipsum.
+    .row
+      .col-md-10.col-md-offset-1
         %a.scroll-button{href: '#bibliography'}
           %button.btn.btn-default.circular
             = fa_icon 'angle-double-down', class: 'fa-2x'
@@ -90,12 +101,16 @@
 %section#bibliography.overview-section
   .container
     .row
-      .col-md-10
+      .col-md-10.col-md-offset-1
         %h2.overview-header
           = fa_icon 'external-link', class: 'fa-1x'
           Bibliography
-        %p.overview-text
+    .row.overview-text
+      .col-md-10.col-md-offset-1
+        %p
           Lorem Ipsum.
+    .row
+      .col-md-10.col-md-offset-1
         %a{href: '#bibliography'}
           %button.btn.btn-default.circular
             = fa_icon 'angle-double-right', class: 'fa-2x'
