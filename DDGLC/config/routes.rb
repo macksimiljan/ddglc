@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '/about',   to: 'about#index'
     get '/staff',   to: 'staff#index'
     get '/contact', to: 'contact#index'
+    get '/imprint', to: 'imprint#index'
   end
 
 

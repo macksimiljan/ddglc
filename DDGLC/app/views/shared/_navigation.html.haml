@@ -3,21 +3,21 @@
   = navbar_collapse do
     = navbar_group id: 'menu' do
       = navbar_item 'Home', root_path
-      = navbar_dropdown "Lexicon" do
-        = navbar_item 'Greek Lemma', '/greek_lemmas'
-        = navbar_item 'Coptic Sublemma', '/coptic_sublemmas'
-        = navbar_item 'Coptic Usage', '/coptic_usages'
-      = navbar_dropdown 'Attestations' do
-        = navbar_item 'foo', '/foo'
-      = navbar_dropdown 'Manuscript/ Texts' do
-        = navbar_item 'foo', '/foo'
-      = navbar_dropdown 'Bibliography' do
-        = navbar_item 'foo', '/foo'
       = navbar_dropdown 'Project' do
         = navbar_item 'About',   project_about_path
         = navbar_item 'Staff',   project_staff_path
         = navbar_item 'Contact', project_contact_path
       - if logged_in?
+        = navbar_dropdown "Lexicon" do
+          = navbar_item 'Greek Lemma', '/greek_lemmas'
+          = navbar_item 'Coptic Sublemma', '/coptic_sublemmas'
+          = navbar_item 'Coptic Usage', '/coptic_usages'
+        = navbar_dropdown 'Attestations' do
+          = navbar_item 'foo', '/foo'
+        = navbar_dropdown 'Manuscript/ Texts' do
+          = navbar_item 'foo', '/foo'
+        = navbar_dropdown 'Bibliography' do
+          = navbar_item 'foo', '/foo'
         = navbar_dropdown 'Account' do
           = navbar_item 'Settings', '/settings'
           - if logged_in_as_admin?
