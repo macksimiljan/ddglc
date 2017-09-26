@@ -1,0 +1,7 @@
+DATABASE_PW: <password>
+production:
+  DATABASE_PW: <password>
+
+DATABASE_USER: <user_name>
+production:
+  DATABASE_USER: <user_name>

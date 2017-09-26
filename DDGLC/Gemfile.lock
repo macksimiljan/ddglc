@@ -61,6 +61,8 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
+    figaro (1.1.1)
+      thor (~> 0.14)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     gem_config (0.3.1)
@@ -182,6 +184,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   coffee-rails (~> 4.2)
+  figaro
   font-awesome-rails
   haml
   jbuilder (~> 2.5)
