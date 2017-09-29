@@ -1,41 +1,76 @@
+$ddglc-color: rgb(30, 0, 97)
+$ddglc-color-light: rgb(62, 34, 125)
+$lexicon-color-light: rgb(108, 172, 194)
+$lexicon-color-dark: rgb(80, 143, 165)
+$attestation-color-light: rgb(163, 148, 179)
+$attestation-color-dark: rgb(126, 105, 148)
+$manuscript-text-color-light: rgb(165, 83, 144)
+$manuscript-text-color-dark: rgb(139, 34, 113)
+$bibliography-color-light: rgb(190, 72, 114)
+$bibliography-color-dark: rgb(169, 68, 104)
+
+
+
 .overview-section
+  padding-top: 20vh
   color: white
-  padding: 20vh 0px
+  min-height: 100vh
   text-align: center
 
-#intro
-  padding: 20vh 0px
-  background: rgb(30, 0, 97)
+.overview-section-last
+  min-height: 95vh
+
+.overview-tab
+  #lexicon &
+    background-color: $lexicon-color-light
+  #intro &
+    background-color: $ddglc-color
+  #attestation &
+    background-color: $attestation-color-light
+  #manuscript-text &
+    background-color: $manuscript-text-color-light
+  #bibliography &
+    background-color: $bibliography-color-light
+
 
 .overview-header
-  font-size: 28px
-  margin: 30px 0px
+  height: 130px
+  line-height: 125px
+  h1
+    font-size: 28px
+    vertical-align: middle
+    display: inline-block
 
 .overview-text
   font-size: 16px
   background: rgba(255, 255, 255, 0.1)
   padding: 25px 20px
-  margin-bottom: 20px
   p
     margin-bottom: 16px
 
-#lexicon
-  padding: 30vh 0px
-  background-color: rgb(111, 177, 200)
+.overview-text-new
+  color: white
+  font-size: 16px
+  padding: 30px 20px
+  p
+    margin-bottom: 16px
+  #lexicon &
+    background-color: $lexicon-color-dark
+  #intro &
+    background-color: $ddglc-color-light
+  #attestation &
+    background-color: $attestation-color-dark
+  #manuscript-text &
+    background-color: $manuscript-text-color-dark
+  #bibliography &
+    background-color: $bibliography-color-dark
 
-#attestation
-  padding: 30vh 0px
-  background-color: rgb(126, 105, 148)
+.overview-links
+  padding-top: 40px
 
-#manuscript-text
-  padding: 30vh 0px
-  background-color: rgb(139, 34, 113)
-
-#bibliography
-  padding: 30vh 0px
-  background-color: rgb(191, 60, 106)
 
 .btn-default.circular
+  font-size: 10px
   color: white
   background-color: transparent
   -webkit-transition: background 0.3s ease-in-out
