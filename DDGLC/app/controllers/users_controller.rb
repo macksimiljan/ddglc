@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all.order(:code)
+    @users = User.all.order(activated: :desc, code: :asc)
   end
 
   def new

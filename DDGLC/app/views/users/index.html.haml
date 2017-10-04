@@ -1,7 +1,7 @@
 - content_for :page_title do
   User Management
 
-.section.management
+.section.col-md-8.col-md-offset-2
   .page-header
     %h1
       Overview
@@ -37,8 +37,8 @@
             %td
               = user.role
               = null_value if user.role.blank?
-            %td
-              = user.activated ? fa_icon('check') : fa_icon('times')
+            %td.text-center
+              = user.activated ? fa_icon('check', class: 'text-success') : fa_icon('times', class: 'text-danger')
             %td
               = user.updated_at
               = null_value if user.updated_at.blank?

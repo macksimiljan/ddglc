@@ -3,7 +3,7 @@
   = f.text_field :first_name, placeholder: 'John'
   = f.text_field :last_name, placeholder: 'Doe'
   = f.email_field :email, placeholder: 'john.doe@example.com'
-  = f.select :role, %w(Guest Employee Manager Admin), help: 'Rights management by different roles.'
+  = f.select :role, %w(guest employee manager admin), help: 'Rights management by different roles.'
   = f.form_group :activated, label: {text: 'Activation'}, help: 'Only users with activated accounts can be login.' do
     = f.check_box :activated, label: 'activated', checked: true
   = f.password_field :password, placeholder: 'ddglc123', help: 'Must be 5-15 characters long.'
