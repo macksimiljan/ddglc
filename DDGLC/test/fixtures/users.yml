@@ -4,7 +4,7 @@ users_001:
   code: JoDo
   first_name: John
   last_name: Doe
-  email: john.doe@example.com
+  email: guest@example.com
   role: guest
   password_digest: "$2a$10$V4xtdjZlEIJTH8xOa0A2O.CV3RmyUJxU01YbMUrhv5zElv/iiwLHe"
   created_at: '2017-10-04 07:35:41.550793'
@@ -15,7 +15,7 @@ users_002:
   code: MaMu
   first_name: Max
   last_name: Mustermann
-  email: max.mustermann@example.com
+  email: activated_employee@example.com
   role: employee
   password_digest: "$2a$10$3lmEwjFTXTHvezbyn.Jk5.7RG1HSlkNJf2T4pTfbnqPc1kp3n5SfC"
   created_at: '2017-10-04 07:36:34.677162'
@@ -26,7 +26,7 @@ users_003:
   code: JaRo
   first_name: Jane
   last_name: Roe
-  email: jane.roe@example.com
+  email: manager@example.com
   role: manager
   password_digest: "$2a$10$IyNpFa2OdRtycwYLlXUAX.lyOTk.z..SLhpilrTc.hoAhYVp2fVZG"
   created_at: '2017-10-04 07:37:26.70155'
@@ -37,7 +37,7 @@ users_004:
   code: JoSm
   first_name: John
   last_name: Smith
-  email: john.smith@example.com
+  email: admin@example.com
   role: admin
   password_digest: "$2a$10$ELi4Sl0QOG42LlgdhkqIKuOkgiKTynEUfwTsJVonsie.E9zXDRTIW"
   created_at: '2017-10-04 07:38:28.802987'
@@ -48,7 +48,7 @@ users_005:
   code: HaHo
   first_name: Harry
   last_name: Holland
-  email: harry.holland@example.com
+  email: deactivated_employee@example.com
   role: employee
   password_digest: "$2a$10$9/fiZqXvCKbuKst.buwmKOG71F3VC57VuORxyfkuVUXjtDT2KWg72"
   created_at: '2017-10-04 07:41:12.975332'
@@ -59,7 +59,7 @@ users_006:
   code: LiMü
   first_name: Lieschen
   last_name: Müller
-  email: lieschen.mueller@example.com
+  email: activated_employee@example.com
   role: employee
   password_digest: "$2a$10$PWujZpDd7JWzdFl.IA06vuct1Lst4A/L3y7r41cWEH5Hqp8afGAMC"
   created_at: '2017-10-04 07:45:36.401627'
