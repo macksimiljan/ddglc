@@ -52,3 +52,4 @@ bower.json
 .idea/
 # Ignore application configuration
 /config/application.yml
+/test/fixtures_dump/
