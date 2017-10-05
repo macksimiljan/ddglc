@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user && user.activated && user.authenticate(params[:session][:password])
       log_in user
       redirect_to root_url
-      flash[:success] = 'You are logged in.'
+      flash[:success] = "Hello #{user.code}. You are logged in as #{user.role}. Welcome back."
     else
       flash.now[:danger] = 'Unable to login. Check your abbreviation and password.'
       render 'new'

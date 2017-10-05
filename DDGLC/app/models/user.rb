@@ -8,7 +8,21 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  ROLES = %i[guest employee manager admin].freeze
+
   def admin?
-    role == 'Admin'
+    role == 'admin' && activated == true
+  end
+
+  def manager?
+    role == 'manager' && activated == true
+  end
+
+  def employee?
+    role == 'employee' && activated == true
+  end
+
+  def guest?
+    role == 'guest' && activated == true
   end
 end
