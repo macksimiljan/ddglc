@@ -9,9 +9,11 @@
         = navbar_item 'Contact', project_contact_path
       - if logged_in?
         = navbar_dropdown "Lexicon" do
-          = navbar_item 'Greek Lemma', '/greek_lemmas'
-          = navbar_item 'Coptic Sublemma', '/coptic_sublemmas'
-          = navbar_item 'Coptic Usage', '/coptic_usages'
+          = navbar_item 'About', '/lexicon/about'
+          = navbar_dropdown_divider
+          = navbar_item 'Greek Lemma', lemmas_path
+          = navbar_item 'Coptic Sublemma', sublemmas_path
+          = navbar_item 'Coptic Usage', usages_path
         = navbar_dropdown 'Attestations' do
           = navbar_item 'foo', '/foo'
         = navbar_dropdown 'Manuscript/ Texts' do

@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     get '/imprint', to: 'imprint#index'
   end
 
+  namespace :lexicon do
+    get '/about', to: 'about#index'
+  end
+
+  resources :lemmas, path: '/lexicon/lemmas'
+  resources :sublemmas, path: '/lexicon/sublemmas'
+  resources :usages, path: '/lexicon/usages'
+
 
   resources :users
 
