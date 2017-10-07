@@ -1,0 +1,30 @@
+- content_for :page_title do
+  POS
+
+.section.col-md-8.col-md-offset-2
+  .page-header
+    %h1
+      Part of Speech
+      %small Lexicon
+  .container
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Label
+          %th Action
+      %tbody
+        - null_value = '--'
+        - @part_of_speeches.each do |pos|
+          %tr
+            %td
+              = pos.label
+              = null_value if pos.label.blank?
+            %td
+              = link_to fa_icon('pencil-square', class: 'fa-2x'), root_path
+              = link_to fa_icon('trash', class: 'fa-2x'), root_path
+
+
+    .row
+      .col-md-12
+        = link_to fa_icon('user-plus', class: 'fa-2x'), root_path
+

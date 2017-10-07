@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007191604) do
+ActiveRecord::Schema.define(version: 20171007200711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,8 @@ ActiveRecord::Schema.define(version: 20171007191604) do
 
   create_table "part_of_speeches", force: :cascade do |t|
     t.string   "label"
-    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_part_of_speeches_on_code", unique: true, using: :btree
   end
 
   create_table "semantic_fields", force: :cascade do |t|

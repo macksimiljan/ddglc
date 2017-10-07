@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :lemmas, path: '/lexicon/lemmas'
   resources :sublemmas, path: '/lexicon/sublemmas'
   resources :usages, path: '/lexicon/usages'
+  resources :part_of_speeches, path: 'lexicon/pos'
+  resources :languages, path: '/lexicon/languages'
 
 
   resources :users
