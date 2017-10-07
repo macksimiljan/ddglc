@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  label: MyString
+  article: MyString
+  meaning: MyString
+  loand_word_form: MyString
+  source: MyString
+  reference: MyString
+
+two:
+  label: MyString
+  article: MyString
+  meaning: MyString
+  loand_word_form: MyString
+  source: MyString
+  reference: MyString
