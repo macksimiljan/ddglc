@@ -2,8 +2,8 @@
   Lexicon
 
 .section.col-md-8.col-md-offset-2
-  .page-header
-    %h1.lexicon-headline
+  .page-header.lexicon-headline
+    %h1
       About
       %small Lexicon
   .row
@@ -17,3 +17,7 @@
           No. of POS:
           = PartOfSpeech.count
           = link_to 'show', part_of_speeches_path
+        %li
+          No. of semantic fiels:
+          = SemanticField.count
+          = link_to 'show', semantic_fields_path

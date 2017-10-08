@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :usages, path: '/lexicon/usages'
   resources :part_of_speeches, path: 'lexicon/pos'
   resources :languages, path: '/lexicon/languages'
+  resources :semantic_fields, path: '/lexicon/semantic_fields'
 
 
   resources :users

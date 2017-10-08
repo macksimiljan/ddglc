@@ -1,28 +1,32 @@
 - content_for :page_title do
-  Language
+  Semantic Field
 
 .section.col-md-8.col-md-offset-2
   .page-header
     %h1.lexicon-headline
-      Language
+      Semantic Fields
       %small Lexicon
   .container
     %table.table.table-hover
       %thead
         %tr
-          %th Code
           %th Label
+          %th URL
+          %th Source
           %th Action
       %tbody
         - null_value = '--'
-        - @languages.each do |l|
+        - @semantic_fields.each do |f|
           %tr
             %td
-              = l.code
-              = null_value if l.code.blank?
+              = f.label
+              = null_value if f.label.blank?
             %td
-              = l.label
-              = null_value if l.label.blank?
+              = link_to "#{f.url}", f.url, target: :blank
+              = null_value if f.url.blank?
+            %td
+              = f.source
+              = null_value if f.source.blank?
             %td
               = link_to fa_icon('pencil-square', class: 'fa-2x'), root_path
               = link_to fa_icon('trash', class: 'fa-2x'), root_path
