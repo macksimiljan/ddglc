@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007205028) do
+ActiveRecord::Schema.define(version: 20171012155001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20171007205028) do
     t.index ["updated_by_id"], name: "index_lemmas_on_updated_by_id", using: :btree
   end
 
+  create_table "lemmas_semantic_fields", id: false, force: :cascade do |t|
+    t.integer "semantic_field_id"
+    t.integer "lemma_id"
+    t.index ["lemma_id"], name: "index_lemmas_semantic_fields_on_lemma_id", using: :btree
+    t.index ["semantic_field_id"], name: "index_lemmas_semantic_fields_on_semantic_field_id", using: :btree
+  end
+
   create_table "part_of_speeches", force: :cascade do |t|
     t.string   "label",      null: false
     t.datetime "created_at", null: false
@@ -54,13 +61,6 @@ ActiveRecord::Schema.define(version: 20171007205028) do
     t.string   "source",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "semantic_fields_lemmas", id: false, force: :cascade do |t|
-    t.integer "semantic_field_id"
-    t.integer "lemma_id"
-    t.index ["lemma_id"], name: "index_semantic_fields_lemmas_on_lemma_id", using: :btree
-    t.index ["semantic_field_id"], name: "index_semantic_fields_lemmas_on_semantic_field_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
