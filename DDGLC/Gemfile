@@ -17,6 +17,8 @@ gem 'puma', '~> 3.0'
 
 # authorization library
 gem 'cancancan', '~> 2.0'
+# engine that provides an easy-to-use interface for managing your data
+gem 'rails_admin', '~> 1.2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
