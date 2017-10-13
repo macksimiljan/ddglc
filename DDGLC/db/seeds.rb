@@ -9,7 +9,7 @@
 pos_labels = ['adjective', 'adverb', 'adverbial multi-word expression', 'article',
               'conjunction', 'conjunction / adverb', 'conjunction / preposition',
               'exclamation', 'interjection', 'language island', 'nominal prefix',
-              'noun', 'particle', 'particle: discourse', 'particle: interrogative',
+              'noun', 'participle', 'particle', 'particle: discourse', 'particle: interrogative',
               'preposition', 'pronoun', 'pronoun: demonstrative', 'pronoun: personal',
               'verb', 'verb: impersonal', 'word combination']
 pos_labels.each do |l|

@@ -1,5 +1,3 @@
-include SessionsHelper
-
 RailsAdmin.config do |config|
 
   ### Popular gems integration
