@@ -53,5 +53,4 @@ bower.json
 # Ignore application configuration
 /config/application.yml
 /test/fixtures_dump/
-/migrate_logs.txt
-/migrate_logs_copy.txt
+/migrate_logs*
