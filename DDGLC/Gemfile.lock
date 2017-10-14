@@ -1,3 +1,20 @@
+GIT
+  remote: https://github.com/kaminari/kaminari
+  revision: 23e4737720675c83e0c06dc269824cd972058419
+  specs:
+    kaminari (1.1.0)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.0)
+      kaminari-activerecord (= 1.1.0)
+      kaminari-core (= 1.1.0)
+    kaminari-actionview (1.1.0)
+      actionview
+      kaminari-core (= 1.1.0)
+    kaminari-activerecord (1.1.0)
+      activerecord
+      kaminari-core (= 1.1.0)
+    kaminari-core (1.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,18 +101,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    kaminari (1.0.1)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.0.1)
-      kaminari-activerecord (= 1.0.1)
-      kaminari-core (= 1.0.1)
-    kaminari-actionview (1.0.1)
-      actionview
-      kaminari-core (= 1.0.1)
-    kaminari-activerecord (1.0.1)
-      activerecord
-      kaminari-core (= 1.0.1)
-    kaminari-core (1.0.1)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -226,7 +231,7 @@ DEPENDENCIES
   indefinite_article
   jbuilder (~> 2.5)
   jquery-rails
-  kaminari
+  kaminari!
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)

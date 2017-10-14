@@ -7,47 +7,64 @@
       Greek Lemma
       %small Lexicon
   .container
-    .row
-      .col-md-10.col-md-offset-1
-        = Lemma::ARTICLES
-    -#%table.table.table-hover
-    -#  %thead
-    -#    %tr
-    -#      %th Code
-    -#      %th First name
-    -#      %th Last name
-    -#      %th Email
-    -#      %th Role
-    -#      %th Activated?
-    -#      %th Last update
-    -#      %th Action
-    -#  %tbody
-    -#    - null_value = '--'
-    -#    - @users.each do |user|
-    -#      %tr
-    -#        %td
-    -#          = user.code
-    -#          = null_value if user.code.blank?
-    -#        %td
-    -#          = user.first_name
-    -#          = null_value if user.first_name.blank?
-    -#        %td
-    -#          = user.last_name
-    -#          = null_value if user.last_name.blank?
-    -#        %td
-    -#          = user.email
-    -#          = null_value if user.email.blank?
-    -#        %td
-    -#          = user.role
-    -#          = null_value if user.role.blank?
-    -#        %td.text-center
-    -#          = user.activated ? fa_icon('check', class: 'text-success') : fa_icon('times', class: 'text-danger')
-    -#        %td
-    -#          = user.updated_at
-    -#          = null_value if user.updated_at.blank?
-    -#        %td
-    -#          = link_to fa_icon('pencil-square', class: 'fa-2x'), edit_user_path(user)
-    -#          = link_to fa_icon('trash', class: 'fa-2x'), user_path(user), method: :delete, data: {confirm: 'Are you sure?'}
-    -#.row
-    -#  .col-md-12
-    -#    = link_to fa_icon('user-plus', class: 'fa-2x'), new_user_path
+    .panel-group
+      .panel.panel-default.panel-lexicon
+        .panel-heading
+          .panel-title Actions
+        .panel-body
+          .row
+            .col-md-6
+              Create New Greek Lemma
+            .col-md-6
+              Update Greek Lemma
+      .panel.panel-default.panel-lexicon
+        .panel-heading
+          .panel-title Greek Lemmas
+        .panel-body
+          %ul
+            - @lemmas.each do |lemma|
+              %li
+                .panel.panel-default.panel-lemma
+                  .row
+                    .col-md-4.basic-information
+                      %p
+                        %span.coptic-greek.lemma-label= link_to lemma.label, lemma_path(lemma)
+                      %p.lemma-meaning
+                        %i= lemma.meaning
+                    .col-md-4.detailed-information
+                      %p
+                        - if lemma.part_of_speech
+                          %span.lemma-pos= lemma.part_of_speech.label
+                        - else
+                          &ndash;
+                        - if lemma.article
+                          %span.coptic-greek.lemma-article= "(#{lemma.article})"
+                      %p
+                        - if lemma.loan_word_form
+                          from
+                          %span.coptic-greek.lemma-loanword= lemma.loan_word_form
+                          - if lemma.language
+                            %span.lemma-language= "(#{lemma.language.code})"
+                    .col-md-3.detailed-information
+                      %p
+                        sublemmas:
+                        = "tbd"
+                      %p
+                        = lemma.updated_at.strftime('last update: %b %Y')
+                    .col-md-1.detailed-information
+                      %p
+                        = link_to lemma_path(lemma) do
+                          %i.fa.fa-eye.has-slow-tooltip{title: 'show'}
+                      %p
+                        = link_to '#' do
+                          %i.fa.fa-wrench.has-slow-tooltip{title: 'update'}
+
+
+                  // TODO: first make design, then add comments, then add comments for currently not migrated lemmas
+          
+          = paginate @lemmas, window: 2
+
+
+
+
+

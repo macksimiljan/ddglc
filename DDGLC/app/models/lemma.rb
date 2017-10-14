@@ -9,4 +9,8 @@ class Lemma < ApplicationRecord
               fSg: 'ἡ', fDu: 'τά', fPl: 'αἱ',
               nSg: 'τό', nDu: 'τώ', nPl: 'τά',
               mfSg: 'ὁ / ἡ'}.freeze
+
+  paginates_per 15
+
+
 end
