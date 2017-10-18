@@ -10,6 +10,7 @@ class Ability
 
       elsif user.manager?
         can :index, User
+        can :manage, Lemma
 
       elsif user.employee?
 

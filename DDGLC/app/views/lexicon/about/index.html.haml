@@ -2,22 +2,23 @@
   Lexicon
 
 %section.col-md-8.col-md-offset-2
-  .page-header.lexicon-headline
-    %h1
-      About
-      %small Lexicon
-  .row
-    .col-md-10.col-md-offset-1
-      %ul
-        %li
-          No. of languages:
-          = Language.count
-          = link_to 'show', languages_path
-        %li
-          No. of POS:
-          = PartOfSpeech.count
-          = link_to 'show', part_of_speeches_path
-        %li
-          No. of semantic fiels:
-          = SemanticField.count
-          = link_to 'show', semantic_fields_path
+  .container
+    .page-header.lexicon-headline
+      %h1
+        About
+        %small Lexicon
+    .row
+      .col-md-10.col-md-offset-1
+        %ul
+          %li
+            No. of languages:
+            = Language.count
+            = link_to 'show', languages_path
+          %li
+            No. of POS:
+            = PartOfSpeech.count
+            = link_to 'show', part_of_speeches_path
+          %li
+            No. of semantic fiels:
+            = SemanticField.count
+            = link_to 'show', semantic_fields_path
