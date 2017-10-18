@@ -61,17 +61,44 @@
                       %p= comment.label
                       %footer Comment by XxYy
 
+          -# language
+          - if @lemma.loan_word_form
+            .panel.panel-default
+              .panel-body
+                .row.lexicon-field
+                  .col-md-12
+                    %span.lexicon-field-attribute
+                      Loan Word Form
+                    %span.lexicon-field-value
+                      = @lemma.loan_word_form
+                    - [].each do |comment|
+                      %blockquote.lexicon-field-comment.text-muted
+                        %p= comment.label
+                        %footer Comment by XxYy
+
+                .row.lexicon-field
+                  .col-md-12
+                    %span.lexicon-field-attribute
+                      Language
+                    %span.lexicon-field-value
+                      - if @lemma.language
+                        = @lemma.language.code
+                      - else
+                        '-'
+
+
           -# semantic fields
-          .panel.panel-default
-            .panel-body
-              - @lemma.semantic_fields.order(:source).each do |semantic_field|
+          - if @lemma.semantic_fields
+            .panel.panel-default
+              .panel-body
                 .row.lexicon-field
                   .col-md-12
                     %span.lexicon-field-attribute
                       Semantic Field
-                    %span.lexicon-field-value
-                      = semantic_field.label
-                      = "(#{semantic_field.source})"
+                  - @lemma.semantic_fields.each do |semantic_field|
+                    .row
+                      %span.lexicon-field-value{style: 'margin-left: 170px'}
+                        = "#{semantic_field.label} (#{semantic_field.source})"
 
           -# source, reference
           .panel.panel-default
