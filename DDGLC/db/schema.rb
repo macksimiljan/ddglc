@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012155001) do
+ActiveRecord::Schema.define(version: 20171018113515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20171012155001) do
     t.string   "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lemma_comments", force: :cascade do |t|
+    t.integer "lemma_id"
+    t.string  "field"
+    t.text    "content"
+    t.integer "created_by_id"
+    t.integer "updated_by_id"
+    t.index ["created_by_id"], name: "index_lemma_comments_on_created_by_id", using: :btree
+    t.index ["field"], name: "index_lemma_comments_on_field", using: :btree
+    t.index ["lemma_id"], name: "index_lemma_comments_on_lemma_id", using: :btree
+    t.index ["updated_by_id"], name: "index_lemma_comments_on_updated_by_id", using: :btree
   end
 
   create_table "lemmas", force: :cascade do |t|
@@ -76,6 +88,9 @@ ActiveRecord::Schema.define(version: 20171012155001) do
     t.index ["code"], name: "index_users_on_code", unique: true, using: :btree
   end
 
+  add_foreign_key "lemma_comments", "lemmas"
+  add_foreign_key "lemma_comments", "users", column: "created_by_id"
+  add_foreign_key "lemma_comments", "users", column: "updated_by_id"
   add_foreign_key "lemmas", "languages"
   add_foreign_key "lemmas", "part_of_speeches"
   add_foreign_key "lemmas", "users", column: "created_by_id"

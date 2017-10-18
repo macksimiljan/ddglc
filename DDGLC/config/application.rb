@@ -13,5 +13,7 @@ module DDGLC
     # -- all .rb files in that directory are automatically loaded.
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
+    config.autoload_paths += Dir[Rails.root.join("app", "models", "{*/}")]
   end
 end
