@@ -20,6 +20,10 @@ module SessionsHelper
     logged_in? && current_user.admin?
   end
 
+  def logged_in_as_manager_or_admin?
+    logged_in? && (current_user.manager? || current_user.admin?)
+  end
+
   # Logs out the current user.
   def log_out
     session.delete(:user_id)

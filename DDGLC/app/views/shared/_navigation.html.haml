@@ -22,7 +22,7 @@
           = navbar_item 'foo', '/foo'
         = navbar_dropdown 'Account' do
           = navbar_item 'Settings', '/settings'
-          - if logged_in_as_admin?
+          - if logged_in_as_manager_or_admin?
             = navbar_dropdown_divider
             = navbar_item "Admin Dashboard", '/admin'
             = navbar_item 'User Management', users_path

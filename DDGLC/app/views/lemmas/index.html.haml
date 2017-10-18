@@ -42,7 +42,7 @@
                       %p
                         - if lemma.loan_word_form
                           from
-                          %span.coptic-greek.lemma-loanword= lemma.loan_word_form
+                          %i.lemma-loanword= lemma.loan_word_form
                           - if lemma.language
                             %span.lemma-language= "(#{lemma.language.code})"
                     .col-md-3.detailed-information
@@ -61,7 +61,7 @@
 
 
                   // TODO: first make design, then add comments, then add comments for currently not migrated lemmas
-          
+
           = paginate @lemmas, window: 2
 
 

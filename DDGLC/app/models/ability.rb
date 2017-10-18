@@ -9,7 +9,7 @@ class Ability
         can :manage, :all
 
       elsif user.manager?
-        can :index, :User
+        can :index, User
 
       elsif user.employee?
 
