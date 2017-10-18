@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :languages, path: '/lexicon/languages'
   resources :semantic_fields, path: '/lexicon/semantic_fields'
 
+  get 'lexicon/lemmas/add_comment' => 'lemmas#add_comment', :as => :add_comment
 
   resources :users
 

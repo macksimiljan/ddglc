@@ -14,6 +14,8 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap-sprockets
+#= require bootstrap-modal
+#= require bootstrap-modalmanager
 #= require_tree .
 
 $(document).on "turbolinks:load", ->
