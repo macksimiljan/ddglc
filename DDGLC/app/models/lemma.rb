@@ -12,5 +12,11 @@ class Lemma < ApplicationRecord
 
   paginates_per 15
 
+  def comments_for(field)
+    comments = LemmaComment.of(id, field)
+    comments ||= []
+    comments
+  end
+
 
 end

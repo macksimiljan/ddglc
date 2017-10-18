@@ -21,9 +21,6 @@
                     Lemma
                   %span.lexicon-field-value.coptic-greek
                     = @lemma.label
-                  %blockquote.lexicon-field-comment.text-muted
-                    %p This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong.
-                    %footer Comment by XxYy
 
               .row.lexicon-field
                 .col-md-12
@@ -31,10 +28,6 @@
                     Meaning
                   %span.lexicon-field-value
                     = optional_field  @lemma.meaning
-                  - [].each do |comment|
-                    %blockquote.lexicon-field-comment.text-muted
-                      %p= comment.label
-                      %footer Comment by XxYy
 
               .row.lexicon-field
                 .col-md-12
@@ -45,10 +38,6 @@
                       = @lemma.part_of_speech.label.titleize
                     - else
                       '-'
-                  - [].each do |comment|
-                    %blockquote.lexicon-field-comment.text-muted
-                      %p= comment.label
-                      %footer Comment by XxYy
 
               .row.lexicon-field
                 .col-md-12
@@ -62,7 +51,7 @@
                       %footer Comment by XxYy
 
           -# language
-          - if @lemma.loan_word_form
+          - unless @lemma.loan_word_form.nil? ||  @lemma.comments_for('loan_word_form').empty?
             .panel.panel-default
               .panel-body
                 .row.lexicon-field
@@ -70,11 +59,11 @@
                     %span.lexicon-field-attribute
                       Loan Word Form
                     %span.lexicon-field-value
-                      = @lemma.loan_word_form
-                    - [].each do |comment|
+                      = optional_field @lemma.loan_word_form
+                    - @lemma.comments_for('loan_word_form').each do |comment|
                       %blockquote.lexicon-field-comment.text-muted
-                        %p= comment.label
-                        %footer Comment by XxYy
+                        %p= comment.content
+                        %footer= "Comment by #{comment.created_by.code}"
 
                 .row.lexicon-field
                   .col-md-12
@@ -84,11 +73,11 @@
                       - if @lemma.language
                         = @lemma.language.code
                       - else
-                        '-'
+                        = '-'
 
 
           -# semantic fields
-          - if @lemma.semantic_fields
+          - unless @lemma.semantic_fields.empty?
             .panel.panel-default
               .panel-body
                 .row.lexicon-field
@@ -109,9 +98,6 @@
                     Source
                   %span.lexicon-field-value
                     = optional_field @lemma.source
-                  %blockquote.lexicon-field-comment.text-muted
-                    %p This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong.
-                    %footer Comment by XxYy
 
               .row.lexicon-field
                 .col-md-12
@@ -119,10 +105,22 @@
                     Reference
                   %span.lexicon-field-value
                     = optional_field @lemma.reference
-                  - [].each do |comment|
+                  - @lemma.comments_for('reference').each do |comment|
                     %blockquote.lexicon-field-comment.text-muted
-                      %p= comment.label
-                      %footer Comment by XxYy
+                      %p= comment.content
+                      %footer= "Comment by #{comment.created_by.code}"
+
+          -# further comments
+          - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
+          - unless comments.empty?
+            .panel.panel-default
+              .panel-body
+                - comments.each do |comment|
+                  .row.lexicon-field
+                    .col-md-12
+                      %blockquote.lexicon-field-comment.text-muted
+                        %p= comment.content
+                        %footer= "Comment by #{comment.created_by.code}"
 
           -# actions
           - unless current_user.guest?
@@ -130,6 +128,7 @@
               .panel-heading
                 .panel-title Actions
               .panel-body
+                -# todo: make sure that only comment owner can edit it (except admin)
                 %p
                   = link_to edit_lemma_path(@lemma) do
                     = fa_icon('edit')

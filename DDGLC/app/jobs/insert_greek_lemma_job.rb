@@ -7,6 +7,7 @@ class InsertGreekLemmaJob < ApplicationJob
     CSV.foreach path do |row|
       next if row.blank?
       insert_lemma(row)
+      insert_lemma_comment(row)
     end
     File.open('migrate_logs.txt','w') do |f|
       f.puts @msgs
@@ -55,6 +56,51 @@ class InsertGreekLemmaJob < ApplicationJob
     values = date(values, :updated_at, data[26])
     values
   end
+
+  def insert_lemma_comment(row)
+    id = row[3]
+    read_comments(row).each do |comment_data|
+      comment_data[:lemma_id] = id
+      comment_data[:created_by] = User.find_by_code('Admin') if comment_data[:created_by].nil?
+      comment_data[:updated_by] = User.find_by_code('Admin')
+      lemma_comment = LemmaComment.find_or_create_by!(comment_data)
+      if lemma_comment.save!
+        @msgs << "INFO \t Saved lemma comment !"
+      else
+        @msgs << "WARNING \t Could not save lemma comment!"
+      end
+    end
+  rescue StandardError => e
+    @msgs << "ERROR \t #{e.message} in"
+    @msgs << "\t\t #{row.to_s}"
+  end
+
+  def read_comments(data)
+    comments = []
+    language_comment = data[12]
+    comments = add_comment(comments, 'loan_word_form', language_comment)
+    reference_comment = data[15]
+    comments = add_comment(comments, 'reference', reference_comment)
+    lemma_comment = data[16]
+    comments = add_comment(comments, 'lemma', lemma_comment)
+    processing_comment = data[27]
+    comments = add_comment(comments, 'processing_note', processing_comment)
+    comments
+  end
+
+  def add_comment(comments, field, content)
+    return comments if content.blank?
+    content.squish!
+    raise "Comment is too long for #{field}" if content.length > 250
+    if content =~ /^[A-Z][a-z][A-Z][a-z][:]?/
+      user_code = content[0..3]
+      content = content[5..-1].squish
+      user = User.find_by_code(user_code)
+    end
+    comments << {field: field, content: content, created_by: user}
+  end
+
+
 
   def normalize_field(values, field_key, field_value, is_optional=true)
     return values if field_value.blank? && is_optional
