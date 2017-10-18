@@ -14,7 +14,7 @@ class LemmasController < ApplicationController
   end
 
   def edit
-    # tbd
+    @lemma = Lemma.find(params[:id])
   end
 
   def create
@@ -22,11 +22,27 @@ class LemmasController < ApplicationController
   end
 
   def update
-    # tbd
+    @lemma = Lemma.find(params[:id])
+    if @lemma.update(lemma_params)
+      flash[:notice] = 'Successfully updated Greek lemma.'
+      redirect_to lemma_path(@lemma)
+    else
+      flash[:alert] = 'Could not updated Greek lemma.'
+      render 'edit'
+    end
   end
 
   def destroy
     # tbd
+  end
+
+  private
+
+  def lemma_params
+    params.require(:lemma)
+        .permit(:label, :meaning, :part_of_speech_id, :article,
+                :loan_word_form, :language_id, :semantic_fields,
+                :source, :reference)
   end
 
 end

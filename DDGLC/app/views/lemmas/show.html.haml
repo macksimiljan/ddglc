@@ -12,7 +12,7 @@
       .col-md-6
         .panel-group
 
-          -# lemma, pos, article
+          -# lemma, meaning, pos, article
           .panel.panel-default
             .panel-body
               .row.lexicon-field
@@ -45,10 +45,6 @@
                     Article
                   %span.lexicon-field-value.coptic-greek
                     = optional_field @lemma.article
-                  - [].each do |comment|
-                    %blockquote.lexicon-field-comment.text-muted
-                      %p= comment.label
-                      %footer Comment by XxYy
 
           -# language
           - unless @lemma.loan_word_form.nil? ||  @lemma.comments_for('loan_word_form').empty?
@@ -100,7 +96,7 @@
                     = optional_field @lemma.source
 
               .row.lexicon-field
-                .col-md-12
+                .col-md-11
                   %span.lexicon-field-attribute
                     Reference
                   %span.lexicon-field-value
@@ -109,6 +105,8 @@
                     %blockquote.lexicon-field-comment.text-muted
                       %p= comment.content
                       %footer= "Comment by #{comment.created_by.code}"
+                .col-md-1
+                  Add comment
 
           -# further comments
           - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
