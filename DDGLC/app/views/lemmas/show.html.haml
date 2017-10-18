@@ -2,17 +2,6 @@
   Greek Lemma
 
 %section
-  .modal.fade#myModal{tabindex: -1, role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true'}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %btn.close{type: 'button', 'data-dismiss': 'modal'}
-            %span{'aria-hidden': 'true'} &times;
-            %span.sr-only Close
-          %h4.modal-title#myModalLabel Modal Title
-        .modal-body
-          blubs
-
   .container
     .page-header
       %h1.lexicon-headline.coptic-greek
@@ -117,8 +106,10 @@
                       %p= comment.content
                       %footer= "Comment by #{comment.created_by.code}"
                 .col-md-1
-                  %btn.btn.btn-default.btn-block{'data-toggle': 'modal', 'data-target': '#myModal', style: 'padding: 0; border: none'}
+                  %btn.btn.btn-default.btn-block{'data-toggle': 'modal', 'data-target': '#referenceCommentModal', style: 'padding: 0; border: none'}
                     = fa_icon('commenting-o')
+            .modal.fade#referenceCommentModal{tabindex: -1, role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true'}
+              = render partial: 'lemmas/add_comment', locals: {field: :reference, lemma_id: @lemma.id}
 
 
 

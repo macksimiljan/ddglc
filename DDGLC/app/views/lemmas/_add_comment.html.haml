@@ -1,0 +1,12 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %btn.close{type: 'button', 'data-dismiss': 'modal'}
+        %span{'aria-hidden': 'true'} &times;
+        %span.sr-only Close
+      %h4.modal-title#myModalLabel= "Add Comment to #{field.to_s.titleize}"
+    .modal-body
+      - @lemma_comment = LemmaComment.new
+      - @lemma_comment[:field] = field
+      - @lemma_comment[:lemma_id] = lemma_id
+      = render partial: 'lemmas/comment_form', locals: {field: field, lemma_id: lemma_id}

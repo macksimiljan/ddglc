@@ -1,0 +1,7 @@
+= bootstrap_form_for(@lemma_comment, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-10') do |f|
+  = f.text_area :content, rows: 7, label: 'Comment', autofocus: true
+  = f.hidden_field :field, value: field
+  = f.hidden_field :lemma_id, value: lemma_id
+  %br
+  = f.form_group do
+    = f.submit 'Save', class: 'btn btn-primary btn-block'
