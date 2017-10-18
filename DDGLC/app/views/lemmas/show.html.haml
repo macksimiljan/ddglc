@@ -1,0 +1,121 @@
+- content_for :page_title do
+  Greek Lemma
+
+%section
+  .container
+    .page-header
+      %h1.lexicon-headline.coptic-greek
+        = @lemma.label
+        %small Greek Lemma
+
+    .row
+      .col-md-12
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title Actions
+          .panel-body
+            .row
+              .col-md-6
+                = link_to edit_lemma_path(@lemma) do
+                  = fa_icon('edit')
+                  Edit
+    .row
+      .col-md-6
+        .panel-group
+          -# lemma, pos, article
+          .panel.panel-default
+            .panel-body
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Lemma
+                  %span.lexicon-field-value.coptic-greek
+                    = @lemma.label
+                  %blockquote.lexicon-field-comment.text-muted
+                    %p This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong.
+                    %footer Comment by XxYy
+
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Meaning
+                  %span.lexicon-field-value
+                    = optional_field  @lemma.meaning
+                  - [].each do |comment|
+                    %blockquote.lexicon-field-comment.text-muted
+                      %p= comment.label
+                      %footer Comment by XxYy
+
+
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Part of Speech
+                  %span.lexicon-field-value
+                    - if @lemma.part_of_speech
+                      = @lemma.part_of_speech.label.titleize
+                    - else
+                      '-'
+                  - [].each do |comment|
+                    %blockquote.lexicon-field-comment.text-muted
+                      %p= comment.label
+                      %footer Comment by XxYy
+
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Article
+                  %span.lexicon-field-value.coptic-greek
+                    = optional_field @lemma.article
+                  - [].each do |comment|
+                    %blockquote.lexicon-field-comment.text-muted
+                      %p= comment.label
+                      %footer Comment by XxYy
+
+          -# semantic fields
+          .panel.panel-default
+            .panel-body
+              - @lemma.semantic_fields.order(:source).each do |semantic_field|
+                .row.lexicon-field
+                  .col-md-12
+                    %strong.lexicon-field-attribute
+                      Semantic Field
+                    %span.lexicon-field-value
+                      = semantic_field.label
+                      = "(#{semantic_field.source})"
+
+
+          -# source, reference
+          .panel.panel-default
+            .panel-body
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Source
+                  %span.lexicon-field-value
+                    = optional_field @lemma.source
+                  %blockquote.lexicon-field-comment.text-muted
+                    %p This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong. This is a very long comment. Very looooong.
+                    %footer Comment by XxYy
+
+
+              .row.lexicon-field
+                .col-md-12
+                  %strong.lexicon-field-attribute
+                    Reference
+                  %span.lexicon-field-value
+                    = optional_field @lemma.reference
+                  - [].each do |comment|
+                    %blockquote.lexicon-field-comment.text-muted
+                      %p= comment.label
+                      %footer Comment by XxYy
+
+      .col-md-6
+        -# coptic sublemmas
+        .panel.panel-default
+          .panel-body
+            coptic sublemmas
+
+
+
+

@@ -55,10 +55,10 @@
                     .col-md-1.detailed-information
                       %p
                         = link_to lemma_path(lemma) do
-                          %i.fa.fa-eye.has-slow-tooltip{title: 'show'}
+                          = fa_icon('eye')
                       %p
                         = link_to '#' do
-                          %i.fa.fa-wrench.has-slow-tooltip{title: 'update'}
+                          = fa_icon('edit')
 
 
                   // TODO: first make design, then add comments, then add comments for currently not migrated lemmas
