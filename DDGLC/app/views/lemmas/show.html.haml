@@ -37,7 +37,7 @@
                     - if @lemma.part_of_speech
                       = @lemma.part_of_speech.label.titleize
                     - else
-                      '-'
+                      = '-'
 
               .row.lexicon-field
                 .col-md-12
@@ -83,7 +83,7 @@
                 .row.lexicon-field
                   .col-md-12
                     %span.lexicon-field-attribute
-                      Semantic Field
+                      = 'Semantic Field'.pluralize @lemma.semantic_fields.count
                   - @lemma.semantic_fields.each do |semantic_field|
                     .row
                       %span.lexicon-field-value{style: 'margin-left: 170px'}
