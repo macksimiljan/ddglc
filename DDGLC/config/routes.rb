@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :lemmas, path: '/lexicon/lemmas'
+  resources :lemma_comments, path: '/lexicon/lemma_comments'
   resources :sublemmas, path: '/lexicon/sublemmas'
   resources :usages, path: '/lexicon/usages'
   resources :part_of_speeches, path: 'lexicon/pos'
