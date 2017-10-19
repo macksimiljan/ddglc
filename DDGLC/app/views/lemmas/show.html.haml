@@ -108,17 +108,7 @@
                 .col-md-1
                   %button.btn.btn-default.btn-add-comment{type: 'button', 'data-toggle': 'collapse', 'data-target':'#referenceComment'}
                     = fa_icon('commenting-o')
-              .row.lexicon-field.collapse#referenceComment
-                .col-md-12
-                  %blockquote.lexicon-field-comment.text-muted
-                    - @lemma_comment = LemmaComment.new
-                    = bootstrap_form_for(@lemma_comment) do |f|
-                      = f.text_area :content, rows: 4, label: 'New Comment', autofocus: true
-                      = f.hidden_field :field, value: 'reference'
-                      = f.hidden_field :lemma_id, value: @lemma.id
-                      %br
-                      = f.form_group do
-                        = f.submit 'Save', class: 'btn btn-primary btn-block'
+              = render partial: 'add_comment', locals: {target_id: 'referenceComment', field: 'reference', lemma_id: @lemma.id}
 
 
 
