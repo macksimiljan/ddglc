@@ -51,15 +51,15 @@
             .panel.panel-default
               .panel-body
                 .row.lexicon-field
-                  .col-md-12
+                  .col-md-11
                     %span.lexicon-field-attribute
                       Loan Word Form
                     %span.lexicon-field-value
                       = optional_field @lemma.loan_word_form
-                    - @lemma.comments_for('loan_word_form').each do |comment|
-                      %blockquote.lexicon-field-comment.text-muted
-                        %p= comment.content
-                        %footer= "Comment by #{comment.created_by.code}"
+                    = render partial: 'show_comments', locals: {lemma: @lemma, field: 'loan_word_form'}
+                  .col-md-1
+                    = comment_button '#loanwordformComment'
+                = render partial: 'add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', lemma_id: @lemma.id}
 
                 .row.lexicon-field
                   .col-md-12
@@ -101,10 +101,7 @@
                     Reference
                   %span.lexicon-field-value
                     = optional_field @lemma.reference
-                  - @lemma.comments_for('reference').order(:created_at).each do |comment|
-                    %blockquote.lexicon-field-comment.text-muted
-                      %p= comment.content
-                      %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                  = render partial: 'show_comments', locals: {lemma: @lemma, field: 'reference'}
                 .col-md-1
                   = comment_button '#referenceComment'
               = render partial: 'add_comment', locals: {target_id: 'referenceComment', field: 'reference', lemma_id: @lemma.id}
@@ -113,15 +110,18 @@
 
           -# further comments
           - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
-          - unless comments.empty?
-            .panel.panel-default
-              .panel-body
-                - comments.each do |comment|
-                  .row.lexicon-field
-                    .col-md-12
+          .panel.panel-default
+            .panel-body
+              - if comments.empty?
+                %i.text-muted No comments.
+              - else
+                .row.lexicon-field
+                  .col-md-12
+                    - comments.sort_by{|c| c[:created_at]}.each do |comment|
                       %blockquote.lexicon-field-comment.text-muted
                         %p= comment.content
-                        %footer= "Comment by #{comment.created_by.code}"
+                        %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+              = render partial: 'add_comment', locals: {target_id: 'generalComment', field: 'lemma', lemma_id: @lemma.id}
 
           -# actions
           - unless current_user.guest?
@@ -130,10 +130,18 @@
                 .panel-title Actions
               .panel-body
                 -# todo: make sure that only comment owner can edit it (except admin)
-                %p
-                  = link_to edit_lemma_path(@lemma) do
-                    = fa_icon('edit')
-                    Edit
+                .row
+                  .col-md-4.text-center
+                    = link_to edit_lemma_path(@lemma) do
+                      = fa_icon('edit')
+                      Edit
+                  .col-md-4.text-center
+                    = comment_button '#generalComment', ' Comment'
+                  .col-md-4.text-center
+                    = link_to '#' do
+                      = fa_icon('trash')
+                      Delete
+
 
       .col-md-6
         -# coptic sublemmas

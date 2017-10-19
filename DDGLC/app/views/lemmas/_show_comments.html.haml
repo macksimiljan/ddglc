@@ -1,0 +1,4 @@
+- lemma.comments_for(field).order(:created_at).each do |comment|
+  %blockquote.lexicon-field-comment.text-muted
+    %p= comment.content
+    %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
