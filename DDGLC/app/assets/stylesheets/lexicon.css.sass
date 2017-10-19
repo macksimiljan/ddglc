@@ -6,6 +6,7 @@
 
 $lexicon-color-dark: rgb(80, 143, 165)
 $lexicon-color-light: rgb(108, 172, 194)
+$lexicon-color-very-light: rgb(179, 216, 229)
 
 .lexicon-headline
   color: $lexicon-color-dark
@@ -29,6 +30,10 @@ $lexicon-color-light: rgb(108, 172, 194)
 
   a
     color: $lexicon-color-dark
+    &:hover,
+    &:focus
+      background-color: transparent
+      color: $lexicon-color-very-light
 
 
 .panel-default.panel-lemma
@@ -64,3 +69,13 @@ $lexicon-color-light: rgb(108, 172, 194)
     border: none
     height: auto
     width: auto
+
+.btn-default.btn-add-comment
+  color: $lexicon-color-dark
+  padding: 0
+  border: none
+  &:hover,
+  &:focus
+    background-color: transparent
+    color: $lexicon-color-very-light
+

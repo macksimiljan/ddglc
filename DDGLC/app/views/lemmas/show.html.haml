@@ -47,7 +47,7 @@
                     = optional_field @lemma.article
 
           -# language
-          - unless @lemma.loan_word_form.nil? ||  @lemma.comments_for('loan_word_form').empty?
+          - unless @lemma.loan_word_form.nil? &&  @lemma.comments_for('loan_word_form').empty?
             .panel.panel-default
               .panel-body
                 .row.lexicon-field
@@ -106,7 +106,8 @@
                       %p= comment.content
                       %footer= "Comment by #{comment.created_by.code}"
                 .col-md-1
-                  Add comment
+                  %btn.btn.btn-default.btn-add-comment.btn-block
+                    = fa_icon('commenting-o')
 
           -# further comments
           - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
