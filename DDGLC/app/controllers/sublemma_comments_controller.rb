@@ -1,0 +1,2 @@
+class SublemmaCommentsController < ApplicationController
+end

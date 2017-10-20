@@ -3,4 +3,8 @@
     - lemma.comments_for(field).order(:created_at).each do |comment|
       %blockquote.lexicon-field-comment.text-muted
         %p= comment.content
-        %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+        %small
+          = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+          - if comment.created_by == current_user
+            = link_to lemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
+              = fa_icon('trash')

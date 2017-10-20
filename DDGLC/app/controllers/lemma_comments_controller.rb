@@ -19,6 +19,12 @@ class LemmaCommentsController < ApplicationController
     redirect_to lemma_path(lemma_comment_params[:lemma_id])
   end
 
+  def destroy
+    @lemma_comment = LemmaComment.find(params[:id])
+    @lemma_comment.delete
+    redirect_to lemma_path(@lemma_comment.lemma)
+  end
+
   private
 
   def lemma_comment_params

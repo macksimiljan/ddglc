@@ -11,16 +11,26 @@ class Ability
       elsif user.manager?
         can :index, User
         can :manage, Lemma
+        can :manage, Sublemma
+
+        can :manage, LemmaComment, created_by_id: user.id
+        can :manage, SublemmaComment, created_by_id: user.id
 
       elsif user.employee?
         can :manage, Lemma
         cannot :destroy, Lemma
+        can :manage, Sublemma
+        cannot :destroy, Sublemma
+
+        can :manage, LemmaComment, created_by_id: user.id
+        can :manage, SublemmaComment, created_by_id: user.id
 
 
       elsif user.guest?
         can :index, Lemma
         can :show, Lemma
-
+        can :index, Sublemma
+        can :show, Sublemma
 
       end
     end
