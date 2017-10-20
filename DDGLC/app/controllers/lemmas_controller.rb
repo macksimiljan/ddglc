@@ -10,7 +10,7 @@ class LemmasController < ApplicationController
   end
 
   def new
-    # tbd
+    @lemma = Lemma.new
   end
 
   def edit
@@ -18,7 +18,16 @@ class LemmasController < ApplicationController
   end
 
   def create
-    # tbd
+    @lemma = Lemma.new(lemma_params)
+    @lemma.created_by = current_user
+    @lemma.updated_by = current_user
+    if @lemma.save
+      flash[:notice] = 'Successfully created new Greek lemma.'
+      redirect_to lemma_path(@lemma)
+    else
+      flash[:warning] = 'Could not create Greek lemma.'
+      render 'new'
+    end
   end
 
   def update
@@ -27,13 +36,16 @@ class LemmasController < ApplicationController
       flash[:notice] = 'Successfully updated Greek lemma.'
       redirect_to lemma_path(@lemma)
     else
-      flash[:alert] = 'Could not updated Greek lemma.'
+      flash[:warning] = 'Could not update Greek lemma.'
       render 'edit'
     end
   end
 
   def destroy
-    # tbd
+    @lemma = Lemma.find(params[:id])
+    LemmaComment.where(lemma_id: @lemma.id).delete_all
+    @lemma.destroy
+    redirect_to lemmas_path
   end
 
   private
@@ -41,8 +53,8 @@ class LemmasController < ApplicationController
   def lemma_params
     params.require(:lemma)
         .permit(:label, :meaning, :part_of_speech_id, :article,
-                :loan_word_form, :language_id, :semantic_fields,
-                :source, :reference)
+                :loan_word_form, :language_id,
+                :source, :reference, semantic_field_ids: [])
   end
 
 end

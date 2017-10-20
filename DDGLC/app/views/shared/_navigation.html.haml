@@ -14,12 +14,12 @@
           = navbar_item 'Greek Lemma', lemmas_path
           = navbar_item 'Coptic Sublemma', sublemmas_path
           = navbar_item 'Coptic Usage', usages_path
-        = navbar_dropdown 'Attestations' do
-          = navbar_item 'foo', '/foo'
-        = navbar_dropdown 'Manuscript/ Texts' do
-          = navbar_item 'foo', '/foo'
-        = navbar_dropdown 'Bibliography' do
-          = navbar_item 'foo', '/foo'
+        -#= navbar_dropdown 'Attestations' do
+        -#  = navbar_item 'foo', '/foo'
+        -#= navbar_dropdown 'Manuscript/ Texts' do
+        -#  = navbar_item 'foo', '/foo'
+        -#= navbar_dropdown 'Bibliography' do
+        -#  = navbar_item 'foo', '/foo'
         = navbar_dropdown 'Account' do
           = navbar_item 'Settings', '/settings'
           - if logged_in_as_manager_or_admin?

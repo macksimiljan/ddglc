@@ -1,12 +1,11 @@
-.modal-dialog
-  .modal-content
-    .modal-header
-      %btn.close{type: 'button', 'data-dismiss': 'modal'}
-        %span{'aria-hidden': 'true'} &times;
-        %span.sr-only Close
-      %h4.modal-title#myModalLabel= "Add Comment to #{field.to_s.titleize}"
-    .modal-body
+.row.lexicon-field.collapse{id: target_id}
+  .col-md-12
+    %blockquote.lexicon-field-comment.text-muted
       - @lemma_comment = LemmaComment.new
-      - @lemma_comment[:field] = field
-      - @lemma_comment[:lemma_id] = lemma_id
-      = render partial: 'lemmas/comment_form', locals: {field: field, lemma_id: lemma_id}
+      = bootstrap_form_for(@lemma_comment) do |f|
+        = f.text_area :content, rows: 4, label: 'New Comment', autofocus: true
+        = f.hidden_field :field, value: field
+        = f.hidden_field :lemma_id, value: lemma_id
+        %br
+        = f.form_group do
+          = f.submit 'Save', class: 'btn btn-primary btn-block'

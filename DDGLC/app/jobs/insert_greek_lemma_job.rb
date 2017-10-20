@@ -9,6 +9,7 @@ class InsertGreekLemmaJob < ApplicationJob
       insert_lemma(row)
       insert_lemma_comment(row)
     end
+    insert_exceptions
     File.open('migrate_logs.txt','w') do |f|
       f.puts @msgs
     end
@@ -91,7 +92,7 @@ class InsertGreekLemmaJob < ApplicationJob
   def add_comment(comments, field, content)
     return comments if content.blank?
     content.squish!
-    raise "Comment is too long for #{field}" if content.length > 250
+    raise "Comment is too long for #{field}" if content.length > 650
     if content =~ /^[A-Z][a-z][A-Z][a-z][:]?/
       user_code = content[0..3]
       content = content[5..-1].squish
@@ -170,7 +171,63 @@ class InsertGreekLemmaJob < ApplicationJob
     values
   end
 
-  def insert_comments(data)
-    # TODO: implement me
+  def insert_exceptions
+    # TODO: add lemma_id: 735 here, too
+
+    semantic_fields1 = [SemanticField.find_by_label("Social and political relations"), SemanticField.find_by_label("Gesellschaft und Gemeinschaft")]
+    exception1_lemma = {id: 6105, label: 'παρρησίᾳ', part_of_speech: PartOfSpeech.find_by_label('adverb'),
+                        meaning: 'freely', source: 'DMT I', reference: 'cf. LSJ 1344a, s.v. παρρησία',
+                        created_by: User.find_by_code('MaBr'), created_at: Time.parse('17.04.2013 14:48:06'),
+                        updated_by: User.find_by_code('GuSp'), updated_at: Time.parse('22.02.2016 10:04:21'),
+                        semantic_fields: semantic_fields1}
+    exception1_comment1 = {lemma_id: 6105, field: 'part_of_speech', content: 'dative form of noun'}
+    exception1_comment2 = {lemma_id: 6105, field: 'lemma', content: 'DMB: cf. adverbial use with a Coptic grammatical morph in lemma 1684.'}
+
+    semantic_fields2 = [SemanticField.find_by_label("The physical world"), SemanticField.find_by_label("Anorganische Welt. Stoffe")]
+    exception2_lemma = {id: 5548, label: 'φύσει', part_of_speech: PartOfSpeech.find_by_label('adverb'),
+                        meaning: 'naturally', source: 'du Cange 1712',
+                        created_by: User.find_by_code('Admin'), created_at: Time.parse('01.02.2013 07:07:48'),
+                        updated_by: User.find_by_code('DyBu'), updated_at: Time.parse('16.04.2014 15:33:15'),
+                        semantic_fields: semantic_fields2}
+    exception2_comment1 = {lemma_id: 5548, field: 'part_of_speech', content: 'dative of φύσις'}
+
+    semantic_fields3 = [SemanticField.find_by_label("Possession"), SemanticField.find_by_label("Wirtschaft")]
+    exception3_lemma = {id: 5130, label: 'ἰνδικτίωνος', part_of_speech: PartOfSpeech.find_by_label('noun'),
+                        meaning: 'of or belonging to the indiction', source: 'Lantschoot 1929', reference: 'du Cange 1712',
+                        loan_word_form: 'indictio', language: Language.find_by_code('lat'),
+                        created_by: User.find_by_code('Admin'), created_at: Time.parse('01.02.2013 07:07:47'),
+                        updated_by: User.find_by_code('DyBu'), updated_at: Time.parse('06.09.2016 15:57:39'),
+                        semantic_fields: semantic_fields3}
+    exception3_comment1 = {lemma_id: 5130, field: 'part_of_speech', content: 'or adjective'}
+    exception3_comment2 = {lemma_id: 5130, field: 'lemma', content: 'Cf. lemma 956.', created_by: User.find_by_code('MaBr')}
+
+    lemma_data = [exception1_lemma, exception2_lemma, exception3_lemma]
+    comment_data = [exception1_comment1, exception1_comment2, exception2_comment1, exception3_comment1, exception3_comment2]
+
+    lemma_data.each do |data|
+      id = data[:id]
+      data.except! :id
+      lemma = Lemma.create_with(data).find_or_create_by!(id: id)
+      if lemma.save!
+        @msgs << "INFO \t Saved lemma -- Exception!"
+      else
+        @msgs << "WARNING \t Could not save lemma -- Exception!"
+      end
+    end
+
+    comment_data.each do |data|
+      data[:created_by] = User.find_by_code('Admin') if data[:created_by].nil?
+      data[:updated_by] = User.find_by_code('Admin')
+      lemma_comment = LemmaComment.find_or_create_by!(data)
+      if lemma_comment.save!
+        @msgs << "INFO \t Saved lemma comment -- Exception!"
+      else
+        @msgs << "WARNING \t Could not save lemma comment -- Exception!"
+      end
+    end
+
+  rescue StandardError => e
+    @msgs << "ERROR \t #{e.message} (Exception) in"
+    @msgs << "\t\t #{row.to_s}"
   end
 end

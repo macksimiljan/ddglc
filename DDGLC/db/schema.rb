@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018180230) do
+ActiveRecord::Schema.define(version: 20171019184415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20171018180230) do
   create_table "lemma_comments", force: :cascade do |t|
     t.integer  "lemma_id"
     t.string   "field"
-    t.text     "content"
+    t.string   "content",                                       null: false
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-    t.datetime "created_at",    default: '2017-10-18 18:05:11', null: false
-    t.datetime "updated_at",    default: '2017-10-18 18:05:11', null: false
+    t.datetime "created_at",    default: '2017-10-19 18:21:35', null: false
+    t.datetime "updated_at",    default: '2017-10-19 18:21:35', null: false
     t.index ["created_by_id"], name: "index_lemma_comments_on_created_by_id", using: :btree
     t.index ["field"], name: "index_lemma_comments_on_field", using: :btree
     t.index ["lemma_id"], name: "index_lemma_comments_on_lemma_id", using: :btree

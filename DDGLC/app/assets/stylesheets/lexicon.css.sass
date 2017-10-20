@@ -6,12 +6,20 @@
 
 $lexicon-color-dark: rgb(80, 143, 165)
 $lexicon-color-light: rgb(108, 172, 194)
+$lexicon-color-very-light: rgb(179, 216, 229)
 
 .lexicon-headline
   color: $lexicon-color-dark
   font-size: 29px
   small
     color: $lexicon-color-light
+    a
+      color: $lexicon-color-light
+      &:hover,
+      &:focus
+        background-color: transparent
+        color: $lexicon-color-very-light
+
 
 .panel-default.panel-lexicon
   .panel-heading
@@ -29,6 +37,10 @@ $lexicon-color-light: rgb(108, 172, 194)
 
   a
     color: $lexicon-color-dark
+    &:hover,
+    &:focus
+      background-color: transparent
+      color: $lexicon-color-very-light
 
 
 .panel-default.panel-lemma
@@ -43,7 +55,8 @@ $lexicon-color-light: rgb(108, 172, 194)
   font-size: 15px
 
 .lexicon-field
-  margin-bottom: 20px
+  margin-bottom: 10px
+  height: 26px
 
 .lexicon-field-attribute
   float: left
@@ -52,10 +65,13 @@ $lexicon-color-light: rgb(108, 172, 194)
 
 .lexicon-field-value
 
+
+.lexicon-field-value.coptic-greek
+  font-size: 18px
+
 .lexicon-field-comment
-  margin-left: 20px
-  margin-top: 10px
-  padding: 0px 10px
+  margin: 0
+  padding: 0 10px
   font-size: 12px
   p
     margin: 0
@@ -65,9 +81,12 @@ $lexicon-color-light: rgb(108, 172, 194)
     height: auto
     width: auto
 
-#referenceCommentModal
-  margin-left: 100px
-  width: 600px
-  display: table
-  .modal-dialog
-    margin: 0
+.btn-default.btn-add-comment
+  color: $lexicon-color-dark
+  padding: 0
+  margin-bottom: 5px
+  border: none
+  &:hover,
+  &:focus
+    background-color: transparent
+    color: $lexicon-color-very-light
