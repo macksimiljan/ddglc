@@ -172,7 +172,6 @@ class InsertGreekLemmaJob < ApplicationJob
   end
 
   def insert_exceptions
-    # TODO: add lemma_id: 735 here, too
 
     semantic_fields1 = [SemanticField.find_by_label("Social and political relations"), SemanticField.find_by_label("Gesellschaft und Gemeinschaft")]
     exception1_lemma = {id: 6105, label: 'παρρησίᾳ', part_of_speech: PartOfSpeech.find_by_label('adverb'),

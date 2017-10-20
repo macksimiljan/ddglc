@@ -7,18 +7,61 @@
       %h1
         About
         %small Lexicon
+
+
     .row
-      .col-md-10.col-md-offset-1
-        %ul
-          %li
-            No. of languages:
-            = Language.count
-            = link_to 'show', languages_path
-          %li
-            No. of POS:
-            = PartOfSpeech.count
-            = link_to 'show', part_of_speeches_path
-          %li
-            No. of semantic fiels:
-            = SemanticField.count
-            = link_to 'show', semantic_fields_path
+      .col-md-12
+        %p
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porta elit sit amet bibendum blandit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec ut augue dui. Nullam bibendum luctus urna, sed fermentum urna pulvinar sodales. Vestibulum placerat libero massa, in tempor lacus blandit ac. Proin convallis iaculis ornare.
+    .row
+      .col-md-6
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title Please Check
+          .panel-body
+            tbd
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title Overview
+          .panel-body
+            %ul
+              %li
+                No. of Greek lemmas:
+                = Lemma.count
+                = link_to 'show', lemmas_path
+              %li
+                No. of languages:
+                = Language.count
+                = link_to 'show', languages_path
+              %li
+                No. of POS:
+                = PartOfSpeech.count
+                = link_to 'show', part_of_speeches_path
+              %li
+                No. of semantic fiels:
+                = SemanticField.count
+                = link_to 'show', semantic_fields_path
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title Data Quality
+          .panel-body
+            tbd
+      .col-md-6
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title 3 recently updated usages
+          .panel-body
+            tbd
+
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title 3 recently updated sublemmas
+          .panel-body
+            tbd
+
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title 3 recently updated lemmas
+          .panel-body
+            tbd
+
