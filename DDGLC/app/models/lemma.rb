@@ -5,6 +5,9 @@ class Lemma < ApplicationRecord
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
+  has_many :sublemmas
+  has_many :lemma_comments
+
   ARTICLES = {mSg: 'ὁ', mDu: 'τώ', mPl: 'οἱ',
               fSg: 'ἡ', fDu: 'τά', fPl: 'αἱ',
               nSg: 'τό', nDu: 'τώ', nPl: 'τά',
