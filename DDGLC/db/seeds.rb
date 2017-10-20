@@ -73,3 +73,9 @@ dornseiff_fields.each do |label|
     .create_with(source: 'Dornseiff')
     .find_or_create_by!(label: label)
 end
+
+User.create_with(email: 'ddglc@uni-leipzig.de',
+                 role: 'admin',
+                 password: 'foobar',
+                 password_confirmation: 'foobar')
+    .find_or_create_by!(code: 'TeSt')

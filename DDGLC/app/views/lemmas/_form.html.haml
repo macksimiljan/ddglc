@@ -6,9 +6,9 @@
   = f.text_field :loan_word_form, help: @lemma.comments_for('loan_word_form').map{|c| c.created_by.code + ': ' + c.content}.join("\n")
   = f.collection_select :language_id, Language.all.order(:code), :id, :code, include_blank: true
   = f.form_group do
-    .btn.btn-default#button-semantic-field-area{style: 'margin: 16px 0'}
+    %button.btn.btn-default{type: 'button', 'data-toggle': 'collapse', 'data-target': '#semantic-field-area', style: 'margin: 16px 0'}
       Edit Semantic Fields
-  #semantic-field-area{style: 'display: none'}
+  .collapse#semantic-field-area
     = f.collection_check_boxes :semantic_field_ids, SemanticField.all, :id, :label, label: 'Semantic Fields'
   = f.text_field :source
   = f.text_field :reference, help: @lemma.comments_for('reference').map{|c| c.created_by.code + ': ' + c.content}.join("\n")
