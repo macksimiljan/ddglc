@@ -6,7 +6,7 @@
     .page-header
       %h1.lexicon-headline
         Coptic Sublemmas
-        %small Lexicon
+        %small= link_to 'Lexicon', '/lexicon/about'
 
     .panel-group
       .panel.panel-default.panel-lexicon
@@ -62,7 +62,7 @@
                           = fa_icon('edit')
 
 
-          = paginate @lemmas, window: 2
+          = paginate @sublemmas, window: 2
 
 
 
