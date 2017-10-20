@@ -13,12 +13,21 @@ class Lemma < ApplicationRecord
               nSg: 'τό', nDu: 'τώ', nPl: 'τά',
               mfSg: 'ὁ / ἡ'}.freeze
 
+  NIL_ATTRS = %w( meaning part_of_speech_id article loan_word_form language_id source reference).freeze
+  before_save :nil_if_blank
+
+
   paginates_per 15
 
   def comments_for(field)
     comments = lemma_comments.where(field: field)
     comments ||= []
     comments
+  end
+
+
+  def nil_if_blank
+    NIL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }
   end
 
 
