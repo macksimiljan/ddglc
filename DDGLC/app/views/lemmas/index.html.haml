@@ -15,12 +15,14 @@
         .panel-body
           .row
             .col-md-6
-              Create New Greek Lemma
+              = link_to new_lemma_path do
+                = fa_icon('plus')
+                %strong Create New Greek Lemma
             .col-md-6
-              Update Greek Lemma
+              Filter Greek Lemma
       .panel.panel-default.panel-lexicon
         .panel-heading
-          .panel-title Greek Lemmas
+          .panel-title= "Greek Lemmas (#{@lemmas.count})"
         .panel-body
           %ul
             - @lemmas.each do |lemma|

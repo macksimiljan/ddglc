@@ -6,7 +6,8 @@
     .page-header
       %h1.lexicon-headline.coptic-greek
         = @lemma.label
-        %small Greek Lemma
+        %small
+          = link_to 'Greek Lemma', lemmas_path
 
     .row
       .col-md-6
@@ -74,7 +75,7 @@
 
           -# semantic fields
           - unless @lemma.semantic_fields.empty?
-            .panel.panel-default
+            .panel.panel-default.panel-lexicon
               .panel-body
                 .row.lexicon-field
                   .col-md-12
@@ -84,6 +85,8 @@
                     .row
                       %span.lexicon-field-value{style: 'margin-left: 170px'}
                         = "#{semantic_field.label} (#{semantic_field.source})"
+                        - if semantic_field.url
+                          = link_to fa_icon('external-link'), semantic_field.url, target: :blank
 
           -# source, reference
           .panel.panel-default
@@ -138,9 +141,13 @@
                   .col-md-4.text-center
                     = comment_button '#generalComment', ' Comment'
                   .col-md-4.text-center
-                    = link_to '#' do
-                      = fa_icon('trash')
-                      Delete
+                    - if current_user.admin?
+                      = link_to lemma_path(@lemma), method: :delete, data: {confirm: 'Are you sure?'} do
+                        = fa_icon('trash')
+                        Delete
+                    - else
+                      %i
+                        %small.text-muted No permisson for delete.
 
 
       .col-md-6

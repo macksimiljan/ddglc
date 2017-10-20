@@ -13,9 +13,14 @@ class Ability
         can :manage, Lemma
 
       elsif user.employee?
+        can :manage, Lemma
+        cannot :destroy, Lemma
 
 
       elsif user.guest?
+        can :index, Lemma
+        can :show, Lemma
+
 
       end
     end
