@@ -1,0 +1,70 @@
+- content_for :page_title do
+  Coptic Sublemmas
+
+%section.col-md-8.col-md-offset-2
+  .container
+    .page-header
+      %h1.lexicon-headline
+        Coptic Sublemmas
+        %small Lexicon
+
+    .panel-group
+      .panel.panel-default.panel-lexicon
+        .panel-heading
+          .panel-title Actions
+        .panel-body
+          .row
+            .col-md-6
+              = link_to new_lemma_path do
+                = fa_icon('plus')
+                %strong Create New Coptic Sublemma
+            .col-md-6
+              Filter Coptic Sublemma
+      .panel.panel-default.panel-lexicon
+        .panel-heading
+          .panel-title Coptic Sublemmas
+        .panel-body
+          %ul
+            - @sublemmas.each do |sublemma|
+              %li
+                .panel.panel-default.panel-lemma
+                  .row
+                    .col-md-4.basic-information
+                      %p
+                        %span.coptic-greek.lemma-label= link_to sublemma.label, sublemma_path(sublemma)
+                      %p
+                        from
+                        %span.coptic-greek= link_to sublemma.lemma&.label, lemma_path(sublemma.lemma)
+                    .col-md-4.detailed-information
+                      %p
+                        - if sublemma.part_of_speech
+                          %span.lemma-pos= sublemma.part_of_speech.label
+                        - else
+                          '-'
+                      %p
+                        - if sublemma.loaned_form
+                          from
+                          %i.lemma-loanword= sublemma.loaned_form
+                          - if sublemma.language
+                            %span.lemma-language= "(#{sublemma.language.code})"
+                    .col-md-3.detailed-information
+                      %p
+                        usages:
+                        = "tbd"
+                      %p
+                        = sublemma.updated_at.strftime('last update: %b %Y')
+                    .col-md-1.detailed-information
+                      %p
+                        = link_to sublemma_path(sublemma) do
+                          = fa_icon('eye')
+                      %p
+                        = link_to '#' do
+                          = fa_icon('edit')
+
+
+          = paginate @lemmas, window: 2
+
+
+
+
+

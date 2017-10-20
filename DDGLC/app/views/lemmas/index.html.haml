@@ -51,7 +51,7 @@
                     .col-md-3.detailed-information
                       %p
                         sublemmas:
-                        = "tbd"
+                        = lemma.sublemmas.count
                       %p
                         = lemma.updated_at.strftime('last update: %b %Y')
                     .col-md-1.detailed-information
@@ -59,11 +59,9 @@
                         = link_to lemma_path(lemma) do
                           = fa_icon('eye')
                       %p
-                        = link_to '#' do
+                        = link_to edit_lemma_path(lemma) do
                           = fa_icon('edit')
 
-
-                  // TODO: first make design, then add comments, then add comments for currently not migrated lemmas
 
           = paginate @lemmas, window: 2
 
