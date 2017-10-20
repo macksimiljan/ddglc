@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020130312) do
+ActiveRecord::Schema.define(version: 20171020133051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,20 @@ ActiveRecord::Schema.define(version: 20171020130312) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sublemma_comments", force: :cascade do |t|
+    t.integer  "sublemma_id"
+    t.string   "field"
+    t.text     "content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.index ["created_by_id"], name: "index_sublemma_comments_on_created_by_id", using: :btree
+    t.index ["field"], name: "index_sublemma_comments_on_field", using: :btree
+    t.index ["sublemma_id"], name: "index_sublemma_comments_on_sublemma_id", using: :btree
+    t.index ["updated_by_id"], name: "index_sublemma_comments_on_updated_by_id", using: :btree
+  end
+
   create_table "sublemmas", force: :cascade do |t|
     t.string   "label",                            null: false
     t.integer  "part_of_speech_id"
@@ -116,6 +130,9 @@ ActiveRecord::Schema.define(version: 20171020130312) do
   add_foreign_key "lemmas", "part_of_speeches"
   add_foreign_key "lemmas", "users", column: "created_by_id"
   add_foreign_key "lemmas", "users", column: "updated_by_id"
+  add_foreign_key "sublemma_comments", "sublemmas"
+  add_foreign_key "sublemma_comments", "users", column: "created_by_id"
+  add_foreign_key "sublemma_comments", "users", column: "updated_by_id"
   add_foreign_key "sublemmas", "languages"
   add_foreign_key "sublemmas", "lemmas"
   add_foreign_key "sublemmas", "part_of_speeches"

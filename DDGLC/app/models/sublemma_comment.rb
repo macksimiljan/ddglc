@@ -1,5 +1,5 @@
-class LemmaComment < ApplicationRecord
-  belongs_to :lemma, dependent: :destroy
+class SublemmaComment < ApplicationRecord
+  belongs_to :sublemma, dependent: :destroy
   belongs_to :created_by, class_name: 'User'
   belongs_to :updated_by, class_name: 'User'
 
