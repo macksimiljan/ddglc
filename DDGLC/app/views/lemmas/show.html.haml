@@ -17,60 +17,58 @@
           .panel.panel-default
             .panel-body
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Lemma
-                  %span.lexicon-field-value.coptic-greek
-                    = @lemma.label
+                .col-md-3.lexicon-field-attribute
+                  Lemma
+                .col-md-7.lexicon-field-value.coptic-greek
+                  = @lemma.label
 
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Meaning
-                  %span.lexicon-field-value
-                    = optional_field  @lemma.meaning
+                .col-md-3.lexicon-field-attribute
+                  Meaning
+                .col-md-7.lexicon-field-value
+                  = optional_field  @lemma.meaning
 
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Part of Speech
-                  %span.lexicon-field-value
-                    - if @lemma.part_of_speech
-                      = @lemma.part_of_speech.label.titleize
-                    - else
-                      = '-'
+                .col-md-3.lexicon-field-attribute
+                  Part of Speech
+                .col-md-8.lexicon-field-value
+                  - if @lemma.part_of_speech
+                    = @lemma.part_of_speech.label.titleize
+                  - else
+                    = '-'
+                .col-md-1
+                  = comment_button '#partofspeechComment'
+              = render partial: 'show_comments', locals: {lemma: @lemma, field: 'part_of_speech'}
+              = render partial: 'add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', lemma_id: @lemma.id}
 
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Article
-                  %span.lexicon-field-value.coptic-greek
-                    = optional_field @lemma.article
+                .col-md-3.lexicon-field-attribute
+                  Article
+                .col-md-7.lexicon-field-value.coptic-greek
+                  = optional_field @lemma.article
 
           -# language
           - unless @lemma.loan_word_form.nil? &&  @lemma.comments_for('loan_word_form').empty?
             .panel.panel-default
               .panel-body
                 .row.lexicon-field
-                  .col-md-11
-                    %span.lexicon-field-attribute
-                      Loan Word Form
-                    %span.lexicon-field-value
-                      = optional_field @lemma.loan_word_form
-                    = render partial: 'show_comments', locals: {lemma: @lemma, field: 'loan_word_form'}
+                  .col-md-3.lexicon-field-attribute
+                    Loan Word Form
+                  .col-md-8.lexicon-field-value
+                    = optional_field @lemma.loan_word_form
                   .col-md-1
                     = comment_button '#loanwordformComment'
+                = render partial: 'show_comments', locals: {lemma: @lemma, field: 'loan_word_form'}
                 = render partial: 'add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', lemma_id: @lemma.id}
 
                 .row.lexicon-field
-                  .col-md-12
-                    %span.lexicon-field-attribute
-                      Language
-                    %span.lexicon-field-value
-                      - if @lemma.language
-                        = @lemma.language.code
-                      - else
-                        = '-'
+                  .col-md-3.lexicon-field-attribute
+                    Language
+                  .col-md-8.lexicon-field-value
+                    - if @lemma.language
+                      = @lemma.language.code
+                    - else
+                      = '-'
 
 
           -# semantic fields
@@ -78,35 +76,32 @@
             .panel.panel-default.panel-lexicon
               .panel-body
                 .row.lexicon-field
-                  .col-md-12
-                    %span.lexicon-field-attribute
-                      = 'Semantic Field'.pluralize @lemma.semantic_fields.count
-                  - @lemma.semantic_fields.each do |semantic_field|
-                    .row
-                      %span.lexicon-field-value{style: 'margin-left: 170px'}
-                        = "#{semantic_field.label} (#{semantic_field.source})"
-                        - if semantic_field.url
-                          = link_to fa_icon('external-link'), semantic_field.url, target: :blank
+                  .col-md-3.lexicon-field-attribute
+                    = 'Semantic Field'.pluralize @lemma.semantic_fields.count
+                  .col-md-9.lexicon-field-value
+                    - @lemma.semantic_fields.each do |semantic_field|
+                      = "#{semantic_field.label} (#{semantic_field.source})"
+                      - if semantic_field.url
+                        = link_to fa_icon('external-link'), semantic_field.url, target: :blank
+                      %br
 
           -# source, reference
           .panel.panel-default
             .panel-body
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Source
-                  %span.lexicon-field-value
-                    = optional_field @lemma.source
+                .col-md-3.lexicon-field-attribute
+                  Source
+                .col-md-8.lexicon-field-value
+                  = optional_field @lemma.source
 
               .row.lexicon-field
-                .col-md-11
-                  %span.lexicon-field-attribute
-                    Reference
-                  %span.lexicon-field-value
-                    = optional_field @lemma.reference
-                  = render partial: 'show_comments', locals: {lemma: @lemma, field: 'reference'}
+                .col-md-3.lexicon-field-attribute
+                  Reference
+                .col-md-8.lexicon-field-value
+                  = optional_field @lemma.reference
                 .col-md-1
                   = comment_button '#referenceComment'
+              = render partial: 'show_comments', locals: {lemma: @lemma, field: 'reference'}
               = render partial: 'add_comment', locals: {target_id: 'referenceComment', field: 'reference', lemma_id: @lemma.id}
 
 
@@ -115,29 +110,28 @@
           .panel.panel-default
             .panel-body
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Creation
-                  %span.lexicon-field-value
-                    = "#{@lemma.created_at.strftime('%b %e, %Y')} by #{@lemma.created_by.code}"
+                .col-md-3.lexicon-field-attribute
+                  Creation
+                .col-md-8.lexicon-field-value
+                  = "#{@lemma.created_at.strftime('%b %e, %Y')} by #{@lemma.created_by.code}"
               .row.lexicon-field
-                .col-md-12
-                  %span.lexicon-field-attribute
-                    Last Update
-                  %span.lexicon-field-value
-                    - if @lemma.created_at == @lemma.updated_at
-                      %i never
-                    - else
-                      = "#{@lemma.updated_at.strftime('%b %e, %Y')} by #{@lemma.updated_by.code}"
-
-              - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
-              - unless comments.empty?
-                .row.lexicon-field
-                  .col-md-12
-                    - comments.sort_by{|c| c[:created_at]}.each do |comment|
-                      %blockquote.lexicon-field-comment.text-muted
-                        %p= comment.content
-                        %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                .col-md-3.lexicon-field-attribute
+                  Last Update
+                .col-md-8.lexicon-field-value
+                  - if @lemma.created_at == @lemma.updated_at
+                    %i never
+                  - else
+                    = "#{@lemma.updated_at.strftime('%b %e, %Y')} by #{@lemma.updated_by.code}"
+              .row.lexicon-field
+                - comments = @lemma.comments_for('lemma') + @lemma.comments_for('processing_note')
+                .col-md-3.lexicon-field-attribute
+                  Comments
+                .col-md-9
+                  - comments.sort_by{|c| c[:created_at]}.each do |comment|
+                    %blockquote.lexicon-field-comment.text-muted
+                      %p= comment.content
+                      %small= "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                    %br
               = render partial: 'add_comment', locals: {target_id: 'generalComment', field: 'lemma', lemma_id: @lemma.id}
 
           -# actions
