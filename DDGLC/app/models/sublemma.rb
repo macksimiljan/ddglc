@@ -8,5 +8,5 @@ class Sublemma < ApplicationRecord
   paginates_per 15
 
   validates :label, presence: true
-  validates :hierarchy, format: {with: /\A[I,V,X]+[.][A-Z][.][0-9]\z/}
+  validates :hierarchy, allow_blank: true, format: {with: /\A[IVX]+[.]?[A-Z]?[.]?[0-9]*\z/}
 end

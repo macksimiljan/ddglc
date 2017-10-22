@@ -1,6 +1,8 @@
 require 'csv'
 
 class InsertCopticSublemmaJob < ApplicationJob
+  include InsertJob
+
   def perform(path)
     @admin = User.find_by_code('Admin')
     @msgs = []
@@ -17,27 +19,36 @@ class InsertCopticSublemmaJob < ApplicationJob
   def insert_sublemma(row)
     values = read_row(row)
     return if values.empty?
+    id = row[7]
     values[:created_by] = @admin
     values[:updated_by] = @admin
-    lemma = Sublemma.new(values)
+    lemma = Sublemma.create_with(values).find_or_create_by!(id: id)
     if lemma.save!
-      @msgs << "INFO \t Saved lemma!"
+      @msgs << "INFO \t Saved sublemma!"
     else
-      @msgs << "WARNING \t Could not save lemma!"
+      @msgs << "WARNING \t Could not save sublemma!"
     end
   rescue StandardError => e
     @msgs << "ERROR \t #{e.message} in"
+    # @msgs << e.backtrace.join("\n")
     @msgs << "\t\t #{row.to_s}"
   end
 
   def read_row(data)
     values = {}
     values = normalize_field(values, :label, data[3])
-    values = pos(values, data[1].downcase)
+    values = pos(values, data[1])
     values = normalize_field(values, :loaned_form, data[5])
-    values = normalize_field(values, :hierarchy, data[2])
+    values = hierarchy(values, data[2])
     values = language(values, data[4])
     values = lemma(values, data[6])
+    values
+  end
+
+  def hierarchy(values, field_value)
+    return values if field_value.blank?
+
+    values[:hierarchy] = field_value.squish.upcase
     values
   end
 

@@ -1,6 +1,7 @@
 require 'csv'
 
 class InsertGreekLemmaJob < ApplicationJob
+  include InsertJob
 
   def perform(path)
     @msgs = []
