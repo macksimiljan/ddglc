@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       redirect_to root_url
       flash[:success] = "Welcome back, #{user.code}. You are logged in as #{user.role}."
     else
-      flash.now[:danger] = 'Unable to login. Check your abbreviation and password.'
       render 'new'
+      flash.now[:alert] = 'Unable to login. Check your abbreviation and password.'
     end
   end
 

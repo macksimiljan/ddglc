@@ -1,0 +1,151 @@
+- content_for :page_title do
+  Coptic Sublemma
+
+%section
+  .container
+    .page-header
+      %h1.lexicon-headline
+        %span.coptic-greek= @sublemma.label
+        %small
+          = link_to 'Coptic Sublemma', sublemmas_path
+
+    .row
+      .col-md-6
+        .panel-group
+
+          -# lemma, pos
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Sublemma
+                .col-md-7.lexicon-field-value.coptic-greek
+                  = @sublemma.label
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Part of Speech
+                .col-md-8.lexicon-field-value
+                  - if @sublemma.part_of_speech
+                    = @sublemma.part_of_speech.label.titleize
+                  - else
+                    = '-'
+              -#      we have to access the sublemma comment table
+              -#  .col-md-1
+              -#    = comment_button '#partofspeechComment'
+              -#= render partial: 'lemmas/show_comments', locals: {lemma: @sublemma, field: 'part_of_speech'}
+              -#= render partial: 'lemmas/add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', lemma_id: @sublemma.id}
+
+
+
+          -# language
+          - if @sublemma.language.present?
+            .panel.panel-default.panel-lexicon
+              .panel-body
+                .row.lexicon-field
+                  .col-md-3.lexicon-field-attribute
+                    Language
+                  .col-md-8.lexicon-field-value
+                    - if @sublemma.language
+                      = @sublemma.language.code
+                    - else
+                      = '-'
+
+
+          -# greek lemma, loaned form, hierarchy
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Greek Lemma
+                .col-md-8.lexicon-field-value.coptic-greek
+                  - if @sublemma.lemma.present?
+                    = link_to @sublemma.lemma.label, lemma_path(@sublemma.lemma)
+                  - else
+                    = '-'
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Loaned Form
+                .col-md-8.lexicon-field-value.coptic-greek
+                  =  optional_field @sublemma.loaned_form
+              -#  .col-md-1
+              -#    = comment_button '#loanwordformComment'
+              -#= render partial: 'lemmas/show_comments', locals: {lemma: @sublemma, field: 'loan_word_form'}
+              -#= render partial: 'lemmas/add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', lemma_id: @sublemma.id}
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Hierarchy
+                .col-md-8.lexicon-field-value.coptic-greek
+                  =  optional_field @sublemma.hierarchy
+
+
+          -# owner, updater, further comments
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Creation
+                .col-md-8.lexicon-field-value
+                  = "#{@sublemma.created_at.strftime('%b %e, %Y')} by #{@sublemma.created_by.code}"
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Last Update
+                .col-md-8.lexicon-field-value
+                  - if @sublemma.created_at == @sublemma.updated_at
+                    = '-'
+                  - else
+                    = "#{@sublemma.updated_at.strftime('%b %e, %Y')} by #{@sublemma.updated_by.code}"
+              -#.row.lexicon-field
+              -#  - comments = @sublemma.comments_for('lemma') + @sublemma.comments_for('processing_note')
+              -#  .col-md-3.lexicon-field-attribute
+              -#    Comments
+              -#  .col-md-9
+              -#    - if comments.empty?
+              -#      = '-'
+              -#    - else
+              -#      - comments.sort_by{|c| c[:created_at]}.each do |comment|
+              -#        %blockquote.lexicon-field-comment.text-muted
+              -#          %p= comment.content
+              -#          %small
+              -#            = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+              -#            - if comment.created_by == current_user
+              -#              = link_to lemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
+              -#                = fa_icon('trash')
+              -#      %br
+              -#= render partial: 'add_comment', locals: {target_id: 'generalComment', field: 'lemma', lemma_id: @sublemma.id}
+
+          -# actions
+          - unless current_user.guest?
+            .panel.panel-default.panel-lexicon
+              .panel-heading
+                .panel-title Actions
+              .panel-body
+                -# todo: make sure that only comment owner can edit it (except admin)
+                .row
+                  .col-md-4.text-center
+                    = link_to edit_lemma_path(@sublemma) do
+                      = fa_icon('edit')
+                      Edit
+                  .col-md-4.text-center
+                    -#= comment_button '#generalComment', ' Comment'
+                  .col-md-4.text-center
+                    - if current_user.admin?
+                      = link_to lemma_path(@sublemma), method: :delete, data: {confirm: 'Are you sure?'} do
+                        = fa_icon('trash')
+                        Delete
+                    - else
+                      %i
+                        %small.text-muted No permisson for delete.
+
+
+      .col-md-6
+        -# coptic sublemmas
+        .panel.panel-default
+          .panel-body
+            coptic sublemmas
+
+
+
+

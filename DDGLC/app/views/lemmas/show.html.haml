@@ -14,7 +14,7 @@
         .panel-group
 
           -# lemma, meaning, pos, article
-          .panel.panel-default
+          .panel.panel-default.panel-lexicon
             .panel-body
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
@@ -49,7 +49,7 @@
 
           -# language
           - if @lemma.loan_word_form.present? || @lemma.language.present? || !@lemma.comments_for('loan_word_form').empty?
-            .panel.panel-default
+            .panel.panel-default.panel-lexicon
               .panel-body
                 .row.lexicon-field
                   .col-md-3.lexicon-field-attribute
@@ -87,7 +87,7 @@
 
           -# source, reference
           - if @lemma.source.present? || @lemma.reference.present? || !@lemma.comments_for('reference').empty?
-            .panel.panel-default
+            .panel.panel-default.panel-lexicon
               .panel-body
                 .row.lexicon-field
                   .col-md-3.lexicon-field-attribute
@@ -108,7 +108,7 @@
 
 
           -# owner, updater, further comments
-          .panel.panel-default
+          .panel.panel-default.panel-lexicon
             .panel-body
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
@@ -168,9 +168,16 @@
 
       .col-md-6
         -# coptic sublemmas
-        .panel.panel-default
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title
+              Coptic Sublemmas
+              = "(#{@lemma.sublemmas.count})"
           .panel-body
-            coptic sublemmas
+            %ul
+              - @lemma.sublemmas.order(:hierarchy).each do |sublemma|
+                %li= sublemma.label
+
 
 
 

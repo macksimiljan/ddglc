@@ -4,4 +4,8 @@ class SublemmasController < ApplicationController
   def index
     @sublemmas = Sublemma.order(:id).page params[:page]
   end
+
+  def show
+    @sublemma = Sublemma.find(params[:id])
+  end
 end

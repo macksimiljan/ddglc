@@ -5,10 +5,10 @@
   .container
     .row
       .col-md-6.col-md-offset-3
-        .page-header
+        .page-header.project-headline
           %h1 Login
         = bootstrap_form_for(:session, url: login_url) do |f|
           = f.text_field :code, icon: 'user', label: 'Abbreviation', placeholder: 'JoDo'
           = f.password_field :password, icon: 'lock', placeholder: 'password'
           = f.form_group do
-            = f.submit 'Log in', class: 'btn btn-primary btn-block'
+            = f.submit 'Log in', class: 'btn btn-primary btn-primary-project btn-block'

@@ -38,11 +38,20 @@ section
 
 .project-headline
   color: $ddglc-color
+  font-size: 29px
+  small
+    color: $ddglc-color-light
+    a
+      color: $ddglc-color-light
+      &:hover,
+      &:focus
+        background-color: transparent
+        color: $ddglc-color-very-light
 
 .alert
   margin-bottom: 0px
 
-.btn-primary
+.btn-primary.btn-primary-project
   background-color: $ddglc-color
   border: 2px solid $ddglc-color-light
   &:hover
