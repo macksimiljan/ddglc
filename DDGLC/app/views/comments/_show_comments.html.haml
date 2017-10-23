@@ -1,6 +1,6 @@
 .row
   .col-md-9.col-md-offset-3
-    - lemma.comments_for(field).order(:created_at).each do |comment|
+    - commented_entry.comments_for(field).order(:created_at).each do |comment|
       %blockquote.lexicon-field-comment.text-muted
         %p= comment.content
         %small

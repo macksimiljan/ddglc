@@ -1,11 +1,12 @@
 .row.lexicon-field.collapse{id: target_id}
   .col-md-12
     %blockquote.lexicon-field-comment.text-muted
-      - @lemma_comment = LemmaComment.new
-      = bootstrap_form_for(@lemma_comment) do |f|
+      - commented_entry_id_label = comment.class.name.gsub('Comment', '').underscore + '_id'
+      - @comment = comment
+      = bootstrap_form_for(@comment) do |f|
         = f.text_area :content, rows: 4, label: 'New Comment', autofocus: true
         = f.hidden_field :field, value: field
-        = f.hidden_field :lemma_id, value: lemma_id
+        = f.hidden_field commented_entry_id_label, value: commented_entry_id
         %br
         = f.form_group do
           = f.submit 'Save', class: 'btn btn-primary btn-block'

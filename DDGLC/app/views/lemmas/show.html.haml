@@ -38,8 +38,8 @@
                     = '-'
                 .col-md-1
                   = comment_button '#partofspeechComment'
-              = render partial: 'show_comments', locals: {lemma: @lemma, field: 'part_of_speech'}
-              = render partial: 'add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', lemma_id: @lemma.id}
+              = render partial: 'comments/show_comments', locals: {commented_entry: @lemma, field: 'part_of_speech'}
+              = render partial: 'comments/add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', commented_entry_id: @lemma.id, comment: LemmaComment.new}
 
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
@@ -58,8 +58,8 @@
                     = optional_field @lemma.loan_word_form
                   .col-md-1
                     = comment_button '#loanwordformComment'
-                = render partial: 'show_comments', locals: {lemma: @lemma, field: 'loan_word_form'}
-                = render partial: 'add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', lemma_id: @lemma.id}
+                = render partial: 'comments/show_comments', locals: {commented_entry: @lemma, field: 'loan_word_form'}
+                = render partial: 'comments/add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', commented_entry_id: @lemma.id, comment: LemmaComment.new}
 
                 .row.lexicon-field
                   .col-md-3.lexicon-field-attribute
@@ -102,8 +102,8 @@
                     = optional_field @lemma.reference
                   .col-md-1
                     = comment_button '#referenceComment'
-                = render partial: 'show_comments', locals: {lemma: @lemma, field: 'reference'}
-                = render partial: 'add_comment', locals: {target_id: 'referenceComment', field: 'reference', lemma_id: @lemma.id}
+                = render partial: 'comments/show_comments', locals: {commented_entry: @lemma, field: 'reference'}
+                = render partial: 'comments/add_comment', locals: {target_id: 'referenceComment', field: 'reference', commented_entry_id: @lemma.id, comment: LemmaComment.new}
 
 
 
@@ -140,7 +140,7 @@
                             = link_to lemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
                               = fa_icon('trash')
                     %br
-              = render partial: 'add_comment', locals: {target_id: 'generalComment', field: 'lemma', lemma_id: @lemma.id}
+              = render partial: 'comments/add_comment', locals: {target_id: 'generalComment', field: 'lemma', commented_entry_id: @lemma.id, comment: LemmaComment.new}
 
           -# actions
           - unless current_user.guest?

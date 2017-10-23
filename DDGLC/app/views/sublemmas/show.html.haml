@@ -30,12 +30,10 @@
                     = @sublemma.part_of_speech.label.titleize
                   - else
                     = '-'
-              -#      we have to access the sublemma comment table
-              -#  .col-md-1
-              -#    = comment_button '#partofspeechComment'
-              -#= render partial: 'lemmas/show_comments', locals: {lemma: @sublemma, field: 'part_of_speech'}
-              -#= render partial: 'lemmas/add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', lemma_id: @sublemma.id}
-
+                .col-md-1
+                  = comment_button '#partofspeechComment'
+              = render partial: 'comments/show_comments', locals: {commented_entry: @sublemma, field: 'part_of_speech'}
+              = render partial: 'comments/add_comment', locals: {target_id: 'partofspeechComment', field: 'part_of_speech', commented_entry_id: @sublemma.id, comment: SublemmaComment.new}
 
 
           -# language
@@ -69,10 +67,10 @@
                   Loaned Form
                 .col-md-8.lexicon-field-value.coptic-greek
                   =  optional_field @sublemma.loaned_form
-              -#  .col-md-1
-              -#    = comment_button '#loanwordformComment'
-              -#= render partial: 'lemmas/show_comments', locals: {lemma: @sublemma, field: 'loan_word_form'}
-              -#= render partial: 'lemmas/add_comment', locals: {target_id: 'loanwordformComment', field: 'loan_word_form', lemma_id: @sublemma.id}
+                .col-md-1
+                  = comment_button '#loanedFormComment'
+              = render partial: 'comments/show_comments', locals: {commented_entry: @sublemma, field: 'loaned_form'}
+              = render partial: 'comments/add_comment', locals: {target_id: 'loanedFormComment', field: 'loaned_form', commented_entry_id: @sublemma.id, comment: SublemmaComment.new}
 
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
@@ -97,24 +95,24 @@
                     = '-'
                   - else
                     = "#{@sublemma.updated_at.strftime('%b %e, %Y')} by #{@sublemma.updated_by.code}"
-              -#.row.lexicon-field
-              -#  - comments = @sublemma.comments_for('lemma') + @sublemma.comments_for('processing_note')
-              -#  .col-md-3.lexicon-field-attribute
-              -#    Comments
-              -#  .col-md-9
-              -#    - if comments.empty?
-              -#      = '-'
-              -#    - else
-              -#      - comments.sort_by{|c| c[:created_at]}.each do |comment|
-              -#        %blockquote.lexicon-field-comment.text-muted
-              -#          %p= comment.content
-              -#          %small
-              -#            = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
-              -#            - if comment.created_by == current_user
-              -#              = link_to lemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
-              -#                = fa_icon('trash')
-              -#      %br
-              -#= render partial: 'add_comment', locals: {target_id: 'generalComment', field: 'lemma', lemma_id: @sublemma.id}
+              .row.lexicon-field
+                - comments = @sublemma.comments_for('sublemma')
+                .col-md-3.lexicon-field-attribute
+                  Comments
+                .col-md-9
+                  - if comments.empty?
+                    = '-'
+                  - else
+                    - comments.sort_by{|c| c[:created_at]}.each do |comment|
+                      %blockquote.lexicon-field-comment.text-muted
+                        %p= comment.content
+                        %small
+                          = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                          - if comment.created_by == current_user
+                            = link_to sublemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
+                              = fa_icon('trash')
+                    %br
+              = render partial: 'comments/add_comment', locals: {target_id: 'generalComment', field: 'sublemma', commented_entry_id: @sublemma.id, comment: SublemmaComment.new}
 
           -# actions
           - unless current_user.guest?
@@ -122,14 +120,13 @@
               .panel-heading
                 .panel-title Actions
               .panel-body
-                -# todo: make sure that only comment owner can edit it (except admin)
                 .row
                   .col-md-4.text-center
                     = link_to edit_lemma_path(@sublemma) do
                       = fa_icon('edit')
                       Edit
                   .col-md-4.text-center
-                    -#= comment_button '#generalComment', ' Comment'
+                    = comment_button '#generalComment', ' Comment'
                   .col-md-4.text-center
                     - if current_user.admin?
                       = link_to lemma_path(@sublemma), method: :delete, data: {confirm: 'Are you sure?'} do
@@ -141,10 +138,19 @@
 
 
       .col-md-6
-        -# coptic sublemmas
-        .panel.panel-default
+        -# coptic usages
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title
+              = link_to 'Coptic Usages', '#'
+              -#= "(#{@lemma.sublemmas.count})"
           .panel-body
-            coptic sublemmas
+            -#%table.table.table-hover.table-sublemmas
+            -#  - @sublemma.usages.order(:hierarchy).each do |sublemma|
+            -#    %tr
+            -#      %td= sublemma.hierarchy
+            -#      %td.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.label, sublemma_path(sublemma)
+            -#      %td= sublemma.part_of_speech.label
 
 
 
