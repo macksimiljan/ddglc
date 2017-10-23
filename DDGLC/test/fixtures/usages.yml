@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coptic_specification: MyString
+  meaning: MyString
+  hierarchy: MyString
+  distinction_tier: one
+  criterion: MyString
+
+two:
+  coptic_specification: MyString
+  meaning: MyString
+  hierarchy: MyString
+  distinction_tier: two
+  criterion: MyString

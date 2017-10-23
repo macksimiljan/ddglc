@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023123514) do
+ActiveRecord::Schema.define(version: 20171023132957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,31 @@ ActiveRecord::Schema.define(version: 20171023123514) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "usage_categories_usages", id: false, force: :cascade do |t|
+    t.integer "usage_id",          null: false
+    t.integer "usage_category_id", null: false
+    t.index ["usage_category_id"], name: "index_usage_categories_usages_on_usage_category_id", using: :btree
+    t.index ["usage_id"], name: "index_usage_categories_usages_on_usage_id", using: :btree
+  end
+
+  create_table "usages", force: :cascade do |t|
+    t.string   "coptic_specification"
+    t.string   "meaning"
+    t.string   "hierarchy"
+    t.integer  "distinction_tier_id"
+    t.integer  "sublemma_id"
+    t.string   "criterion"
+    t.integer  "corresponding_usages", default: [],              array: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.index ["created_by_id"], name: "index_usages_on_created_by_id", using: :btree
+    t.index ["distinction_tier_id"], name: "index_usages_on_distinction_tier_id", using: :btree
+    t.index ["sublemma_id"], name: "index_usages_on_sublemma_id", using: :btree
+    t.index ["updated_by_id"], name: "index_usages_on_updated_by_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "code",                           null: false
     t.string   "first_name"
@@ -152,4 +177,8 @@ ActiveRecord::Schema.define(version: 20171023123514) do
   add_foreign_key "sublemmas", "part_of_speeches"
   add_foreign_key "sublemmas", "users", column: "created_by_id"
   add_foreign_key "sublemmas", "users", column: "updated_by_id"
+  add_foreign_key "usages", "distinction_tiers"
+  add_foreign_key "usages", "sublemmas"
+  add_foreign_key "usages", "users", column: "created_by_id"
+  add_foreign_key "usages", "users", column: "updated_by_id"
 end
