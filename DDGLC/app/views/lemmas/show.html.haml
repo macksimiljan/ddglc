@@ -25,7 +25,7 @@
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Meaning
-                .col-md-7.lexicon-field-value
+                .col-md-8.lexicon-field-value
                   = optional_field  @lemma.meaning
 
               .row.lexicon-field
@@ -44,7 +44,7 @@
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Article
-                .col-md-7.lexicon-field-value.coptic-greek
+                .col-md-8.lexicon-field-value.coptic-greek
                   = optional_field @lemma.article
 
           -# language
@@ -148,7 +148,6 @@
               .panel-heading
                 .panel-title Actions
               .panel-body
-                -# todo: make sure that only comment owner can edit it (except admin)
                 .row
                   .col-md-4.text-center
                     = link_to edit_lemma_path(@lemma) do
@@ -171,12 +170,16 @@
         .panel.panel-default.panel-lexicon
           .panel-heading
             .panel-title
-              Coptic Sublemmas
+              = link_to 'Coptic Sublemmas', sublemmas_path
               = "(#{@lemma.sublemmas.count})"
           .panel-body
-            %ul
+            %table.table.table-hover.table-sublemmas
               - @lemma.sublemmas.order(:hierarchy).each do |sublemma|
-                %li= sublemma.label
+                %tr
+                  %td= sublemma.hierarchy
+                  %td.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.label, sublemma_path(sublemma)
+                  %td= sublemma.part_of_speech.label
+
 
 
 

@@ -35,7 +35,7 @@
                       %p
                         - if sublemma.lemma.present?
                           Greek:
-                          %span.coptic-greek= link_to sublemma.lemma&.label, lemma_path(sublemma.lemma)
+                          %span.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.lemma&.label, lemma_path(sublemma.lemma)
                     .col-md-4.detailed-information
                       %p
                         - if sublemma.part_of_speech
