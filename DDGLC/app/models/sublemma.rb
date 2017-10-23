@@ -6,6 +6,7 @@ class Sublemma < ApplicationRecord
   belongs_to :updated_by, class_name: 'User'
 
   has_many :sublemma_comments
+  has_many :usages
 
   paginates_per 15
 

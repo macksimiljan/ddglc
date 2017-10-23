@@ -143,14 +143,14 @@
           .panel-heading
             .panel-title
               = link_to 'Coptic Usages', '#'
-              -#= "(#{@lemma.sublemmas.count})"
+              = "(#{@sublemma.usages.count})"
           .panel-body
-            -#%table.table.table-hover.table-sublemmas
-            -#  - @sublemma.usages.order(:hierarchy).each do |sublemma|
-            -#    %tr
-            -#      %td= sublemma.hierarchy
-            -#      %td.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.label, sublemma_path(sublemma)
-            -#      %td= sublemma.part_of_speech.label
+            %table.table.table-hover.table-sublemmas
+              - @sublemma.usages.order(:hierarchy).each do |usage|
+                %tr
+                  %td= usage.hierarchy
+                  %td= optional_field usage.meaning
+                  %td= usage.usage_categories&.map{|m| m.code}.join(',')
 
 
 
