@@ -6,7 +6,11 @@
     .page-header
       %h1.lexicon-headline
         Semantic Fields
-        %small Lexicon
+        %small= link_to 'Lexicon', '/lexicon/about'
+
+    .row
+      .col-md-12
+        = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
     %table.table.table-hover
       %thead
@@ -33,7 +37,5 @@
               = link_to fa_icon('trash', class: 'fa-2x'), root_path
 
 
-    .row
-      .col-md-12
-        = link_to fa_icon('user-plus', class: 'fa-2x'), root_path
+
 

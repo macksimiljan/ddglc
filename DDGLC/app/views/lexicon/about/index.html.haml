@@ -1,7 +1,7 @@
 - content_for :page_title do
   Lexicon
 
-%section.col-md-8.col-md-offset-2
+%section.col-md-8.col-md-offset-2.lexicon-page
   .container
     .page-header.lexicon-headline
       %h1 Lexicon
@@ -28,6 +28,10 @@
                 = Lemma.count
                 = link_to 'show', lemmas_path
               %li
+                No. of Coptic sublemmas:
+                = Sublemma.count
+                = link_to 'show', sublemmas_path
+              %li
                 No. of languages:
                 = Language.count
                 = link_to 'show', languages_path
@@ -39,6 +43,14 @@
                 No. of semantic fiels:
                 = SemanticField.count
                 = link_to 'show', semantic_fields_path
+              %li
+                No. of usage categories:
+                = UsageCategory.count
+                = link_to 'show', usage_categories_path
+              %li
+                No. of distinction tiers:
+                = DistinctionTier.count
+                = link_to 'show', distinction_tiers_path
         .panel.panel-default.panel-lexicon
           .panel-heading
             .panel-title Data Quality

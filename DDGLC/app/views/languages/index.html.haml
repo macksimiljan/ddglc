@@ -1,12 +1,16 @@
 - content_for :page_title do
   Language
 
-%section.col-md-8.col-md-offset-2
+%section.col-md-8.col-md-offset-2.lexicon-page
   .container
     .page-header
       %h1.lexicon-headline
         Language
-        %small Lexicon
+        %small= link_to 'Lexicon', '/lexicon/about'
+
+    .row
+      .col-md-12
+        = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
     %table.table.table-hover
       %thead
@@ -25,11 +29,9 @@
               = l.label
               = null_value if l.label.blank?
             %td
-              = link_to fa_icon('pencil-square', class: 'fa-2x'), root_path
-              = link_to fa_icon('trash', class: 'fa-2x'), root_path
+              = link_to fa_icon('pencil-square'), root_path
+              = link_to fa_icon('trash'), root_path
 
 
-    .row
-      .col-md-12
-        = link_to fa_icon('user-plus', class: 'fa-2x'), root_path
+
 

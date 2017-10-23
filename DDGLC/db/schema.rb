@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020141359) do
+ActiveRecord::Schema.define(version: 20171023123514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "distinction_tiers", force: :cascade do |t|
+    t.string   "label",       null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string   "code",       null: false
@@ -108,6 +115,13 @@ ActiveRecord::Schema.define(version: 20171020141359) do
     t.index ["lemma_id"], name: "index_sublemmas_on_lemma_id", using: :btree
     t.index ["part_of_speech_id"], name: "index_sublemmas_on_part_of_speech_id", using: :btree
     t.index ["updated_by_id"], name: "index_sublemmas_on_updated_by_id", using: :btree
+  end
+
+  create_table "usage_categories", force: :cascade do |t|
+    t.string   "code",       null: false
+    t.string   "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

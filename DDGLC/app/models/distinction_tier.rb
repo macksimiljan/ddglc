@@ -1,0 +1,2 @@
+class DistinctionTier < ApplicationRecord
+end

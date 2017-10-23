@@ -1,0 +1,2 @@
+class UsageCategory < ApplicationRecord
+end

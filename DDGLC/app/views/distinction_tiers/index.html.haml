@@ -1,11 +1,11 @@
 - content_for :page_title do
-  Part of Speech
+  Distinction Tiers
 
 %section.col-md-8.col-md-offset-2.lexicon-page
   .container
     .page-header
       %h1.lexicon-headline
-        Part of Speech
+        Distinction Tiers
         %small= link_to 'Lexicon', '/lexicon/about'
 
     .row
@@ -16,12 +16,15 @@
       %thead
         %tr
           %th Label
+          %th Description
           %th Action
       %tbody
-        - @part_of_speeches.each do |pos|
+        - @distinction_tiers.each do |tier|
           %tr
             %td
-              = optional_field post.label
+              = tier.label
+            %td
+              = optional_field tier.description
             %td
               = link_to fa_icon('pencil-square'), root_path
               = link_to fa_icon('trash'), root_path
