@@ -39,18 +39,12 @@ class InsertCopticSublemmaJob < ApplicationJob
     values = normalize_field(values, :label, data[3])
     values = pos(values, data[1])
     values = normalize_field(values, :loaned_form, data[5])
-    values = hierarchy(values, data[2])
+    values = sublemma_hierarchy(values, data[2])
     values = language(values, data[4])
     values = lemma(values, data[6])
     values
   end
 
-  def hierarchy(values, field_value)
-    return values if field_value.blank?
-
-    values[:hierarchy] = field_value.squish.upcase
-    values
-  end
 
   def lemma(values, field_value)
     return values if field_value.blank?

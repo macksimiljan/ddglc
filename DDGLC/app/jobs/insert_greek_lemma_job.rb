@@ -126,27 +126,6 @@ class InsertGreekLemmaJob < ApplicationJob
     values
   end
 
-  def user(values, field_key, field_value)
-    raise "User cannot be empty" if field_value.blank?
-    field_value = 'Admin' if field_value.eql? 'SU'
-
-    field_value = field_value.nil? ? nil : field_value.squish
-    user = User.create_with(
-             email: 'ddglc@uni-leipzig.de',
-             role: 'guest',
-             password: 'ddglc123',
-             password_confirmation: 'ddglc123'
-          ).find_or_create_by!(code: field_value)
-    values[field_key] = user
-    values
-  end
-
-  def date(values, field_key, field_value)
-    field_value = field_value.nil? ? nil : field_value.squish
-    values[field_key] = Time.parse(field_value)
-    values
-  end
-
   def insert_exceptions
 
     semantic_fields1 = [SemanticField.find_by_label("Social and political relations"), SemanticField.find_by_label("Gesellschaft und Gemeinschaft")]

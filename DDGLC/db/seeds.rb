@@ -74,7 +74,7 @@ dornseiff_fields.each do |label|
     .find_or_create_by!(label: label)
 end
 
-distinction_tiers = ['lexicalisation', 'morphological', 'syntagmatic: function', 'syntagmatic: part of speech',
+distinction_tiers = ['lexicalization', 'morphological', 'syntagmatic: function', 'syntagmatic: part of speech',
                      'syntagmatic: valency', 'semantic', 'pragmatic']
 distinction_tiers.each do |tier|
   DistinctionTier.find_or_create_by!(label: tier)
@@ -83,7 +83,7 @@ end
 usage_categories = ['alch.', 'arch.', 'astrol.', 'bibl.', 'biol.', 'bot.',
                     'eccl.', 'epist.', 'gen.', 'geog.', 'homil.', 'leg.',
                     'lit.', 'liturg.', 'mag.', 'mart.', 'med.', 'metaph.',
-                    'mil.', 'mon.', 'num.', 'phil.', 'phsy.', 'poet.', 'theol.']
+                    'mil.', 'mon.', 'num.', 'phil.', 'phys.', 'poet.', 'theol.']
 usage_categories.each do |category|
   UsageCategory.find_or_create_by!(code: category)
 
