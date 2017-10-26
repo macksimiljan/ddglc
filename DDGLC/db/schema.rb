@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023132957) do
+ActiveRecord::Schema.define(version: 20171025191525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20171023132957) do
     t.string   "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_usage_categories_on_code", unique: true, using: :btree
   end
 
   create_table "usage_categories_usages", id: false, force: :cascade do |t|

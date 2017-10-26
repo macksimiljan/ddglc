@@ -51,7 +51,7 @@
                     .col-md-3.detailed-information
                       %p
                         usages:
-                        = "tbd"
+                        = @sublemma.usages.count
                       %p
                         = sublemma.updated_at.strftime('last update: %b %Y')
                     .col-md-1.detailed-information

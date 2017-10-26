@@ -1,0 +1,174 @@
+- content_for :page_title do
+  Coptic Usage
+
+%section
+  .container
+    .page-header
+      %h1.lexicon-headline
+        Usage
+        = @usage.hierarchy if @usage.hierarchy.present?
+        of
+        %span.coptic-greek= @usage.sublemma.label if @usage.sublemma.present?
+        %small
+          = link_to 'Coptic Usage', usages_path
+
+    .row
+      .col-md-6
+        .panel-group
+
+          -# hierarchy, coptic specification, meaning
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Hierarchy
+                .col-md-8.lexicon-field-value
+                  = optional_field @usage.hierarchy
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Sublemma
+                .col-md-8.coptic-greek.lexicon-field-value
+                  - if @usage.sublemma.present?
+                    = link_to @usage.sublemma.label, sublemma_path(@usage.sublemma)
+                  - else
+                    '-'
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Coptic Specification
+                .col-md-8.coptic-greek.lexicon-field-value
+                  = optional_field @usage.coptic_specification
+
+          -# distinction tier, criterion
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Distinction Tier
+                .col-md-8.lexicon-field-value
+                  = @usage.distinction_tier.present? ? @usage.distinction_tier.label : '-'
+
+          -# meaning, usage categories
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Meaning
+                .col-md-8.lexicon-field-value
+                  = optional_field @usage.meaning
+
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Usage Category
+                .col-md-8.lexicon-field-value
+                  = optional_field @usage.usage_categories.map{|c| c.code}.join(', ')
+
+
+          -# corresponding usages
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Corresponding Usages
+                .col-md-8.lexicon-field-value
+                  %table.table.table-sublemmas
+                    - usages = @usage.corresponding_usages.map{|u_id| Usage.find(u_id)}
+                    - usages.sort_by{|u| u.hierarchy}.each do |u|
+                      %tr
+                        %td= u&.hierarchy
+                        %td= u.distinction_tier&.label
+                        %td= link_to fa_icon('eye'), usage_path(u), target: :blank
+
+          -# hierarchy connections
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Usages of Same Sublemma
+                .col-md-8.lexicon-field-value
+                  %table.table.table-sublemmas
+                    - usages = @usage.sublemma.usages
+                    - usages.sort_by{|u| u.hierarchy}.each do |u|
+                      %tr
+                        %td= u&.hierarchy
+                        %td= u.distinction_tier&.label
+                        %td= link_to fa_icon('eye'), usage_path(u), target: :blank
+
+
+          -# owner, updater, further comments
+          .panel.panel-default.panel-lexicon
+            .panel-body
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Creation
+                .col-md-8.lexicon-field-value
+                  = "#{@usage.created_at.strftime('%b %e, %Y')} by #{@usage.created_by.code}"
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Last Update
+                .col-md-8.lexicon-field-value
+                  - if @usage.created_at == @usage.updated_at
+                    = '-'
+                  - else
+                    = "#{@usage.updated_at.strftime('%b %e, %Y')} by #{@usage.updated_by.code}"
+              .row.lexicon-field
+                - comments = @usage.comments_for('usage')
+                .col-md-3.lexicon-field-attribute
+                  Comments
+                .col-md-9
+                  -#- if comments.empty?
+                  -#  = '-'
+                  -#- else
+                  -#  - comments.sort_by{|c| c[:created_at]}.each do |comment|
+                  -#    %blockquote.lexicon-field-comment.text-muted
+                  -#      %p= comment.content
+                  -#      %small
+                  -#        = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                  -#        - if comment.created_by == current_user
+                  -#          = link_to usage_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
+                  -#            = fa_icon('trash')
+                  -#  %br
+              -#= render partial: 'comments/add_comment', locals: {target_id: 'generalComment', field: 'sublemma', commented_entry_id: @sublemma.id, comment: SublemmaComment.new}
+
+          -# actions
+          - unless current_user.guest?
+            .panel.panel-default.panel-lexicon
+              .panel-heading
+                .panel-title Actions
+              .panel-body
+                .row
+                  .col-md-4.text-center
+                    = link_to edit_usage_path(@usage) do
+                      = fa_icon('edit')
+                      Edit
+                  .col-md-4.text-center
+                    = comment_button '#generalComment', ' Comment'
+                  .col-md-4.text-center
+                    - if current_user.admin?
+                      = link_to usage_path(@usage), method: :delete, data: {confirm: 'Are you sure?'} do
+                        = fa_icon('trash')
+                        Delete
+                    - else
+                      %i
+                        %small.text-muted No permisson for delete.
+
+
+      .col-md-6
+        -# attestations
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title
+              = link_to 'Attestations', '#'
+              = "(tbd)"
+          .panel-body
+            -#%table.table.table-hover.table-sublemmas
+            -#  - @sublemma.usages.order(:hierarchy).each do |usage|
+            -#    %tr
+            -#      %td= usage.hierarchy
+            -#      %td= optional_field usage.meaning
+            -#      %td= usage.usage_categories&.map{|m| m.code}.join(',')
+
+
+
+

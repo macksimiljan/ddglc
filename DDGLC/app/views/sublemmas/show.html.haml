@@ -122,14 +122,14 @@
               .panel-body
                 .row
                   .col-md-4.text-center
-                    = link_to edit_lemma_path(@sublemma) do
+                    = link_to edit_sublemma_path(@sublemma) do
                       = fa_icon('edit')
                       Edit
                   .col-md-4.text-center
                     = comment_button '#generalComment', ' Comment'
                   .col-md-4.text-center
                     - if current_user.admin?
-                      = link_to lemma_path(@sublemma), method: :delete, data: {confirm: 'Are you sure?'} do
+                      = link_to sublemma_path(@sublemma), method: :delete, data: {confirm: 'Are you sure?'} do
                         = fa_icon('trash')
                         Delete
                     - else
@@ -147,10 +147,12 @@
           .panel-body
             %table.table.table-hover.table-sublemmas
               - @sublemma.usages.order(:hierarchy).each do |usage|
-                %tr
-                  %td= usage.hierarchy
-                  %td= optional_field usage.meaning
-                  %td= usage.usage_categories&.map{|m| m.code}.join(',')
+                = link_to usage_path(usage) do
+                  %tr
+                    %td= usage.hierarchy
+                    %td= link_to optional_field(usage.meaning), usage_path(usage)
+                    %td= usage.distinction_tier&.label
+                    %td= link_to fa_icon('eye'), usage_path(usage)
 
 
 
