@@ -179,8 +179,7 @@
               = link_to 'Coptic Sublemmas', sublemmas_path
               = "(#{@lemma.sublemmas.count})"
           .panel-body
-            %table.table.table-hover.table-sublemmas
-              = render partial: 'sublemmas/previews', locals: {sublemmas: @lemma.sublemmas, show_lemma: false}
+            = render partial: 'sublemmas/previews', locals: {sublemmas: @lemma.sublemmas, show_lemma: false}
 
 
 
