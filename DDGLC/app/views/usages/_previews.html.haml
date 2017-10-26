@@ -1,0 +1,14 @@
+- if usages.empty?
+  = '-'
+- else
+  %table.table.table-hover.table-sublemmas
+    - usages.order(:sublemma_id, :hierarchy).each do |usage|
+      = link_to usage_path(usage) do
+        %tr
+          - if show_sublemma
+            %td= link_to optional_field(usage.sublemma&.label), sublemma_path(usage.sublemma)
+          %td= optional_field usage.hierarchy
+          %td= optional_field usage.meaning
+          - if show_distinction_tier
+            %td= optional_field usage.distinction_tier&.label
+          %td= link_to fa_icon('eye'), usage_path(usage)

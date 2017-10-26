@@ -148,15 +148,5 @@
               = link_to 'Coptic Usages', usages_path
               = "(#{@sublemma.usages.count})"
           .panel-body
-            %table.table.table-hover.table-sublemmas
-              - @sublemma.usages.order(:hierarchy).each do |usage|
-                = link_to usage_path(usage) do
-                  %tr
-                    %td= usage.hierarchy
-                    %td= link_to optional_field(usage.meaning), usage_path(usage)
-                    %td= usage.distinction_tier&.label
-                    %td= link_to fa_icon('eye'), usage_path(usage)
-
-
-
+            = render partial: 'usages/previews', locals: {usages: @sublemma.usages, show_distinction_tier: true, show_sublemma: false}
 

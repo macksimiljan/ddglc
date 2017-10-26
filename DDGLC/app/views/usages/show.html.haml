@@ -78,17 +78,10 @@
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Corresponding Usages
-                .col-md-8.lexicon-field-value
+                .col-md-9.lexicon-field-value
                   %table.table.table-hover.table-sublemmas
-                    - usages = @usage.corresponding_usages.map{|u_id| Usage.find(u_id)}
-                    - usages.sort_by{|u| u.hierarchy}.each do |u|
-                      %tr
-                        %td
-                          usage
-                          = u&.hierarchy
-                          of sublemma
-                          = u&.sublemma.label
-                        %td.text-right= link_to fa_icon('eye'), usage_path(u), target: :blank
+                    - usages = Usage.where(id: @usage.corresponding_usages)
+                    = render partial: 'previews', locals: {usages: usages, show_distinction_tier: false, show_sublemma: true}
 
           -# hierarchy connections
           .panel.panel-default.panel-lexicon
@@ -96,16 +89,9 @@
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Usages of Same Sublemma
-                .col-md-8.lexicon-field-value
-                  %table.table.table-hover.table-sublemmas
-                    - if (usages = @usage.sublemma.usages).nil?
-                      %i This is the only usage of the corresponding sublemma.
-                    - else
-                      - usages.reject{|u| u.id == @usage.id}.sort_by{|u| optional_field(u.hierarchy)}.each do |u|
-                        %tr
-                          %td= optional_field u&.hierarchy
-                          %td= link_to optional_field(u.meaning), usage_path(u), target: :blank
-                          %td.text-right= link_to fa_icon('eye'), usage_path(u), target: :blank
+                .col-md-9.lexicon-field-value
+                  - usages = @usage.sublemma.usages.where.not(id: @usage.id)
+                  = render partial: 'previews', locals: {usages: usages, show_distinction_tier: true, show_sublemma: false}
 
 
           -# owner, updater, further comments
