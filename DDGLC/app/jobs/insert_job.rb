@@ -1,5 +1,16 @@
 module InsertJob
 
+  def add_comment(comments, field, content)
+    return comments if content.blank?
+    content.squish!
+    if content =~ /^[A-Z][a-z][A-Z][a-z][:]?/
+      user_code = content[0..3]
+      content = content[5..-1].squish
+      user = User.find_by_code(user_code)
+    end
+    comments << {field: field, content: content, created_by: user}
+  end
+
   def normalize_field(values, field_key, field_value, is_optional=true)
     return values if field_value.blank? && is_optional
     raise 'Obligatory field is empty' if field_value.blank? && !is_optional

@@ -90,21 +90,6 @@ class InsertGreekLemmaJob < ApplicationJob
     comments
   end
 
-  def add_comment(comments, field, content)
-    return comments if content.blank?
-    content.squish!
-    raise "Comment is too long for #{field}" if content.length > 650
-    if content =~ /^[A-Z][a-z][A-Z][a-z][:]?/
-      user_code = content[0..3]
-      content = content[5..-1].squish
-      user = User.find_by_code(user_code)
-    end
-    comments << {field: field, content: content, created_by: user}
-  end
-
-
-
-
   def article(values, field_value)
     return values if field_value.blank?
 

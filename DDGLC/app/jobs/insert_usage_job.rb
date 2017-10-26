@@ -7,7 +7,7 @@ class InsertUsageJob < ApplicationJob
     @msgs = []
     CSV.foreach path, headers: true do |row|
       next if row.blank?
-      insert_usage(row)
+      # insert_usage(row)
       insert_usage_comment(row)
     end
     insert_exceptions
@@ -137,7 +137,32 @@ class InsertUsageJob < ApplicationJob
   end
 
   def insert_usage_comment(row)
+    return if row.empty?
 
+    id = row['coptic_usage::cu_ID']
+    read_comments(row).each do |comment_data|
+      comment_data[:usage_id] = id
+      comment_data[:created_by] = User.find_by_code('Admin') if comment_data[:created_by].nil?
+      comment_data[:updated_by] = User.find_by_code('Admin')
+      usage_comment = UsageComment.find_or_create_by!(comment_data)
+      if usage_comment.save!
+        @msgs << "INFO \t Saved usage comment !"
+      else
+        @msgs << "WARNING \t Could not save usage comment!"
+      end
+    end
+  rescue StandardError => e
+    @msgs << "ERROR \t #{e.message} in"
+    @msgs << "\t\t #{row.to_s}"
+  end
+
+  def read_comments(row)
+    comments = []
+    comments = add_comment comments, 'encylremark', row['coptic_usage::cu_encylremark']
+    comments = add_comment comments, 'general', row['coptic_usage::cl_comment']
+    comments = add_comment comments, 'delete', row['coptic_usage::cl_delete_comment']
+    comments = add_comment comments, 'processing_note', row['coptic_usage::cl_procNote']
+    comments
   end
 
   def insert_exceptions
