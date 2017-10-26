@@ -5,6 +5,5 @@
         %p= comment.content
         %small
           = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
-          - if comment.created_by == current_user
-            = link_to lemma_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
-              = fa_icon('trash')
+          = delete_comment_button comment.created_by, commented_entry.class.name, comment
+
