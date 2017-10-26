@@ -50,6 +50,11 @@
                   Distinction Tier
                 .col-md-8.lexicon-field-value
                   = @usage.distinction_tier.present? ? @usage.distinction_tier.label : '-'
+              .row.lexicon-field
+                .col-md-3.lexicon-field-attribute
+                  Criterion
+                .col-md-8.lexicon-field-value
+                  = optional_field @usage.criterion
 
           -# meaning, usage categories
           .panel.panel-default.panel-lexicon

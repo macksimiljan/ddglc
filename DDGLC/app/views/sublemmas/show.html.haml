@@ -120,13 +120,17 @@
                 .panel-title Actions
               .panel-body
                 .row
-                  .col-md-4.text-center
+                  .col-md-3.text-center
                     = link_to edit_sublemma_path(@sublemma) do
                       = fa_icon('edit')
                       Edit
-                  .col-md-4.text-center
+                  .col-md-3.text-center
                     = comment_button '#generalComment', ' Comment'
-                  .col-md-4.text-center
+                  .col-md-3.text-center
+                    = link_to new_usage_path(sublemma_id: @sublemma.id) do
+                      = fa_icon('plus')
+                      Usage
+                  .col-md-3.text-center
                     - if current_user.admin?
                       = link_to sublemma_path(@sublemma), method: :delete, data: {confirm: 'Are you sure?'} do
                         = fa_icon('trash')

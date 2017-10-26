@@ -1,0 +1,21 @@
+= bootstrap_form_for(@usage, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-4') do |f|
+  = f.text_field :hierarchy, help: 'Schema: 1.a.i'
+  - if @usage.sublemma
+    = f.hidden_field :sublemma_id
+    = f.static_control label: 'Coptic Sublemma' do
+      = content_tag :div, Sublemma.find_by_id(@usage.sublemma.id)&.label, class: 'coptic-greek adjust-line'
+  - else
+    = f.text_field :sublemma_id, label: 'Coptic Sublemma'
+  = f.hidden_field :coptic_specification, class: 'coptic-greek'
+  = f.collection_select :distinction_tier_id, DistinctionTier.all.order(:label), :id, lambda{|tier| tier.label.titleize}, include_blank: true
+  = f.text_field :criterion
+  = f.text_field :meaning
+  = f.form_group do
+    %button.btn.btn-default{type: 'button', 'data-toggle': 'collapse', 'data-target': '#usage-categories-area', style: 'margin: 16px 0'}
+      Add Usage Categories
+  .collapse#usage-categories-area
+    = f.collection_check_boxes :usage_category_ids, UsageCategory.all, :id, :code, label: 'Usage Categories'
+  = f.text_field :corresponding_usages, help: 'Enter the ID. Multiple IDs are delimited by one space.'
+  %br
+  = f.form_group do
+    = f.submit 'Submit', class: 'btn btn-primary btn-block'
