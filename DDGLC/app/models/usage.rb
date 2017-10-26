@@ -13,6 +13,7 @@ class Usage < ApplicationRecord
   paginates_per 10
 
   NIL_ATTRS = %w[coptic_specification meaning hierarchy distinction_tier_id sublemma_id criterion].freeze
+  before_save :nil_if_blank, :squish_values
 
   def comments_for(field)
     comments = usage_comments.where(field: field)
