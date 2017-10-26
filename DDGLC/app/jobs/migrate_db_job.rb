@@ -8,5 +8,7 @@ class MigrateDbJob < ApplicationJob
     # InsertGreekLemmaJob.perform_now greek_lemma_path
     # InsertCopticSublemmaJob.perform_now coptic_sublemma_path
     InsertUsageJob.perform_now coptic_usage_path
+
+    #TODO: i think we have to increment the id counter manually
   end
 end
