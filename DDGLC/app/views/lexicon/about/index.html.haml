@@ -22,56 +22,172 @@
           .panel-heading
             .panel-title Overview
           .panel-body
-            %ul
-              %li
-                No. of Greek lemmas:
-                = Lemma.count
-                = link_to 'show', lemmas_path
-              %li
-                No. of Coptic sublemmas:
-                = Sublemma.count
-                = link_to 'show', sublemmas_path
-              %li
-                No. of languages:
-                = Language.count
-                = link_to 'show', languages_path
-              %li
-                No. of POS:
-                = PartOfSpeech.count
-                = link_to 'show', part_of_speeches_path
-              %li
-                No. of semantic fiels:
-                = SemanticField.count
-                = link_to 'show', semantic_fields_path
-              %li
-                No. of usage categories:
-                = UsageCategory.count
-                = link_to 'show', usage_categories_path
-              %li
-                No. of distinction tiers:
-                = DistinctionTier.count
-                = link_to 'show', distinction_tiers_path
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 4}
+                        = link_to 'Coptic Usage', usages_path, class: 'incognito-link'
+                        Counter
+                    %tr
+                      %th in total
+                      %th= "new in #{Time.now.last_year.year}"
+                      %th= "new in #{Time.now.year}"
+                      %th= "new in #{Date.today.strftime('%b')}"
+                  %tbody
+                    %tr
+                      %td= Usage.count
+                      %td= Usage.where("date_part('year', usages.created_at) = ?", Time.now.year - 1).count
+                      %td= Usage.where("date_part('year', usages.created_at) = ?", Time.now.year).count
+                      %td= Usage.where("date_part('year', usages.created_at) = ? and date_part('month', usages.created_at) = ?", Time.now.year, Time.now.month).count
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 4}
+                        = link_to 'Coptic Sublemma', sublemmas_path, class: 'incognito-link'
+                        Counter
+                    %tr
+                      %th in total
+                      %th= "new in #{Time.now.last_year.year}"
+                      %th= "new in #{Time.now.year}"
+                      %th= "new in #{Date.today.strftime('%b')}"
+                  %tbody
+                    %tr
+                      %td= Sublemma.count
+                      %td= Sublemma.where("date_part('year', sublemmas.created_at) = ?", Time.now.year - 1).count
+                      %td= Sublemma.where("date_part('year', sublemmas.created_at) = ?", Time.now.year).count
+                      %td= Sublemma.where("date_part('year', sublemmas.created_at) = ? and date_part('month', sublemmas.created_at) = ?", Time.now.year, Time.now.month).count
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 4}
+                        = link_to 'Greek Lemma', lemmas_path, class: 'incognito-link'
+                        Counter
+                    %tr
+                      %th in total
+                      %th= "new in #{Time.now.last_year.year}"
+                      %th= "new in #{Time.now.year}"
+                      %th= "new in #{Date.today.strftime('%b')}"
+                  %tbody
+                    %tr
+                      %td= Lemma.count
+                      %td= Lemma.where("date_part('year', lemmas.created_at) = ?", Time.now.year - 1).count
+                      %td= Lemma.where("date_part('year', lemmas.created_at) = ?", Time.now.year).count
+                      %td= Lemma.where("date_part('year', lemmas.created_at) = ? and date_part('month', lemmas.created_at) = ?", Time.now.year, Time.now.month).count
+
+
+
+
         .panel.panel-default.panel-lexicon
           .panel-heading
             .panel-title Data Quality
           .panel-body
-            tbd
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 6}
+                        = link_to 'Coptic Usage', usages_path, class: 'incognito-link'
+                        Completeness
+                    %tr
+                      %th Hierarchy
+                      %th Sublemma
+                      %th Tier
+                      %th Criterion
+                      %th Meaning
+                      %th Category
+                  %tbody
+                    - total = Usage.count
+                    - if total > 0
+                      %tr
+                        %td= "#{(100.0 * Usage.where.not(hierarchy: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Usage.where.not(sublemma_id: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Usage.where.not(distinction_tier_id: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Usage.where.not(criterion: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Usage.where.not(meaning: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * ActiveRecord::Base.connection.execute("SELECT COUNT( DISTINCT usage_id) FROM usage_categories_usages").first['count'] / total).round(1)}%"
+
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 5}
+                        = link_to 'Coptic Sublemma', sublemmas_path, class: 'incognito-link'
+                        Completeness
+                    %tr
+                      %th Label
+                      %th Lemma
+                      %th Usage
+                      %th Part of Speech
+                      %th Hierarchy
+                  %tbody
+                    - total = Sublemma.count
+                    - if total > 0
+                      %tr
+                        %td= "#{(100.0 * Sublemma.where.not(label: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Sublemma.where.not(lemma_id: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Usage.distinct.pluck(:sublemma_id).count / total).round(1)}%"
+                        %td= "#{(100.0 * Sublemma.where.not(part_of_speech_id: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Sublemma.where.not(hierarchy: nil).count / total).round(1)}%"
+
+            .row
+              .col-md-12
+                %table.table.table-lexicon-overview
+                  %thead
+                    %tr
+                      %th{colspan: 6}
+                        = link_to 'Greek Lemma', lemmas_path, class: 'incognito-link'
+                        Completeness
+                    %tr
+                      %th Label
+                      %th Sublemma
+                      %th Meaning
+                      %th Part of Speech
+                      %th Source
+                      %th Reference
+                  %tbody
+                    - total = Lemma.count
+                    - if total > 0
+                      %tr
+                        %td= "#{(100.0 * Lemma.where.not(label: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Sublemma.distinct.pluck(:lemma_id).count / total).round(1)}%"
+                        %td= "#{(100.0 * Lemma.where.not(meaning: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Lemma.where.not(part_of_speech_id: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Lemma.where.not(source: nil).count / total).round(1)}%"
+                        %td= "#{(100.0 * Lemma.where.not(reference: nil).count / total).round(1)}%"
+
+
+
+
       .col-md-6
         .panel.panel-default.panel-lexicon
           .panel-heading
-            .panel-title 3 recently updated usages
+            .panel-title Recently Updated Coptic Usages
           .panel-body
-            tbd
+            - usages = Usage.order(updated_at: :desc).limit(3)
+            %p.text-right.text-muted= usages.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            = render partial: 'usages/previews', locals: {usages: usages}
 
         .panel.panel-default.panel-lexicon
           .panel-heading
-            .panel-title 3 recently updated sublemmas
+            .panel-title Recently Updated Coptic Sublemmas
           .panel-body
-            tbd
+            - sublemmas = Sublemma.order(updated_at: :desc).limit(3)
+            %p.text-right.text-muted= sublemmas.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            = render partial: 'sublemmas/previews', locals: {sublemmas: sublemmas}
 
         .panel.panel-default.panel-lexicon
           .panel-heading
-            .panel-title 3 recently updated lemmas
+            .panel-title Recently Updated Greek Lemmas
           .panel-body
-            tbd
+            - lemmas = Lemma.order(updated_at: :desc).limit(3)
+            %p.text-right.text-muted= lemmas.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            = render partial: 'lemmas/previews', locals: {lemmas: lemmas}
 

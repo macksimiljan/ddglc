@@ -8,7 +8,7 @@ class Sublemma < ApplicationRecord
   has_many :sublemma_comments
   has_many :usages
 
-  paginates_per 15
+  paginates_per 10
 
   validates :label, presence: true
   validates :hierarchy, allow_blank: true, format: {with: /\A[IVX]+[.]?[A-Z]?[.]?[0-9]*\z/}

@@ -148,5 +148,5 @@
               = link_to 'Coptic Usages', usages_path
               = "(#{@sublemma.usages.count})"
           .panel-body
-            = render partial: 'usages/previews', locals: {usages: @sublemma.usages, show_distinction_tier: true, show_sublemma: false}
+            = render partial: 'usages/previews', locals: {usages: @sublemma.usages, show_sublemma: false}
 

@@ -1,0 +1,12 @@
+- if sublemmas.empty?
+  = '-'
+- else
+  - show_lemma = true if show_lemma.nil?
+  %table.table.table-hover.table-previews
+    - sublemmas.order(:lemma_id, :hierarchy).each do |sublemma|
+      %tr
+        - if show_lemma
+          %td.coptic-greek.adjust-line= link_to optional_field(sublemma.lemma&.label), lemma_path(sublemma.lemma)
+        %td= optional_field sublemma.hierarchy
+        %td= optional_field sublemma.part_of_speech&.label&.titleize
+        %td= link_to fa_icon('eye'), sublemma_path(sublemma)

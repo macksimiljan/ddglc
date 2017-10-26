@@ -10,6 +10,8 @@ class Usage < ApplicationRecord
 
   validates :hierarchy, allow_blank: true, format: {with: /\A[0-9]+[.]?[a-z]?[.]?[ivx]*[.]?[a-z]*\z/}
 
+  paginates_per 10
+
   def comments_for(field)
     comments = usage_comments.where(field: field)
     comments ||= []

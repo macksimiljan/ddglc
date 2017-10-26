@@ -81,7 +81,7 @@
                 .col-md-9.lexicon-field-value
                   %table.table.table-hover.table-sublemmas
                     - usages = Usage.where(id: @usage.corresponding_usages)
-                    = render partial: 'previews', locals: {usages: usages, show_distinction_tier: false, show_sublemma: true}
+                    = render partial: 'previews', locals: {usages: usages, show_distinction_tier: false}
 
           -# hierarchy connections
           .panel.panel-default.panel-lexicon
@@ -91,7 +91,7 @@
                   Usages of Same Sublemma
                 .col-md-9.lexicon-field-value
                   - usages = @usage.sublemma.usages.where.not(id: @usage.id)
-                  = render partial: 'previews', locals: {usages: usages, show_distinction_tier: true, show_sublemma: false}
+                  = render partial: 'previews', locals: {usages: usages, show_sublemma: false}
 
 
           -# owner, updater, further comments

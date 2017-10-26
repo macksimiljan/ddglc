@@ -23,7 +23,7 @@ class UsagesController < ApplicationController
     @usage.updated_by = current_user
     if usage_is_not_empty && @usage.save
       flash[:notice] = 'Successfully created new Coptic usage.'
-      redirect_to sublemma_path(@usage)
+      redirect_to usage_path(@usage)
     else
       flash[:error] = 'Could not create Coptic usage.'
       render 'new'
@@ -43,7 +43,7 @@ class UsagesController < ApplicationController
 
   def destroy
     @usage = Usage.find(params[:id])
-    UsageComment.where(usaeg_id: @usage.id).delete_all
+    UsageComment.where(usage_id: @usage.id).delete_all
     @usage.destroy
     redirect_to usages_path
   end

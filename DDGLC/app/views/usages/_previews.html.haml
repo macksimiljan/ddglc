@@ -1,9 +1,11 @@
 - if usages.empty?
   = '-'
 - else
-  %table.table.table-hover.table-sublemmas
-    - usages.order(:sublemma_id, :hierarchy).each do |usage|
-      = link_to usage_path(usage) do
+  - show_sublemma = true if show_sublemma.nil?
+  - show_distinction_tier = true if show_distinction_tier.nil?
+  %table.table.table-hover.table-previews
+    %tbody
+      - usages.order(:sublemma_id, :hierarchy).each do |usage|
         %tr
           - if show_sublemma
             %td= link_to optional_field(usage.sublemma&.label), sublemma_path(usage.sublemma)

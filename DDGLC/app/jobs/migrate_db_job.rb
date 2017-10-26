@@ -7,8 +7,15 @@ class MigrateDbJob < ApplicationJob
 
     # InsertGreekLemmaJob.perform_now greek_lemma_path
     # InsertCopticSublemmaJob.perform_now coptic_sublemma_path
-    InsertUsageJob.perform_now coptic_usage_path
+    # InsertUsageJob.perform_now coptic_usage_path
 
-    #TODO: i think we have to increment the id counter manually
+
+    connection = ActiveRecord::Base.establish_connection.connection
+    next_id = Lemma.order(id: :desc).first.id + 1
+    connection.execute "ALTER SEQUENCE lemmas_id_seq START with #{next_id} RESTART;"
+
+    next_id = Usage.order(id: :desc).first.id + 1
+    connection.execute "ALTER SEQUENCE usages_id_seq START with #{next_id} RESTART;"
+
   end
 end

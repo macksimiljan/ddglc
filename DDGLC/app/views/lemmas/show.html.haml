@@ -180,12 +180,7 @@
               = "(#{@lemma.sublemmas.count})"
           .panel-body
             %table.table.table-hover.table-sublemmas
-              - @lemma.sublemmas.order(:hierarchy).each do |sublemma|
-                %tr
-                  %td= optional_field sublemma.hierarchy
-                  %td.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.label, sublemma_path(sublemma)
-                  %td= optional_field sublemma.part_of_speech&.label
-                  %td= link_to fa_icon('eye'), sublemma_path(sublemma)
+              = render partial: 'sublemmas/previews', locals: {sublemmas: @lemma.sublemmas, show_lemma: false}
 
 
 

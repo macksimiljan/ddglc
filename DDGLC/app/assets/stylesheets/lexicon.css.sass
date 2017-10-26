@@ -51,9 +51,24 @@ $lexicon-color-very-light: rgb(179, 216, 229)
       background-color: transparent
       color: $lexicon-color-very-light
 
+  a.incognito-link
+    color: #2c3e50
+    &:hover,
+    &:focus
+      background-color: transparent
+      color: $lexicon-color-very-light
 
-.table.table-sublemmas > tbody > tr:first-child > td
+
+.table.table-previews > tbody > tr:first-child > td
   border: none
+
+.table.table-lexicon-overview
+  th
+    font-weight: normal
+    text-align: center
+  td
+    font-weight: bold
+    text-align: center
 
 
 .panel-default.panel-lemma
@@ -75,7 +90,6 @@ $lexicon-color-very-light: rgb(179, 216, 229)
 
 .lexicon-field-attribute
   float: left
-  width: 140px
   color: $lexicon-color-light
 
 .lexicon-field-value

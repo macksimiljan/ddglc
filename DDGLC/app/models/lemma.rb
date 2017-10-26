@@ -17,7 +17,7 @@ class Lemma < ApplicationRecord
   before_save :nil_if_blank
 
 
-  paginates_per 15
+  paginates_per 10
 
   def comments_for(field)
     comments = lemma_comments.where(field: field)

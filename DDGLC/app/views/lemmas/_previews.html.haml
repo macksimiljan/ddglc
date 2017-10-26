@@ -1,0 +1,10 @@
+- if lemmas.empty?
+  = '-'
+- else
+  %table.table.table-hover.table-previews
+    - lemmas.order(:id).each do |lemma|
+      %tr
+        %td.coptic-greek.adjust-line= link_to optional_field(lemma.label), lemma_path(lemma)
+        %td= optional_field lemma.part_of_speech&.label&.titleize
+        %td= optional_field lemma.meaning
+        %td= link_to fa_icon('eye'), lemma_path(lemma)
