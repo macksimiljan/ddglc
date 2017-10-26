@@ -46,10 +46,7 @@
                   .col-md-3.lexicon-field-attribute
                     Language
                   .col-md-8.lexicon-field-value
-                    - if @sublemma.language
-                      = @sublemma.language.code
-                    - else
-                      = '-'
+                    = optional_field @sublemma.language.code
 
 
           -# greek lemma, loaned form, hierarchy

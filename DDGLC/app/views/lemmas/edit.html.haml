@@ -6,7 +6,8 @@
     .page-header
       %h1.lexicon-headline
         Edit
-        %small= link_to 'Greek Lemma', lemmas_path
-        |
-        = link_to 'Lexicon', '/lexicon/about'
+        %small
+          = link_to 'Greek Lemmas', lemmas_path
+          |
+          = link_to 'Lexicon', '/lexicon/about'
     = render 'form'

@@ -151,13 +151,17 @@
                 .panel-title Actions
               .panel-body
                 .row
-                  .col-md-4.text-center
+                  .col-md-3.text-center
                     = link_to edit_lemma_path(@lemma) do
                       = fa_icon('edit')
                       Edit
-                  .col-md-4.text-center
+                  .col-md-3.text-center
                     = comment_button '#generalComment', ' Comment'
-                  .col-md-4.text-center
+                  .col-md-3.text-center
+                    = link_to new_sublemma_path(lemma_id: @lemma.id) do
+                      = fa_icon('plus')
+                      Sublemma
+                  .col-md-3.text-center
                     - if current_user.admin?
                       = link_to lemma_path(@lemma), method: :delete, data: {confirm: 'Are you sure?'} do
                         = fa_icon('trash')
@@ -178,9 +182,9 @@
             %table.table.table-hover.table-sublemmas
               - @lemma.sublemmas.order(:hierarchy).each do |sublemma|
                 %tr
-                  %td= sublemma.hierarchy
+                  %td= optional_field sublemma.hierarchy
                   %td.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.label, sublemma_path(sublemma)
-                  %td= sublemma.part_of_speech.label
+                  %td= optional_field sublemma.part_of_speech&.label
                   %td= link_to fa_icon('eye'), sublemma_path(sublemma)
 
 

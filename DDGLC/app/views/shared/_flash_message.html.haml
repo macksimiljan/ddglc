@@ -1,4 +1,4 @@
-- if flash[:success] or flash[:notice] or flash[:error] or flash[:alert] or flash[:warning]
+- if flash[:success] or flash[:notice] or flash[:warning] or flash[:error]
   .container
     .row.row-flash-message
       .col-md-12
@@ -8,13 +8,8 @@
             %button{:class => 'close', 'data-dismiss' => 'alert', :href =>'#'}
               &times
         -if flash[:error]
-          .alert.alert-error.fade.in
+          .alert.alert-danger.fade.in
             =flash[:error]
-            %button{:class => 'close', 'data-dismiss' => 'alert', :href =>'#'}
-              &times
-        -if flash[:alert]
-          .alert.alert-warning.fade.in
-            =flash[:alert]
             %button{:class => 'close', 'data-dismiss' => 'alert', :href =>'#'}
               &times
         -if flash[:success]

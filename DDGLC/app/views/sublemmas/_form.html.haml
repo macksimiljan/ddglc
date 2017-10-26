@@ -1,0 +1,15 @@
+= bootstrap_form_for(@sublemma, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-4') do |f|
+  = f.text_field :label
+  = f.collection_select :part_of_speech_id, PartOfSpeech.all.order(:label), :id, lambda{|pos| pos.label.titleize}, include_blank: true, help: @sublemma.comments_for('part_of_speech').map{|c| c.created_by.code + ': ' + c.content}.join("\n")
+  = f.collection_select :language_id, Language.all.order(:code), :id, :code, include_blank: true
+  - if @sublemma.lemma
+    = f.hidden_field :lemma_id
+    = f.static_control label: 'Greek Lemma' do
+      .coptic-greek.adjust-line= Lemma.find_by_id(@sublemma.lemma.id)&.label
+  - else
+    = f.text_field :lemma_id, label: 'Greek Lemma'
+  = f.text_field :loaned_form, help: @sublemma.comments_for('loaned_form').map{|c| c.created_by.code + ': ' + c.content}.join("\n")
+  = f.text_field :hierarchy, help: 'Schema: I.A.0'
+  %br
+  = f.form_group do
+    = f.submit 'Submit', class: 'btn btn-primary btn-block'
