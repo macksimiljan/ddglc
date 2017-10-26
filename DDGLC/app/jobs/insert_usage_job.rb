@@ -79,10 +79,11 @@ class InsertUsageJob < ApplicationJob
 
   # TODO: there is also comment in this field!
   def corresponding_usages(values, field_value)
-    return values if field_value.blank? || !field_value.include?('corresponding usage')
+    return values if field_value.blank? || !field_value.downcase.include?('corresponding usage')
 
     usages = []
     data = field_value.delete(',').split('#')
+    puts "after split: #{data}"
     (1..data.size-1).to_a.each do |i|
       id = data[i].squish.to_i
       next if id.zero?

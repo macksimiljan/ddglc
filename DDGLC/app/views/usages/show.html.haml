@@ -74,12 +74,15 @@
                 .col-md-3.lexicon-field-attribute
                   Corresponding Usages
                 .col-md-8.lexicon-field-value
-                  %table.table.table-sublemmas
+                  %table.table.table-hover.table-sublemmas
                     - usages = @usage.corresponding_usages.map{|u_id| Usage.find(u_id)}
                     - usages.sort_by{|u| u.hierarchy}.each do |u|
                       %tr
-                        %td= u&.hierarchy
-                        %td= u.distinction_tier&.label
+                        %td
+                          usage
+                          = u&.hierarchy
+                          of sublemma
+                          = u&.sublemma.label
                         %td= link_to fa_icon('eye'), usage_path(u), target: :blank
 
           -# hierarchy connections
