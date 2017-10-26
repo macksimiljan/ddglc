@@ -14,12 +14,17 @@
           .panel-title Actions
         .panel-body
           .row
-            .col-md-6
+            .col-md-4
+              = link_to sublemmas_path do
+                = fa_icon('level-down')
+                Coptic Sublemmas
+            .col-md-4
+              Filter Greek Lemma
+            .col-md-4
               = link_to new_lemma_path do
                 = fa_icon('plus')
-                %strong Create New Greek Lemma
-            .col-md-6
-              Filter Greek Lemma
+                %b Create New Greek Lemma
+
       .panel.panel-default.panel-lexicon
         .panel-heading
           .panel-title Greek Lemmas

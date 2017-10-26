@@ -14,12 +14,21 @@
           .panel-title Actions
         .panel-body
           .row
-            .col-md-6
+            .col-md-2
+              = link_to lemmas_path do
+                = fa_icon('level-up')
+                Greek Lemmas
+            .col-md-2
+              = link_to usages_path do
+                = fa_icon('level-down')
+                Coptic Usages
+            .col-md-4
+              Filter Coptic Sublemma
+            .col-md-4
               = link_to new_lemma_path do
                 = fa_icon('plus')
-                %strong Create New Coptic Sublemma
-            .col-md-6
-              Filter Coptic Sublemma
+                %b Create New Coptic Sublemma
+
       .panel.panel-default.panel-lexicon
         .panel-heading
           .panel-title Coptic Sublemmas
@@ -51,7 +60,7 @@
                     .col-md-3.detailed-information
                       %p
                         usages:
-                        = @sublemma.usages.count
+                        = sublemma.usages.count
                       %p
                         = sublemma.updated_at.strftime('last update: %b %Y')
                     .col-md-1.detailed-information

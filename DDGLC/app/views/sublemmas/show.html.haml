@@ -7,7 +7,9 @@
       %h1.lexicon-headline
         %span.coptic-greek= @sublemma.label
         %small
-          = link_to 'Coptic Sublemma', sublemmas_path
+          = link_to 'Coptic Sublemmas', sublemmas_path
+          |
+          = link_to 'Lexicon', '/lexicon/about'
 
     .row
       .col-md-6
@@ -142,7 +144,7 @@
         .panel.panel-default.panel-lexicon
           .panel-heading
             .panel-title
-              = link_to 'Coptic Usages', '#'
+              = link_to 'Coptic Usages', usages_path
               = "(#{@sublemma.usages.count})"
           .panel-body
             %table.table.table-hover.table-sublemmas

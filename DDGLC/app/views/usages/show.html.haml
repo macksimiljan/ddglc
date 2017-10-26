@@ -10,7 +10,9 @@
         of
         %span.coptic-greek= @usage.sublemma.label if @usage.sublemma.present?
         %small
-          = link_to 'Coptic Usage', usages_path
+          = link_to 'Coptic Usages', usages_path
+          |
+          = link_to 'Lexicon', '/lexicon/about'
 
     .row
       .col-md-6
@@ -87,13 +89,15 @@
                 .col-md-3.lexicon-field-attribute
                   Usages of Same Sublemma
                 .col-md-8.lexicon-field-value
-                  %table.table.table-sublemmas
-                    - usages = @usage.sublemma.usages
-                    - usages.sort_by{|u| u.hierarchy}.each do |u|
-                      %tr
-                        %td= u&.hierarchy
-                        %td= u.distinction_tier&.label
-                        %td= link_to fa_icon('eye'), usage_path(u), target: :blank
+                  %table.table.table-hover.table-sublemmas
+                    - if (usages = @usage.sublemma.usages).nil?
+                      %i This is the only usage of the corresponding sublemma.
+                    - else
+                      - usages.reject{|u| u.id == @usage.id}.sort_by{|u| optional_field(u.hierarchy)}.each do |u|
+                        %tr
+                          %td= optional_field u&.hierarchy
+                          %td= link_to optional_field(u.meaning), usage_path(u), target: :blank
+                          %td= link_to fa_icon('eye'), usage_path(u), target: :blank
 
 
           -# owner, updater, further comments
