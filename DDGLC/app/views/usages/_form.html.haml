@@ -6,7 +6,7 @@
       = content_tag :div, Sublemma.find_by_id(@usage.sublemma.id)&.label, class: 'coptic-greek adjust-line'
   - else
     = f.text_field :sublemma_id, label: 'Coptic Sublemma'
-  = f.hidden_field :coptic_specification, class: 'coptic-greek'
+  = f.text_field :coptic_specification, class: 'coptic-greek'
   = f.collection_select :distinction_tier_id, DistinctionTier.all.order(:label), :id, lambda{|tier| tier.label.titleize}, include_blank: true
   = f.text_field :criterion
   = f.text_field :meaning

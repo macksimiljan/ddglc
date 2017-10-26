@@ -12,10 +12,16 @@ class Usage < ApplicationRecord
 
   paginates_per 10
 
+  NIL_ATTRS = %w[coptic_specification meaning hierarchy distinction_tier_id sublemma_id criterion].freeze
+
   def comments_for(field)
     comments = usage_comments.where(field: field)
     comments ||= []
     comments
+  end
+
+  def nil_if_blank
+    NIL_ATTRS.each{ |attr| self[attr] = nil if self[attr].blank? }
   end
 
 end

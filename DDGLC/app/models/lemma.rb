@@ -13,8 +13,8 @@ class Lemma < ApplicationRecord
               nSg: 'τό', nDu: 'τώ', nPl: 'τά',
               mfSg: 'ὁ / ἡ'}.freeze
 
-  NIL_ATTRS = %w( meaning part_of_speech_id article loan_word_form language_id source reference).freeze
-  before_save :nil_if_blank
+  NIL_ATTRS = %w[meaning part_of_speech_id article loan_word_form language_id source reference].freeze
+  before_save :nil_if_blank, :squish_values
 
 
   paginates_per 10
@@ -25,9 +25,8 @@ class Lemma < ApplicationRecord
     comments
   end
 
-
   def nil_if_blank
-    NIL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }
+    NIL_ATTRS.each{ |attr| self[attr] = nil if self[attr].blank? }
   end
 
 

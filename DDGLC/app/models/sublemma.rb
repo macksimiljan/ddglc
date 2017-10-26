@@ -13,9 +13,15 @@ class Sublemma < ApplicationRecord
   validates :label, presence: true
   validates :hierarchy, allow_blank: true, format: {with: /\A[IVX]+[.]?[A-Z]?[.]?[0-9]*\z/}
 
+  NIL_ATTRS = %w[part_of_speech_id language_id hierarchy loaned_form lemma_id].freeze
+
   def comments_for(field)
     comments = sublemma_comments.where(field: field)
     comments ||= []
     comments
+  end
+
+  def nil_if_blank
+    NIL_ATTRS.each{ |attr| self[attr] = nil if self[attr].blank? }
   end
 end

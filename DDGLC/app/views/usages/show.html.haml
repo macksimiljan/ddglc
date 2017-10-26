@@ -49,7 +49,7 @@
                 .col-md-3.lexicon-field-attribute
                   Distinction Tier
                 .col-md-8.lexicon-field-value
-                  = @usage.distinction_tier.present? ? @usage.distinction_tier.label : '-'
+                  = @usage.distinction_tier.present? ? @usage.distinction_tier.label.titleize : '-'
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Criterion
