@@ -83,7 +83,7 @@
                           = u&.hierarchy
                           of sublemma
                           = u&.sublemma.label
-                        %td= link_to fa_icon('eye'), usage_path(u), target: :blank
+                        %td.text-right= link_to fa_icon('eye'), usage_path(u), target: :blank
 
           -# hierarchy connections
           .panel.panel-default.panel-lexicon
@@ -100,7 +100,7 @@
                         %tr
                           %td= optional_field u&.hierarchy
                           %td= link_to optional_field(u.meaning), usage_path(u), target: :blank
-                          %td= link_to fa_icon('eye'), usage_path(u), target: :blank
+                          %td.text-right= link_to fa_icon('eye'), usage_path(u), target: :blank
 
 
           -# owner, updater, further comments
@@ -120,23 +120,23 @@
                   - else
                     = "#{@usage.updated_at.strftime('%b %e, %Y')} by #{@usage.updated_by.code}"
               .row.lexicon-field
-                - comments = @usage.comments_for('usage')
+                - comments = @usage.comments_for('delete') + @usage.comments_for('encylremark') + @usage.comments_for('general') + @usage.comments_for('processing_note')
                 .col-md-3.lexicon-field-attribute
                   Comments
                 .col-md-9
-                  -#- if comments.empty?
-                  -#  = '-'
-                  -#- else
-                  -#  - comments.sort_by{|c| c[:created_at]}.each do |comment|
-                  -#    %blockquote.lexicon-field-comment.text-muted
-                  -#      %p= comment.content
-                  -#      %small
-                  -#        = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
-                  -#        - if comment.created_by == current_user
-                  -#          = link_to usage_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
-                  -#            = fa_icon('trash')
-                  -#  %br
-              -#= render partial: 'comments/add_comment', locals: {target_id: 'generalComment', field: 'sublemma', commented_entry_id: @sublemma.id, comment: SublemmaComment.new}
+                  - if comments.empty?
+                    = '-'
+                  - else
+                    - comments.sort_by{|c| c[:created_at]}.each do |comment|
+                      %blockquote.lexicon-field-comment.text-muted
+                        %p= comment.content
+                        %small
+                          = "#{comment.created_by.code}, #{comment.updated_at.strftime('%b %Y')}"
+                          - if comment.created_by == current_user
+                            = link_to usage_comment_path(comment), method: :delete, data: {confirm: 'Are you sure?'} do
+                              = fa_icon('trash')
+                    %br
+              = render partial: 'comments/add_comment', locals: {target_id: 'generalComment', field: 'general', commented_entry_id: @usage.id, comment: UsageComment.new}
 
           -# actions
           - unless current_user.guest?

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :lexicon do
     get '/about', to: 'about#index'
+    get '/', to: 'about#index'
   end
 
   resources :lemmas, path: '/lexicon/lemmas'
