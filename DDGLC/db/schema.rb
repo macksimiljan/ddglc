@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025191525) do
+ActiveRecord::Schema.define(version: 20171026104516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,20 @@ ActiveRecord::Schema.define(version: 20171025191525) do
     t.index ["usage_id"], name: "index_usage_categories_usages_on_usage_id", using: :btree
   end
 
+  create_table "usage_comments", force: :cascade do |t|
+    t.integer  "usage_id"
+    t.string   "field"
+    t.text     "content",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.index ["created_by_id"], name: "index_usage_comments_on_created_by_id", using: :btree
+    t.index ["field"], name: "index_usage_comments_on_field", using: :btree
+    t.index ["updated_by_id"], name: "index_usage_comments_on_updated_by_id", using: :btree
+    t.index ["usage_id"], name: "index_usage_comments_on_usage_id", using: :btree
+  end
+
   create_table "usages", force: :cascade do |t|
     t.string   "coptic_specification"
     t.string   "meaning"
@@ -178,6 +192,9 @@ ActiveRecord::Schema.define(version: 20171025191525) do
   add_foreign_key "sublemmas", "part_of_speeches"
   add_foreign_key "sublemmas", "users", column: "created_by_id"
   add_foreign_key "sublemmas", "users", column: "updated_by_id"
+  add_foreign_key "usage_comments", "usages"
+  add_foreign_key "usage_comments", "users", column: "created_by_id"
+  add_foreign_key "usage_comments", "users", column: "updated_by_id"
   add_foreign_key "usages", "distinction_tiers"
   add_foreign_key "usages", "sublemmas"
   add_foreign_key "usages", "users", column: "created_by_id"

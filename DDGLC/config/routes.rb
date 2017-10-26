@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :sublemmas, path: '/lexicon/sublemmas'
   resources :sublemma_comments, path: '/lexicon/sublemma_comments'
   resources :usages, path: '/lexicon/usages'
+  resources :usage_comments, path: '/lexicon/usage_comments'
 
   resources :part_of_speeches, path: 'lexicon/pos'
   resources :languages, path: '/lexicon/languages'
