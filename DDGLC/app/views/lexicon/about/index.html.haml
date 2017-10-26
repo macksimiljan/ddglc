@@ -34,7 +34,7 @@
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
                       %th= "new in #{Time.now.year}"
-                      %th= "new in #{Date.today.strftime('%b')}"
+                      %th= "new in #{Date.today&.strftime('%b')}"
                   %tbody
                     %tr
                       %td= Usage.count
@@ -53,7 +53,7 @@
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
                       %th= "new in #{Time.now.year}"
-                      %th= "new in #{Date.today.strftime('%b')}"
+                      %th= "new in #{Date.today&.strftime('%b')}"
                   %tbody
                     %tr
                       %td= Sublemma.count
@@ -72,7 +72,7 @@
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
                       %th= "new in #{Time.now.year}"
-                      %th= "new in #{Date.today.strftime('%b')}"
+                      %th= "new in #{Date.today&.strftime('%b')}"
                   %tbody
                     %tr
                       %td= Lemma.count
@@ -172,7 +172,7 @@
             .panel-title Recently Updated Coptic Usages
           .panel-body
             - usages = Usage.order(updated_at: :desc).limit(3)
-            %p.text-right.text-muted= usages.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            %p.text-right.text-muted= usages.first&.updated_at&.strftime('most recent update: %b %e, %Y')
             = render partial: 'usages/previews', locals: {usages: usages}
 
         .panel.panel-default.panel-lexicon
@@ -180,7 +180,7 @@
             .panel-title Recently Updated Coptic Sublemmas
           .panel-body
             - sublemmas = Sublemma.order(updated_at: :desc).limit(3)
-            %p.text-right.text-muted= sublemmas.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            %p.text-right.text-muted= sublemmas.first&.updated_at&.strftime('most recent update: %b %e, %Y')
             = render partial: 'sublemmas/previews', locals: {sublemmas: sublemmas}
 
         .panel.panel-default.panel-lexicon
@@ -188,6 +188,6 @@
             .panel-title Recently Updated Greek Lemmas
           .panel-body
             - lemmas = Lemma.order(updated_at: :desc).limit(3)
-            %p.text-right.text-muted= lemmas.first&.updated_at.strftime('most recent update: %b %e, %Y')
+            %p.text-right.text-muted= lemmas.first&.updated_at&.strftime('most recent update: %b %e, %Y')
             = render partial: 'lemmas/previews', locals: {lemmas: lemmas}
 
