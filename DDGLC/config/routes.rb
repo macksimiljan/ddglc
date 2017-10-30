@@ -9,10 +9,8 @@ Rails.application.routes.draw do
     get '/imprint', to: 'imprint#index'
   end
 
-  namespace :lexicon do
-    get '/about', to: 'about#index'
-    get '/', to: 'about#index'
-  end
+  get '/lexicon/about', to: 'lexicon#about'
+  get '/lexicon/', to: 'lexicon#about'
 
   resources :lemmas, path: '/lexicon/lemmas'
   resources :lemma_comments, path: '/lexicon/lemma_comments'

@@ -10,6 +10,7 @@ class Ability
 
       elsif user.manager?
         can :index, User
+        can :about, :lexicon
         can :manage, Lemma
         can :manage, Sublemma
 
@@ -17,6 +18,7 @@ class Ability
         can :manage, SublemmaComment, created_by_id: user.id
 
       elsif user.employee?
+        can :about, :lexicon
         can :manage, Lemma
         cannot :destroy, Lemma
         can :manage, Sublemma
