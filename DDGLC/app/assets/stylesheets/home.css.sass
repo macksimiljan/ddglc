@@ -12,52 +12,55 @@ $bibliography-color-dark: rgb(169, 68, 104)
 
 
 .overview-section
-  padding-top: 20vh
-  color: white
-  min-height: 100vh
-  text-align: center
+  padding: 0
+  margin: 0
+  //text-align: left
 
 .overview-section-last
-  min-height: 95vh
+  padding-bottom: 80px
+
 
 .overview-tab
-  #lexicon &
-    background-color: $lexicon-color-light
-  #intro &
-    background-color: $ddglc-color
-  #attestation &
-    background-color: $attestation-color-light
-  #manuscript-text &
-    background-color: $manuscript-text-color-light
-  #bibliography &
-    background-color: $bibliography-color-light
+  background-color: white
+  //#lexicon &
+  //  background-color: $lexicon-color-light
+  //#intro &
+  //  background-color: white //$ddglc-color
+  //#attestation &
+  //  background-color: $attestation-color-light
+  //#manuscript-text &
+  //  background-color: $manuscript-text-color-light
+  //#bibliography &
+  //  background-color: $bibliography-color-light
 
 
 .overview-header
-  height: 130px
-  line-height: 125px
-  h1
-    font-size: 28px
-    vertical-align: middle
-    display: inline-block
+  #lexicon &
+    color: $lexicon-color-light
+  #attestation &
+    color: $attestation-color-light
+  #manuscript-text &
+    color: $manuscript-text-color-light
+  #bibliography &
+    color: $bibliography-color-light
 
-.overview-text
-  font-size: 16px
-  background: rgba(255, 255, 255, 0.1)
-  padding: 25px 20px
-  p
-    margin-bottom: 16px
+  padding-top: 60px
+  h2
+    font-size: 28px
+    text-align: right
+    margin-right: 2em
 
 .overview-text-new
   color: white
-  font-size: 16px
-  padding: 30px 20px
+  line-height: 1.7
+  padding: 50px 10px 30px
   p
     margin-bottom: 16px
   #lexicon &
     background-color: $lexicon-color-dark
   #intro &
-    background-color: $ddglc-color-light
+    background-color: white //$ddglc-color-light
+    color: $ddglc-color
   #attestation &
     background-color: $attestation-color-dark
   #manuscript-text &
@@ -66,7 +69,7 @@ $bibliography-color-dark: rgb(169, 68, 104)
     background-color: $bibliography-color-dark
 
 .overview-links
-  padding-top: 40px
+  padding-top: 20px
 
 
 .btn-default.circular
@@ -79,12 +82,20 @@ $bibliography-color-dark: rgb(169, 68, 104)
   border: 2px solid white
   border-radius: 100% !important
   margin: 10px
+  #intro &
+    color: $ddglc-color
+    border:  1px solid $ddglc-color
   &:focus
     color: white
     background-color: transparent
     border: 2px solid white
+    #intro &
+      color: $ddglc-color
   &:hover
     color: white
     background: rgba(255, 255, 255, 0.4)
     border: 2px solid white
+    #intro &
+      color: white
+      background: $ddglc-color-light
 

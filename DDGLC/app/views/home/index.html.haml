@@ -1,64 +1,77 @@
-%header#intro.overview-section
+%section#intro
   .overview-tab
-    .container
+    .container-fluid
       .row
-        .col-md-10.col-md-offset-1
-          .row.overview-header
-            .col-md-2
-              = image_tag 'logo2.jpg', class: 'img-rounded', alt: 'logo', height: '100'
-            .col-md-10
-              %h1
-                Database and Dictionary of Greek Loanwords in Coptic
-      .row.overview-text-new.overview-text-lexicon
-        .col-md-10.col-md-offset-1
-          %p
-            The DDGLC project is hosted by the Egyptological Institute -Georg Steindorff- of the University of Leipzig and
-            funded by the Deutsche Forschungsgemeinschaft as a long-term project with a projected lifespan ranging through 2024.
-          %p
-            The DDGLC project seeks to produce a systematic, comprehensive and detailed lexicographical compilation and
-            description of Greek loanwords as attested in the entire Coptic corpus through every dialect, each kind of text,
-            and in pre-Coptic Egyptian. The project will thus eventually record 1500 years of contact-induced language change
-            of the Egyptian-Coptic language. The results of the project shall be made available in an online database
-            and in a printed dictionary.
-          %p
-            The core tool of the DDGLC project is currently a relational database designed to connect linguistic and
-            extra-linguistic data concerning types and tokens of all identifiable Greek loanwords in Coptic.
-          .overview-links
-            %a.scroll-button{href: '#lexicon'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-down', class: 'fa-2x'
-            %a{href: '/project/about'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-right', class: 'fa-2x'
+        .col-md-12{style: 'padding: 0'}
+          = image_tag 'book_top2.png', class: 'img-responsive'
+      .row
+        .col-md-8.col-md-offset-2
+          .row
+            .col-md-4.overview-header.text-center
+              = image_tag 'logo2.jpg', class: 'img-rounded', alt: 'logo', height: '200'
+            .col-md-8.overview-text-new
+              %p
+                The
+                %b DDGLC
+                (Database and Dictionary of Greek Loanwords in Coptic) project is hosted by the Egyptological Institute -Georg Steindorff- of the University of Leipzig and
+                funded by the Deutsche Forschungsgemeinschaft as a long-term project with a projected lifespan ranging through 2024.
+              %p
+                The DDGLC project seeks to produce a systematic, comprehensive and detailed lexicographical compilation and
+                description of Greek loanwords as attested in the entire Coptic corpus through every dialect, each kind of text,
+                and in pre-Coptic Egyptian. The project will thus eventually record 1500 years of contact-induced language change
+                of the Egyptian-Coptic language. The results of the project shall be made available in an online database
+                and in a printed dictionary.
+              %p
+                The core tool of the DDGLC project is currently a relational database designed to connect linguistic and
+                extra-linguistic data concerning types and tokens of all identifiable Greek loanwords in Coptic.
+              .overview-links.text-center
+                %a.scroll-button{href: '#lexicon'}
+                  %button.btn.btn-default.circular
+                    = fa_icon 'angle-double-down', class: 'fa-2x'
+                %a{href: '/project/about'}
+                  %button.btn.btn-default.circular
+                    = fa_icon 'angle-double-right', class: 'fa-2x'
+      .row
+        .col-md-12{style: 'padding: 0'}
+          = image_tag 'book_bottom4.jpg', class: 'img-responsive'
 
 
 %section#lexicon.overview-section
   .overview-tab
     .container
       .row
-        .col-md-10.col-md-offset-1
-          %h2.overview-header
-            = fa_icon 'book'
-            Lexicon
-      .row.overview-text-new.overview-text-lexicon
-        .col-md-10.col-md-offset-1
+        .col-md-4.overview-header
+          %h2 Lexicon
+      .row
+        .col-md-4
+        .col-md-8.overview-text-new
           %p
             The lexicon summarizes the morphological and semantic information of the data.
             It is divided into three parts. The first part is the Greek Lemma list, which contains the information
-            of the processed donor language lemmas. Currently, there XX lemmas in the database.
+            of the processed donor language lemmas. Currently, there are
+            %b= pluralize Lemma.count, 'lemma'
+            in the database.
           %p
-            The second part is the Coptic Sublemma list with more than XX entries. Each entry represents the morphological
+            The second part is the Coptic Sublemma list with more than
+            = succeed '.' do
+              %b= pluralize Sublemma.count, 'sublemma'
+            Each entry represents the morphological
             and semantic information of a loanword.
           %p
-            Eventually, the Coptic Usage is the third part. It contains data about ... Within the database, there are
-            XX Coptic Usages, on average XX usages per sublemma.
-          .overview-links
-            %a.scroll-button{href: '#intro'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-up', class: 'fa-2x'
-            %a.scroll-button{href: '#attestation'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-down', class: 'fa-2x'
+            Eventually, the Coptic Usage is the third part. It contains data about the concrete use cases of a sublemma
+            in the texts. Within the database, there are
+            = succeed ',' do
+              %b= pluralize Usage.count, 'usage'
+            i.e. on average
+            = pluralize (Usage.count.to_f/ Sublemma.count).round(1), 'usages'
+            per sublemma.
+          .overview-links.text-center
+            -#%a.scroll-button{href: '#intro'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-up', class: 'fa-2x'
+            -#%a.scroll-button{href: '#attestation'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-down', class: 'fa-2x'
             %a{href: '/lexicon/about'}
               %button.btn.btn-default.circular
                 = fa_icon 'angle-double-right', class: 'fa-2x'
@@ -68,23 +81,22 @@
   .overview-tab
     .container
       .row
-        .col-md-10.col-md-offset-1
-          %h2.overview-header
-            = fa_icon 'pencil-square-o', class: 'fa-1x'
-            Attestations
-      .row.overview-text-new.overview-text-lexicon
-        .col-md-10.col-md-offset-1
+        .col-md-4.overview-header
+          %h2 Attestations
+      .row
+        .col-md-4
+        .col-md-8.overview-text-new
           %p
             Lorem Ipsum.
           %p
             Lorem Ipsum.
-          .overview-links
-            %a.scroll-button{href: '#lexicon'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-up', class: 'fa-2x'
-            %a.scroll-button{href: '#manuscript-text'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-down', class: 'fa-2x'
+          .overview-links.text-center
+            -#%a.scroll-button{href: '#lexicon'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-up', class: 'fa-2x'
+            -#%a.scroll-button{href: '#manuscript-text'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-down', class: 'fa-2x'
             %a{href: '#attestation'}
               %button.btn.btn-default.circular
                 = fa_icon 'angle-double-right', class: 'fa-2x'
@@ -93,23 +105,22 @@
   .overview-tab
     .container
       .row
-        .col-md-10.col-md-offset-1
-          %h2.overview-header
-            = fa_icon 'file-text-o', class: 'fa-1x'
-            Manuscripts and Texts
-      .row.overview-text-new.overview-text-lexicon
-        .col-md-10.col-md-offset-1
+        .col-md-4.overview-header
+          %h2 Manuscripts & Texts
+      .row
+        .col-md-4
+        .col-md-8.overview-text-new
           %p
             Lorem Ipsum.
           %p
             Lorem Ipsum.
-          .overview-links
-            %a.scroll-button{href: '#attestation'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-up', class: 'fa-2x'
-            %a.scroll-button{href: '#bibliography'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-down', class: 'fa-2x'
+          .overview-links.text-center
+            -#%a.scroll-button{href: '#attestation'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-up', class: 'fa-2x'
+            -#%a.scroll-button{href: '#bibliography'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-down', class: 'fa-2x'
             %a{href: '#manuscript-text'}
               %button.btn.btn-default.circular
                 = fa_icon 'angle-double-right', class: 'fa-2x'
@@ -118,20 +129,19 @@
   .overview-tab
     .container
       .row
-        .col-md-10.col-md-offset-1
-          %h2.overview-header
-            = fa_icon 'external-link', class: 'fa-1x'
-            Bibliography
-      .row.overview-text-new.overview-text-lexicon
-        .col-md-10.col-md-offset-1
+        .col-md-4.overview-header
+          %h2 Bibliography
+      .row
+        .col-md-4
+        .col-md-8.overview-text-new
           %p
             Lorem Ipsum.
           %p
             Lorem Ipsum.
-          .overview-links
-            %a.scroll-button{href: '#manuscript-text'}
-              %button.btn.btn-default.circular
-                = fa_icon 'angle-double-up', class: 'fa-2x'
+          .overview-links.text-center
+            -#%a.scroll-button{href: '#manuscript-text'}
+            -#  %button.btn.btn-default.circular
+            -#    = fa_icon 'angle-double-up', class: 'fa-2x'
             %a{href: '#bibliography'}
               %button.btn.btn-default.circular
                 = fa_icon 'angle-double-right', class: 'fa-2x'
