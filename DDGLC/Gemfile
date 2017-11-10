@@ -6,6 +6,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# -------------
+# Backend
+# -------------
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'
@@ -21,6 +25,13 @@ gem 'cancancan', '~> 2.0'
 gem 'rails_admin', '~> 1.2'
 # a Scope & Engine based, clean, powerful, customizable and sophisticated paginator
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
+# Filterrific is a Rails Engine plugin that makes it easy to filter, search, and sort your ActiveRecord lists.
+gem 'filterrific'
+
+
+# -------------
+# Frontend
+# -------------
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -42,7 +53,7 @@ gem 'bootstrap_form'
 # Use Font-Awesome web fonts and stylesheets
 gem "font-awesome-rails"
 
-gem 'bootstrap-modal-rails'
+# gem 'bootstrap-modal-rails'
 
 gem 'responders', '~> 2.0'
 

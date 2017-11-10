@@ -60,8 +60,6 @@ GEM
       execjs
     bcrypt (3.1.11)
     bindex (0.5.0)
-    bootstrap-modal-rails (2.2.5)
-      railties (>= 3.1)
     bootstrap-navbar (2.5.0)
       gem_config (~> 0.3)
     bootstrap-sass (3.2.0.2)
@@ -83,6 +81,7 @@ GEM
     ffi (1.9.18)
     figaro (1.1.1)
       thor (~> 0.14)
+    filterrific (2.1.2)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     gem_config (0.3.1)
@@ -225,13 +224,13 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bcrypt (~> 3.1.7)
-  bootstrap-modal-rails
   bootstrap-sass (~> 3.2.0)
   bootstrap_form
   byebug
   cancancan (~> 2.0)
   coffee-rails (~> 4.2)
   figaro
+  filterrific
   font-awesome-rails
   haml
   indefinite_article
