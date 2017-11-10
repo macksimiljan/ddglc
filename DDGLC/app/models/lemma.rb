@@ -1,4 +1,6 @@
 class Lemma < ApplicationRecord
+  include LemmaFilter
+
   has_and_belongs_to_many :semantic_fields
   belongs_to :part_of_speech, optional: true
   belongs_to :language, optional: true

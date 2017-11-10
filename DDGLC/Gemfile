@@ -26,7 +26,7 @@ gem 'rails_admin', '~> 1.2'
 # a Scope & Engine based, clean, powerful, customizable and sophisticated paginator
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 # Filterrific is a Rails Engine plugin that makes it easy to filter, search, and sort your ActiveRecord lists.
-gem 'filterrific'
+gem 'filterrific', git: 'https://github.com/ayaman/filterrific.git'
 
 
 # -------------

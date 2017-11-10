@@ -2,7 +2,22 @@ class LemmasController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @lemmas = Lemma.order(:id).page params[:page]
+    persistence_id = params[:reset_filter] == 'true' ? false : 'lemmas#index'
+
+    @filterrifc = initialize_filterrific(
+      Lemma,
+      params[:filterrific],
+      select_options: {
+        sorted_by: Lemma.options_for_sorted_by
+      },
+      persistence_id: persistence_id
+    ) or return
+
+
+    @lemmas = @filterrifc.find.page(params[:page])
+
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def show

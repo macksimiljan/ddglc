@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/ayaman/filterrific.git
+  revision: 292ecd953df4ec70f2f9a879105ef5aba5b77e95
+  specs:
+    filterrific (2.1.2)
+
+GIT
   remote: https://github.com/kaminari/kaminari
   revision: 23e4737720675c83e0c06dc269824cd972058419
   specs:
@@ -81,7 +87,6 @@ GEM
     ffi (1.9.18)
     figaro (1.1.1)
       thor (~> 0.14)
-    filterrific (2.1.2)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     gem_config (0.3.1)
@@ -230,7 +235,7 @@ DEPENDENCIES
   cancancan (~> 2.0)
   coffee-rails (~> 4.2)
   figaro
-  filterrific
+  filterrific!
   font-awesome-rails
   haml
   indefinite_article

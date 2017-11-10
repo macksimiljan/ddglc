@@ -1,0 +1,37 @@
+%ul
+  - @lemmas.each do |lemma|
+    %li
+      .panel.panel-default.panel-lemma
+        .row
+          .col-md-4.basic-information
+            %p
+              %span.coptic-greek.lemma-label= link_to lemma.label, lemma_path(lemma)
+            %p.lemma-meaning
+              %i= lemma.meaning
+          .col-md-4.detailed-information
+            %p
+              - if lemma.part_of_speech
+                %span.lemma-pos= lemma.part_of_speech.label
+              - else
+                &ndash;
+              - if lemma.article
+                %span.coptic-greek.lemma-article{style: 'font-size: 18px'}= "(#{lemma.article})"
+            %p
+              - if lemma.loan_word_form
+                from
+                %i.lemma-loanword= lemma.loan_word_form
+                - if lemma.language
+                  %span.lemma-language= "(#{lemma.language.code})"
+          .col-md-3.detailed-information
+            %p
+              sublemmas:
+              = lemma.sublemmas.count
+            %p
+              = lemma.updated_at.strftime('last update: %b %Y')
+          .col-md-1.detailed-information
+            %p
+              = link_to lemma_path(lemma) do
+                = fa_icon('eye')
+            %p
+              = link_to edit_lemma_path(lemma) do
+                = fa_icon('edit')
