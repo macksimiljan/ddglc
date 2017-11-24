@@ -1,14 +1,35 @@
 = form_for_filterrific @filterrifc do |f|
   .row
-    .col-md-4 Sort
-    .col-md-8
-      = f.select :sorted_by, @filterrifc.select_options[:sorted_by]
+    .col-md-6.form-group
+      %label.filter-label Sort by
+      = f.select :sorted_by, @filterrifc.select_options[:sorted_by], { include_blank: '...' }, class: 'form-control'
+    .col-md-6.form-group
+      %p.text-center
+        Reset filters
+        %br
+        = link_to fa_icon('times', class: 'fa-2x'), reset_filterrific_url
+  %hr
   .row
-    .col-md-4 Meaning
-    .col-md-8
-      = f.text_field :search_for_meaning, class: 'filterrific-periodically-observed', placeholder: 'Meaning ... '
+    .col-md-12.form-group
+      %label.filter-label Lemma
+      = f.text_field :search_for_label, class: 'filterrific-periodically-observed form-control', placeholder: '...'
   .row
-    .col-md-8
-      = link_to 'Reset filters', reset_filterrific_url
-    .col-md-4
-      = render_filterrific_spinner
+    .col-md-12.form-group
+      %label.filter-label Meaning
+      = f.text_field :search_for_meaning, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Source
+      = f.text_field :search_for_source, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Part of Speech
+      = f.select :with_any_part_of_speech_ids, @filterrifc.select_options[:with_part_of_speech_id], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Created by
+      = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Last update by
+      = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'

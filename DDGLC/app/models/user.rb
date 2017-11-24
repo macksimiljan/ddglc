@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   ROLES = %i[guest employee manager admin].freeze
 
+  def self.options_for_select(table='lemma')
+    order('LOWER(code)').map { |user| [user.code, user.id] }
+  end
+
   def admin?
     role == 'admin' && activated == true
   end

@@ -7,6 +7,7 @@
 $lexicon-color-dark: rgb(80, 143, 165)
 $lexicon-color-light: rgb(108, 172, 194)
 $lexicon-color-very-light: rgb(179, 216, 229)
+$lexicon-background-color: rgb(217, 225, 237)
 
 .lexicon-page
   a
@@ -72,7 +73,7 @@ $lexicon-color-very-light: rgb(179, 216, 229)
 
 
 .panel-default.panel-lemma
-  //min-height: 80px
+  background-color: $lexicon-background-color
   padding: 10px
 
 .coptic-greek
@@ -130,3 +131,7 @@ input.btn-primary
   &:hover,
   &:focus
     background-color: $lexicon-color-very-light
+
+
+label.filter-label
+  font-weight: normal

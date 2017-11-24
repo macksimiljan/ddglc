@@ -5,41 +5,23 @@
   .container
     .page-header
       %h1.lexicon-headline
+        %small= link_to 'Lexicon | ', '/lexicon/about'
         Greek Lemma
-        %small= link_to 'Lexicon', '/lexicon/about'
+        %small= link_to ' | Coptic Sublemma | ', sublemmas_path
+        %small= link_to 'Coptic Usage', usages_path
 
-    .panel-group
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Actions
-        .panel-body
-          .row
-            .col-md-4
-              = link_to sublemmas_path do
-                = fa_icon('level-down')
-                Coptic Sublemmas
-            .col-md-4
-              Filter Greek Lemma
-            .col-md-4
-              = link_to new_lemma_path do
-                = fa_icon('plus')
-                %b Create New Greek Lemma
-
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Filter Greek Lemma List
-        .panel-body
-          = render partial: 'filter'
-
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Greek Lemmas
-        .panel-body#filterrific_results
+    .row
+      .col-md-8
+        .panel-default.panel-lexicon#filterrific_results
           = render partial: 'list'
 
-          = paginate @lemmas, window: 2
+      .col-md-4
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = link_to new_lemma_path do
+              = fa_icon('plus')
+              %b Create New Greek Lemma
 
-
-
-
-
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = render partial: 'filter'

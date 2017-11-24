@@ -8,7 +8,9 @@ class LemmasController < ApplicationController
       Lemma,
       params[:filterrific],
       select_options: {
-        sorted_by: Lemma.options_for_sorted_by
+        sorted_by: Lemma.options_for_sorted_by,
+        with_part_of_speech_id: PartOfSpeech.options_for_select,
+        with_any_user_ids: User.options_for_select
       },
       persistence_id: persistence_id
     ) or return
