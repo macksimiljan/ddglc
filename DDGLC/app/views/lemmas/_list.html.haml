@@ -1,9 +1,15 @@
 .row
   .col-md-12.text-right.text-muted
     %p
-      Greek Lemmas:
-      = @lemmas.total_count
-      = "(#{(100 * @lemmas.total_count.to_f / Lemma.count).round(1)}%)"
+      - if @lemmas.total_count != Lemma.count
+        showing
+        = pluralize @lemmas.total_count, 'Greek lemma', 'Greek lemmas'
+        after filtering
+        = "(#{(100 * @lemmas.total_count.to_f / Lemma.count).round(1)}%)"
+      - else
+        showing all
+        = pluralize Lemma.count, 'Greek lemma', 'Greek lemmas'
+
 .row
   .col-md-12
     %ul

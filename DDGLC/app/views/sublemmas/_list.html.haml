@@ -1,9 +1,14 @@
 .row
   .col-md-12.text-right.text-muted
     %p
-      Coptic Sublemmas:
-      = @sublemmas.total_count
-      = "(#{(100 * @sublemmas.total_count.to_f / Sublemma.count).round(1)}%)"
+      - if @sublemmas.total_count != Sublemma.count
+        showing
+        = pluralize @sublemmas.total_count, 'Coptic sublemma', 'Coptic sublemmas'
+        after filtering
+        = "(#{(100 * @sublemmas.total_count.to_f / Sublemma.count).round(1)}%)"
+      - else
+        showing all
+        = pluralize Sublemma.count, 'Coptic sublemma', 'Coptic sublemmas'
 .row
   .col-md-12
     %ul
