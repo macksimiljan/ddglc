@@ -10,8 +10,9 @@ class User < ApplicationRecord
 
   ROLES = %i[guest employee manager admin].freeze
 
-  def self.options_for_select(table='lemma')
-    order('LOWER(code)').map { |user| [user.code, user.id] }
+  def self.options_for_select(table='lemmas', field='created_by_id')
+    sql = "SELECT DISTINCT u.id, u.code FROM users u, #{table} m WHERE u.id = m.#{field} ORDER BY u.code"
+    ActiveRecord::Base.connection.execute(sql).to_a.map{|result| [result['code'], result['id']]}
   end
 
   def admin?

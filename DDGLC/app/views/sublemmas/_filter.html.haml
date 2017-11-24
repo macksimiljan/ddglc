@@ -31,11 +31,11 @@
   .row
     .col-md-12.form-group
       %label.filter-label Created by
-      = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+      = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_created_by_ids], { include_blank: '...' }, class: 'form-control'
   .row
     .col-md-12.form-group
       %label.filter-label Last update by
-      = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+      = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_updated_by_ids], { include_blank: '...' }, class: 'form-control'
   %hr
     .row
       .col-md-12

@@ -10,7 +10,8 @@ class LemmasController < ApplicationController
       select_options: {
         sorted_by: Lemma.options_for_sorted_by,
         with_part_of_speech_id: PartOfSpeech.options_for_select,
-        with_any_user_ids: User.options_for_select
+        with_any_created_by_ids: User.options_for_select('lemmas', 'created_by_id'),
+        with_any_updated_by_ids: User.options_for_select('lemmas', 'updated_by_id')
       },
       persistence_id: persistence_id
     ) or return
