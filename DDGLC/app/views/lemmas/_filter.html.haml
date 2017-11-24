@@ -33,3 +33,17 @@
     .col-md-12.form-group
       %label.filter-label Last update by
       = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+  %hr
+    .row
+      .col-md-12
+        %small
+          You can use
+          %code
+            *
+          as a placeholder for an arbitrary number of characters in text fields. For instance,
+          %code
+            *(*)
+          searches for text which contains an opening parenthesis and a closing parenthesis; whereby
+          %code
+            (*)
+          returns text which starts with an opening parenthesis and contains a closing one.

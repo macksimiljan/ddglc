@@ -2,6 +2,8 @@ module LemmaFilter
   extend ActiveSupport::Concern
 
   included do
+    include Filter
+
     filterrific(
       default_filter_params: { sorted_by: 'id' },
       available_filters: %i[
@@ -34,9 +36,7 @@ module LemmaFilter
     scope :search_for_meaning, (->(query) do
       return nil if query.blank?
 
-      terms = query.downcase
-                   .split(/\s+/)
-                   .map{ |term| ('%' + term.tr('*', '%') + '%').gsub(/%+/, '%')}
+      terms = split_query query.downcase
       where(
         terms.map { |term| 'LOWER(lemmas.meaning) LIKE ?' }
              .join(' AND '),
@@ -47,8 +47,7 @@ module LemmaFilter
     scope :search_for_label, (->(query) do
       return nil if query.blank?
 
-      terms = query.split(/\s+/)
-                   .map{ |term| ('%' + term.tr('*', '%') + '%').gsub(/%+/, '%')}
+      terms = split_query query
       where(
         terms.map { |term| 'lemmas.label LIKE ?' }.join(' AND '),
         terms
@@ -58,8 +57,7 @@ module LemmaFilter
     scope :search_for_source, (->(query) do
       return nil if query.blank?
 
-      terms = query.split(/\s+/)
-                   .map{ |term| ('%' + term.tr('*', '%') + '%').gsub(/%+/, '%')}
+      terms = split_query query
       where(
         terms.map { |term| 'lemmas.source LIKE ?'}.join(' AND '),
         terms
