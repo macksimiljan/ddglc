@@ -14,4 +14,4 @@
   = f.text_field :reference, help: @lemma.comments_for('reference').map{|c| c.created_by.code + ': ' + c.content}.join("\n")
   %br
   = f.form_group do
-    = f.submit 'Submit', class: 'btn btn-primary btn-block'
+    = f.submit 'Save Greek Lemma', class: 'btn btn-primary btn-block'

@@ -5,8 +5,13 @@
   .container
     .page-header
       %h1.lexicon-headline
-        Coptic Usages
         %small= link_to 'Lexicon', '/lexicon/about'
+        &ndash;
+        %small= link_to 'Greek Lemma', lemmas_path
+        &ndash;
+        %small= link_to 'Coptic Sublemma', sublemmas_path
+        &ndash;
+        Coptic Usage
 
     .panel-group
       .panel.panel-default.panel-lexicon

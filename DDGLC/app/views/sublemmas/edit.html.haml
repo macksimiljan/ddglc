@@ -7,7 +7,11 @@
       %h1.lexicon-headline
         Edit
         %small
-          = link_to 'Coptic Sublemmas', sublemmas_path
-          |
           = link_to 'Lexicon', '/lexicon/about'
+          &ndash;
+          = link_to 'Greek Lemma', lemmas_path
+          &ndash;
+          = link_to 'Coptic Sublemma', sublemmas_path
+          &ndash;
+          = link_to 'Coptic Usage', usages_path
     = render 'form'
