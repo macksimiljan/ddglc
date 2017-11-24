@@ -1,0 +1,50 @@
+= form_for_filterrific @filterrifc do |f|
+  .row
+    .col-md-6.form-group
+      %label.filter-label Sort by
+      = f.select :sorted_by, @filterrifc.select_options[:sorted_by], { include_blank: '...' }, class: 'form-control'
+    .col-md-5.col-md-offset-1.form-group
+      = link_to reset_filterrific_url, role: 'button', class: 'btn', style: 'padding: 0px' do
+        %p.filter-label Reset filters
+        = fa_icon 'times', class: 'fa-2x'
+  %hr
+  .row
+    .col-md-12.form-group
+      %label.filter-label Coptic Sublemma
+      = f.text_field :search_for_label, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Greek Lemma
+      = f.text_field :with_lemma_label, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Part of Speech
+      = f.select :with_any_part_of_speech_ids, @filterrifc.select_options[:with_part_of_speech_id], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Hierarchy
+      = f.text_field :search_for_hierarchy, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Language
+      = f.select :with_any_language_ids, @filterrifc.select_options[:with_any_language_ids], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Created by
+      = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Last update by
+      = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_user_ids], { include_blank: '...' }, class: 'form-control'
+  %hr
+    %small
+      You can use
+      %code
+        *
+      as a placeholder for an arbitrary number of characters in text fields. For instance,
+      %code
+        *(*)
+      searches for text which contains an opening parenthesis and a closing parenthesis; whereby
+      %code
+        (*)
+      returns text which starts with an opening parenthesis and contains a closing one.

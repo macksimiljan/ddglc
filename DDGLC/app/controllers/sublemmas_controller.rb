@@ -2,7 +2,25 @@ class SublemmasController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @sublemmas = Sublemma.order(:id).page params[:page]
+    persistence_id = params[:reset_filter] == 'true' ? false : 'sublemmas#index'
+
+    @filterrifc = initialize_filterrific(
+        Sublemma,
+        params[:filterrific],
+        select_options: {
+          sorted_by: Sublemma.options_for_sorted_by,
+          with_any_language_ids: Language.options_for_select,
+          with_any_user_ids: User.options_for_select,
+          with_part_of_speech_id: PartOfSpeech.options_for_select
+        },
+        persistence_id: persistence_id
+    ) or return
+
+
+    @sublemmas = @filterrifc.find.page(params[:page])
+
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def show

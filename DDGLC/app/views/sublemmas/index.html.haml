@@ -13,73 +13,19 @@
         &ensp;
         %small= link_to 'Coptic Usage', usages_path
 
-    .panel-group
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Actions
-        .panel-body
-          .row
-            .col-md-2
-              = link_to lemmas_path do
-                = fa_icon('level-up')
-                Greek Lemmas
-            .col-md-2
-              = link_to usages_path do
-                = fa_icon('level-down')
-                Coptic Usages
-            .col-md-4
-              Filter Coptic Sublemma
-            .col-md-4
-              = link_to new_sublemma_path do
-                = fa_icon('plus')
-                %b Create New Coptic Sublemma
 
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Coptic Sublemmas
-        .panel-body
-          %ul
-            - @sublemmas.each do |sublemma|
-              %li
-                .panel.panel-default.panel-lemma
-                  .row
-                    .col-md-4.basic-information
-                      %p
-                        %span.coptic-greek.lemma-label= link_to sublemma.label, sublemma_path(sublemma)
-                      %p
-                        - if sublemma.lemma.present?
-                          Greek:
-                          %span.coptic-greek{style: 'font-size: 18px'}= link_to sublemma.lemma&.label, lemma_path(sublemma.lemma)
-                    .col-md-4.detailed-information
-                      %p
-                        - if sublemma.part_of_speech
-                          %span.lemma-pos= sublemma.part_of_speech.label
-                        - else
-                          = '-'
-                      %p
-                        - if sublemma.loaned_form
-                          from
-                          %i.lemma-loanword= sublemma.loaned_form
-                          - if sublemma.language
-                            %span.lemma-language= "(#{sublemma.language.code})"
-                    .col-md-3.detailed-information
-                      %p
-                        usages:
-                        = sublemma.usages.count
-                      %p
-                        = sublemma.updated_at.strftime('last update: %b %Y')
-                    .col-md-1.detailed-information
-                      %p
-                        = link_to sublemma_path(sublemma) do
-                          = fa_icon('eye')
-                      %p
-                        = link_to '#' do
-                          = fa_icon('edit')
+    .row
+      .col-md-8
+        .panel-default.panel-lexicon#filterrific_results
+          = render partial: 'list'
 
+      .col-md-4
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = link_to new_sublemma_path do
+              = fa_icon('plus')
+              %b Create New Coptic Sublemma
 
-          = paginate @sublemmas, window: 2
-
-
-
-
-
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = render partial: 'filter'

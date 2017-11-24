@@ -1,0 +1,42 @@
+.row
+  .col-md-12.text-right.text-muted
+    %p
+      Coptic Sublemmas:
+      = @sublemmas.total_count
+      = "(#{(100 * @sublemmas.total_count.to_f / Sublemma.count).round(1)}%)"
+.row
+  .col-md-12
+    %ul
+      - @sublemmas.each do |sublemma|
+        %li
+          .panel.panel-default.panel-lemma
+            .row
+              .col-md-4
+                %span.coptic-greek.lemma-label= link_to sublemma.label, sublemma_path(sublemma)
+              .col-md-4
+                = optional_field sublemma.part_of_speech&.label
+                - if sublemma.language
+                  = "(#{sublemma.language.code})"
+              .col-md-3
+                usages:
+                = sublemma.usages.count
+              .col-md-1
+                = link_to sublemma_path(sublemma) do
+                  = fa_icon('eye')
+            .row
+              .col-md-4.basic-information
+                - if sublemma.lemma.present?
+                  = fa_icon('link', class: 'text-muted panel-lemma-icon')
+                  %span.coptic-greek{style: 'font-size: 15px'}= link_to sublemma.lemma&.label, lemma_path(sublemma.lemma)
+              .col-md-4.detailed-information
+                = fa_icon('sitemap', class: 'text-muted panel-lemma-icon')
+                = optional_field sublemma.hierarchy
+              .col-md-3.detailed-information
+                = sublemma.updated_at.strftime('update: %b %Y')
+              .col-md-1.detailed-information
+                = link_to edit_sublemma_path(sublemma) do
+                  = fa_icon('edit')
+
+.row
+  .col-md-12.text-center
+    = paginate @sublemmas, window: 3

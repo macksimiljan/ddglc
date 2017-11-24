@@ -1,4 +1,6 @@
 class Sublemma < ApplicationRecord
+  include SublemmaFilter
+
   belongs_to :part_of_speech, optional: true
   belongs_to :language, optional: true
   belongs_to :lemma, optional: true
