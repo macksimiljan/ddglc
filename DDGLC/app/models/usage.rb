@@ -1,4 +1,6 @@
 class Usage < ApplicationRecord
+  include UsageFiler
+
   belongs_to :distinction_tier, optional: true
   belongs_to :sublemma, optional: true
   belongs_to :created_by, class_name: 'User'

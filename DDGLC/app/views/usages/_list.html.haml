@@ -1,0 +1,51 @@
+.row
+  .col-md-12.text-right.text-muted
+    %p
+      - if @usages.total_count != Usage.count
+        showing
+        = pluralize @usages.total_count, 'Coptic usage', 'Coptic usages'
+        after filtering
+        = "(#{(100 * @usages.total_count.to_f / Usage.count).round(1)}%)"
+      - else
+        showing all
+        = pluralize Usage.count, 'Coptic usage', 'Coptic usages'
+.row
+  .col-md-12
+    %ul
+      - @usages.each do |usage|
+        %li
+          .panel.panel-default.panel-lemma
+            .row
+              .col-md-4.basic-information
+                %p
+                  = link_to optional_field(usage.meaning), usage_path(usage)
+                %p
+                  - if usage.sublemma.present?
+                    Sublemma:
+                    %span.coptic-greek{style: 'font-size: 18px'}= link_to usage.sublemma&.label, sublemma_path(usage.sublemma)
+
+              .col-md-4.detailed-information
+                %p
+                  Hierarchy:
+                  = optional_field usage.hierarchy
+                %p
+                  = optional_field usage&.distinction_tier&.label
+
+
+              .col-md-3.detailed-information
+                %p
+                  attestations:
+                  = "tbd"
+                %p
+                  = usage.updated_at.strftime('last update: %b %Y')
+              .col-md-1.detailed-information
+                %p
+                  = link_to usage_path(usage) do
+                    = fa_icon('eye')
+                %p
+                  = link_to '#' do
+                    = fa_icon('edit')
+
+.row
+  .col-md-12.text-center
+    = paginate @usages, window: 3

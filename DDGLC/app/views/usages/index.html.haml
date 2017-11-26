@@ -13,70 +13,19 @@
         &ensp;
         Coptic Usage
 
-    .panel-group
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Actions
-        .panel-body
-          .row
-            .col-md-2
-              = link_to sublemmas_path do
-                = fa_icon('level-up')
-                Coptic Sublemmas
-            .col-md-2
-              = link_to '#' do
-                = fa_icon('level-down')
-                Attestations
-            .col-md-4
-              Filter Coptic Usage
-            .col-md-4
-              = link_to new_usage_path do
-                = fa_icon('plus')
-                %strong Create New Coptic Usage
 
-      .panel.panel-default.panel-lexicon
-        .panel-heading
-          .panel-title Coptic Usages
-        .panel-body
-          %ul
-            - @usages.each do |usage|
-              %li
-                .panel.panel-default.panel-lemma
-                  .row
-                    .col-md-4.basic-information
-                      %p
-                        = link_to optional_field(usage.meaning), usage_path(usage)
-                      %p
-                        - if usage.sublemma.present?
-                          Sublemma:
-                          %span.coptic-greek{style: 'font-size: 18px'}= link_to usage.sublemma&.label, sublemma_path(usage.sublemma)
+    .row
+      .col-md-8
+        .panel-default.panel-lexicon#filterrific_results
+          = render partial: 'list'
 
-                    .col-md-4.detailed-information
-                      %p
-                        Hierarchy:
-                        = optional_field usage.hierarchy
-                      %p
-                        = optional_field usage&.distinction_tier&.label
+      .col-md-4
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = link_to new_usage_path do
+              = fa_icon('plus')
+              %b Create New Coptic Usage
 
-
-                    .col-md-3.detailed-information
-                      %p
-                        attestations:
-                        = "tbd"
-                      %p
-                        = usage.updated_at.strftime('last update: %b %Y')
-                    .col-md-1.detailed-information
-                      %p
-                        = link_to usage_path(usage) do
-                          = fa_icon('eye')
-                      %p
-                        = link_to '#' do
-                          = fa_icon('edit')
-
-
-          = paginate @usages, window: 2
-
-
-
-
-
+        .panel.panel-default.panel-lexicon
+          .panel-body
+            = render partial: 'filter'

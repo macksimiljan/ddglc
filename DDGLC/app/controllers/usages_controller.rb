@@ -2,7 +2,25 @@ class UsagesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @usages = Usage.order(:sublemma_id, :id).page params[:page]
+    persistence_id = params[:reset_filter] == 'true' ? false : 'usages#index'
+
+    @filterrifc = initialize_filterrific(
+        Usage,
+        params[:filterrific],
+        select_options: {
+            sorted_by: Usage.options_for_sorted_by,
+            with_any_created_by_ids: User.options_for_select('usages', 'created_by_id'),
+            with_any_updated_by_ids: User.options_for_select('usages', 'updated_by_id'),
+            with_any_usage_category_ids: UsageCategory.options_for_select
+        },
+        persistence_id: persistence_id
+    ) or return
+
+
+    @usages = @filterrifc.find.page(params[:page])
+
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to(reset_filterrific_url(format: :html)) and return
   end
 
   def show
