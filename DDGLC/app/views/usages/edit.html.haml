@@ -3,15 +3,5 @@
 
 %section.col-md-8.col-md-offset-2
   .container
-    .page-header
-      %h1.lexicon-headline
-        Edit
-        %small
-          = link_to 'Lexicon', '/lexicon/about'
-          &ensp;
-          = link_to 'Greek Lemma', lemmas_path
-          &ensp;
-          = link_to 'Coptic Sublemma', sublemmas_path
-          &ensp;
-          = link_to 'Coptic Usage', usages_path
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Edit'}
     = render 'form'

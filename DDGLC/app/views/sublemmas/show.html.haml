@@ -3,17 +3,7 @@
 
 %section
   .container
-    .page-header
-      %h1.lexicon-headline
-        %span.coptic-greek= @sublemma.label
-        %small
-          = link_to 'Lexicon', '/lexicon/about'
-          &ensp;
-          = link_to 'Greek Lemma', lemmas_path
-          &ensp;
-          = link_to 'Coptic Sublemma', sublemmas_path
-          &ensp;
-          = link_to 'Coptic Usage', usages_path
+    = render partial: 'shared/lexicon_navigation', locals: {title: @sublemma.label}
 
     .row
       .col-md-6
@@ -68,7 +58,7 @@
               .row.lexicon-field
                 .col-md-3.lexicon-field-attribute
                   Loaned Form
-                .col-md-8.lexicon-field-value.coptic-greek
+                .col-md-8.lexicon-field-value
                   =  optional_field @sublemma.loaned_form
                 .col-md-1
                   = comment_button '#loanedFormComment'

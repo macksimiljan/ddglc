@@ -3,15 +3,7 @@
 
 %section.col-md-8.col-md-offset-2
   .container
-    .page-header
-      %h1.lexicon-headline
-        %small= link_to 'Lexicon', '/lexicon/about'
-        &ensp;
-        Greek Lemma
-        &ensp;
-        %small= link_to 'Coptic Sublemma', sublemmas_path
-        &ensp;
-        %small= link_to 'Coptic Usage', usages_path
+    = render partial: 'shared/lexicon_navigation', locals: {is_lemma: true}
 
     .row
       .col-md-8
