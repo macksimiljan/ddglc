@@ -16,35 +16,35 @@
         %li
           .panel.panel-default.panel-lemma
             .row
-              .col-md-4.basic-information
-                %p
-                  = link_to optional_field(usage.meaning), usage_path(usage)
-                %p
-                  - if usage.sublemma.present?
-                    Sublemma:
-                    %span.coptic-greek{style: 'font-size: 18px'}= link_to usage.sublemma&.label, sublemma_path(usage.sublemma)
+              %b.col-md-12
+                = link_to optional_field(usage.meaning), usage_path(usage)
+            .row
+              .col-md-3
+                .row
+                  .col-md-12
+                    - if usage.sublemma.present?
+                      = fa_icon('link', class: 'text-muted panel-lemma-icon')
+                      %span.coptic-greek{style: 'font-size: 18px'}= link_to usage.sublemma&.label, sublemma_path(usage.sublemma)
+                .row
+                  .col-md-12
+                    = fa_icon('sitemap', class: 'text-muted panel-lemma-icon')
+                    = optional_field usage.hierarchy
+              .col-md-6
+                .row
+                  .col-md-12
+                    = fa_icon('tag', class: 'text-muted panel-lemma-icon')
+                    = optional_field usage&.distinction_tier&.label
+                .row
+                  .col-md-12
+                    = fa_icon('sticky-note-o', class: 'text-muted panel-lemma-icon')
+                    %i= optional_field usage.criterion
 
-              .col-md-4.detailed-information
-                %p
-                  Hierarchy:
-                  = optional_field usage.hierarchy
-                %p
-                  = optional_field usage&.distinction_tier&.label
-
-
-              .col-md-3.detailed-information
+              .col-md-3
                 %p
                   attestations:
                   = "tbd"
                 %p
-                  = usage.updated_at.strftime('last update: %b %Y')
-              .col-md-1.detailed-information
-                %p
-                  = link_to usage_path(usage) do
-                    = fa_icon('eye')
-                %p
-                  = link_to '#' do
-                    = fa_icon('edit')
+                  = usage.updated_at.strftime('update: %b %Y')
 
 .row
   .col-md-12.text-center
