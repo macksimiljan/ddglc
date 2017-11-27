@@ -8,10 +8,12 @@ module UsageFiler
     filterrific(
       default_filter_params: { sorted_by: 'id' },
       available_filters: %i[
+        search_for_criterion
+        search_for_hierarchy
         search_for_meaning
         sorted_by
         with_any_created_by_ids
-        with_any_usage_category_ids
+        with_any_distinction_tier_ids
         with_any_updated_by_ids
         with_sublemma_label
       ]
@@ -29,6 +31,27 @@ module UsageFiler
           order(id: :asc)
       end
     end)
+
+    scope :search_for_criterion, (->(query) do
+      return nil if query.blank?
+
+      terms = split_query query
+      where(
+        terms.map{|term| 'usages.criterion LIKE ?'}.join(' AND '),
+        *terms
+      )
+    end)
+
+    scope :search_for_hierarchy, (->(query) do
+      return nil if query.blank?
+
+      terms = split_query query
+      where(
+        terms.map{|term| 'usages.hierarchy LIKE ?'}.join(' AND '),
+        *terms
+      )
+    end)
+
 
     scope :search_for_meaning, (->(query) do
       return nil if query.blank?

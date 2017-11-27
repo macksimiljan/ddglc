@@ -3,6 +3,7 @@ module Filter
 
   module ClassMethods
     def split_query(query)
+      query = query.to_s
       query.tr! '*', '%'
       query.gsub! '_', '\_'
 

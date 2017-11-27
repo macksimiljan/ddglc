@@ -18,6 +18,18 @@
       = f.text_field :with_sublemma_label, class: 'filterrific-periodically-observed form-control', placeholder: '...'
   .row
     .col-md-12.form-group
+      %label.filter-label Hierarchy
+      = f.text_field :search_for_hierarchy, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Distinction Tier
+      = f.select :with_any_distinction_tier_ids, @filterrifc.select_options[:with_any_distinction_tier_ids], { include_blank: '...' }, class: 'form-control'
+  .row
+    .col-md-12.form-group
+      %label.filter-label Criterion
+      = f.text_field :search_for_criterion, class: 'filterrific-periodically-observed form-control', placeholder: '...'
+  .row
+    .col-md-12.form-group
       %label.filter-label Created by
       = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_created_by_ids], { include_blank: '...' }, class: 'form-control'
   .row

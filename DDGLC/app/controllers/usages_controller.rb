@@ -11,7 +11,8 @@ class UsagesController < ApplicationController
             sorted_by: Usage.options_for_sorted_by,
             with_any_created_by_ids: User.options_for_select('usages', 'created_by_id'),
             with_any_updated_by_ids: User.options_for_select('usages', 'updated_by_id'),
-            with_any_usage_category_ids: UsageCategory.options_for_select
+            with_any_usage_category_ids: UsageCategory.options_for_select,
+            with_any_distinction_tier_ids: DistinctionTier.options_for_select
         },
         persistence_id: persistence_id
     ) or return
