@@ -3,31 +3,30 @@
 
 %section.lexicon-page
   .container
-    .page-header
-      %h1.lexicon-headline
-        Distinction Tiers
-        %small= link_to 'Lexicon', '/lexicon/about'
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Distinction Tiers'}
 
     .row
       .col-md-12
         = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th Label
-          %th Description
-          %th Action
-      %tbody
-        - @distinction_tiers.each do |tier|
-          %tr
-            %td
-              = tier.label
-            %td
-              = optional_field tier.description
-            %td
-              = link_to fa_icon('pencil-square'), root_path
-              = link_to fa_icon('trash'), root_path
+    .row
+      .col-md-6.col-md-offset-1
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Label
+              %th Description
+              %th.text-center Action
+          %tbody
+            - @distinction_tiers.each do |tier|
+              %tr
+                %td
+                  = tier.label
+                %td
+                  = optional_field tier.description
+                %td.text-center
+                  = link_to fa_icon('pencil-square'), root_path
+                  = link_to fa_icon('trash'), root_path
 
 
 

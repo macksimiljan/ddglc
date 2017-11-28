@@ -1,7 +1,7 @@
 = navbar fixed: :top, id: 'mainNav' do
   = navbar_header brand: "#{image_tag('logo2.jpg', height: '30px')} DDGLC", brand_link: root_path
   = navbar_collapse do
-    = navbar_group id: 'menu' do
+    = navbar_group align: 'right', id: 'menu' do
       = navbar_item 'Home', root_path
       = navbar_dropdown 'Project' do
         = navbar_item 'About',   project_about_path
@@ -26,9 +26,8 @@
             -#= navbar_dropdown_divider
             -#= navbar_item "Admin Dashboard", '/admin'
             = navbar_item 'User Management', users_path
-    = navbar_group align: 'right' do
-      - if logged_in?
-        = navbar_item "Log out #{fa_icon('sign-out')}", logout_path, method: :delete
-      - else
-        = navbar_item "#{fa_icon('sign-in')} Log in", login_path
+        - if logged_in?
+          = navbar_item "Log out #{fa_icon('sign-out')}", logout_path, method: :delete
+        - else
+          = navbar_item "#{fa_icon('sign-in')} Log in", login_path
 
