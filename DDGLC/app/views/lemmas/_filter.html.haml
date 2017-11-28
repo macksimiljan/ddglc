@@ -3,11 +3,10 @@
     .col-md-6.form-group
       %label.filter-label Sort by
       = f.select :sorted_by, @filterrifc.select_options[:sorted_by], { include_blank: '...' }, class: 'form-control'
-    .col-md-6.form-group
-      %p.text-center
-        Reset filters
-        %br
-        = link_to fa_icon('times', class: 'fa-2x'), reset_filterrific_url
+    .col-md-5.col-md-offset-1.form-group
+      = link_to reset_filterrific_url, role: 'button', class: 'btn', style: 'padding: 0px' do
+        %p.filter-label Reset filters
+        = fa_icon 'times', class: 'fa-2x'
   %hr
   .row
     .col-md-12.form-group

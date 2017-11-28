@@ -33,7 +33,7 @@
                 .row
                   .col-md-12
                     = fa_icon('tag', class: 'text-muted panel-lemma-icon')
-                    = optional_field sublemma.part_of_speech&.label
+                    = optional_field sublemma.part_of_speech&.label&.titleize
                 .row
                   .col-md-12
                     = fa_icon('globe', class: 'text-muted panel-lemma-icon')

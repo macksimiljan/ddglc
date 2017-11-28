@@ -33,7 +33,7 @@
                 .row
                   .col-md-12
                     = fa_icon('tag', class: 'text-muted panel-lemma-icon')
-                    = optional_field usage&.distinction_tier&.label
+                    = optional_field usage&.distinction_tier&.label&.titleize
                 .row
                   .col-md-12
                     = fa_icon('sticky-note-o', class: 'text-muted panel-lemma-icon')
