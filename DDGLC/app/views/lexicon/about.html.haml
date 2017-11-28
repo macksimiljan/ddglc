@@ -16,7 +16,7 @@
         -#    tbd
         .panel.panel-default.panel-lexicon
           .panel-heading
-            .panel-title Overview
+            .panel-title Number of New Entries
           .panel-body
             .row
               .col-md-12
@@ -24,8 +24,8 @@
                   %thead
                     %tr
                       %th{colspan: 4}
-                        = link_to 'Coptic Usage', usages_path, class: 'incognito-link'
-                        Counter
+                        Number of
+                        = link_to 'Coptic Usages', usages_path, class: 'incognito-link'
                     %tr
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
@@ -37,14 +37,15 @@
                       %td= Usage.where("date_part('year', usages.created_at) = ?", Time.now.year - 1).count
                       %td= Usage.where("date_part('year', usages.created_at) = ?", Time.now.year).count
                       %td= Usage.where("date_part('year', usages.created_at) = ? and date_part('month', usages.created_at) = ?", Time.now.year, Time.now.month).count
+            %hr
             .row
               .col-md-12
                 %table.table.table-lexicon-overview
                   %thead
                     %tr
                       %th{colspan: 4}
-                        = link_to 'Coptic Sublemma', sublemmas_path, class: 'incognito-link'
-                        Counter
+                        Number of
+                        = link_to 'Coptic Sublemmas', sublemmas_path, class: 'incognito-link'
                     %tr
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
@@ -56,14 +57,15 @@
                       %td= Sublemma.where("date_part('year', sublemmas.created_at) = ?", Time.now.year - 1).count
                       %td= Sublemma.where("date_part('year', sublemmas.created_at) = ?", Time.now.year).count
                       %td= Sublemma.where("date_part('year', sublemmas.created_at) = ? and date_part('month', sublemmas.created_at) = ?", Time.now.year, Time.now.month).count
+            %hr
             .row
               .col-md-12
                 %table.table.table-lexicon-overview
                   %thead
                     %tr
                       %th{colspan: 4}
-                        = link_to 'Greek Lemma', lemmas_path, class: 'incognito-link'
-                        Counter
+                        Number of
+                        = link_to 'Greek Lemmas', lemmas_path, class: 'incognito-link'
                     %tr
                       %th in total
                       %th= "new in #{Time.now.last_year.year}"
@@ -81,7 +83,7 @@
 
         .panel.panel-default.panel-lexicon
           .panel-heading
-            .panel-title Data Quality
+            .panel-title Data Quality: Completeness Measures
           .panel-body
             .row
               .col-md-12
@@ -109,6 +111,7 @@
                         %td= "#{(100.0 * Usage.where.not(meaning: nil).count / total).round(1)}%"
                         %td= "#{(100.0 * ActiveRecord::Base.connection.execute("SELECT COUNT( DISTINCT usage_id) FROM usage_categories_usages").first['count'] / total).round(1)}%"
 
+            %hr
             .row
               .col-md-12
                 %table.table.table-lexicon-overview
@@ -133,6 +136,7 @@
                         %td= "#{(100.0 * Sublemma.where.not(part_of_speech_id: nil).count / total).round(1)}%"
                         %td= "#{(100.0 * Sublemma.where.not(hierarchy: nil).count / total).round(1)}%"
 
+            %hr
             .row
               .col-md-12
                 %table.table.table-lexicon-overview
@@ -186,4 +190,39 @@
             - lemmas = Lemma.order(updated_at: :desc).limit(3)
             %p.text-right.text-muted= lemmas.first&.updated_at&.strftime('most recent update: %b %e, %Y')
             = render partial: 'lemmas/previews', locals: {lemmas: lemmas}
+
+        .panel.panel-default.panel-lexicon
+          .panel-heading
+            .panel-title Fixed Values of Attributes
+          .panel-body
+            .row
+              .col-md-10
+                %table.table.table-hover
+                  %thead
+                    %tr
+                      %th.col-md-4 Attribute
+                      %th.col-md-4.text-center Unique Values
+                      %th.col-md-1
+                  %tbody
+                    %tr
+                      %td Distinction Tiers
+                      %td.text-center= DistinctionTier.count
+                      %td.text-center= link_to fa_icon('eye'), distinction_tiers_path
+                    %tr
+                      %td Languages
+                      %td.text-center= Language.count
+                      %td.text-center= link_to fa_icon('eye'), languages_path
+                    %tr
+                      %td Parf of Speech
+                      %td.text-center= PartOfSpeech.count
+                      %td.text-center= link_to fa_icon('eye'), part_of_speeches_path
+                    %tr
+                      %td Semantic Fields
+                      %td.text-center= SemanticField.count
+                      %td.text-center= link_to fa_icon('eye'), semantic_fields_path
+                    %tr
+                      %td Usage Categories
+                      %td.text-center= UsageCategory.count
+                      %td.text-center= link_to fa_icon('eye'), usage_categories_path
+
 

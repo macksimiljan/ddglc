@@ -1,36 +1,35 @@
 - content_for :page_title do
-  Language
+  Languages
 
 %section.lexicon-page
   .container
-    .page-header
-      %h1.lexicon-headline
-        Language
-        %small= link_to 'Lexicon', '/lexicon/about'
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Languages'}
 
     .row
       .col-md-12
         = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th Code
-          %th Label
-          %th Action
-      %tbody
-        - null_value = '--'
-        - @languages.each do |l|
-          %tr
-            %td
-              = l.code
-              = null_value if l.code.blank?
-            %td
-              = l.label
-              = null_value if l.label.blank?
-            %td
-              = link_to fa_icon('pencil-square'), root_path
-              = link_to fa_icon('trash'), root_path
+    .row
+      .col-md-6.col-md-offset-1
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Code
+              %th Label
+              %th.text-center Action
+          %tbody
+            - null_value = '-'
+            - @languages.each do |l|
+              %tr
+                %td
+                  = l.code
+                  = null_value if l.code.blank?
+                %td
+                  = l.label
+                  = null_value if l.label.blank?
+                %td.text-center
+                  = link_to fa_icon('pencil-square'), root_path
+                  = link_to fa_icon('trash'), root_path
 
 
 

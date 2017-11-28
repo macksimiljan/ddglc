@@ -22,10 +22,7 @@
                 .col-md-3.lexicon-field-attribute
                   Part of Speech
                 .col-md-8.lexicon-field-value
-                  - if @sublemma.part_of_speech
-                    = @sublemma.part_of_speech.label.titleize
-                  - else
-                    = '-'
+                  = optional_field @sublemma.part_of_speech&.label&.titleize
                 .col-md-1
                   = comment_button '#partofspeechComment'
               = render partial: 'comments/show_comments', locals: {commented_entry: @sublemma, field: 'part_of_speech'}

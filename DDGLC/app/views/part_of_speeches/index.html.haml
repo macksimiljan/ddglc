@@ -3,28 +3,27 @@
 
 %section.lexicon-page
   .container
-    .page-header
-      %h1.lexicon-headline
-        Part of Speech
-        %small= link_to 'Lexicon', '/lexicon/about'
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Part of Speech'}
 
     .row
       .col-md-12
         = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th Label
-          %th Action
-      %tbody
-        - @part_of_speeches.each do |pos|
-          %tr
-            %td
-              = optional_field pos.label
-            %td
-              = link_to fa_icon('pencil-square'), root_path
-              = link_to fa_icon('trash'), root_path
+    .row
+      .col-md-6.col-md-offset-1
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Label
+              %th.text-center Action
+          %tbody
+            - @part_of_speeches.each do |pos|
+              %tr
+                %td
+                  = optional_field pos.label
+                %td.text-center
+                  = link_to fa_icon('pencil-square'), root_path
+                  = link_to fa_icon('trash'), root_path
 
 
 

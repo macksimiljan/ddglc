@@ -1,40 +1,39 @@
 - content_for :page_title do
-  Semantic Field
+  Semantic Fields
 
-%section.col-md-8.col-md-offset-2
+%section.lexicon-page
   .container
-    .page-header
-      %h1.lexicon-headline
-        Semantic Fields
-        %small= link_to 'Lexicon', '/lexicon/about'
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Semantic Fields'}
 
     .row
       .col-md-12
         = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th Label
-          %th URL
-          %th Source
-          %th Action
-      %tbody
-        - null_value = '--'
-        - @semantic_fields.each do |f|
-          %tr
-            %td
-              = f.label
-              = null_value if f.label.blank?
-            %td
-              = link_to "#{f.url}", f.url, target: :blank
-              = null_value if f.url.blank?
-            %td
-              = f.source
-              = null_value if f.source.blank?
-            %td
-              = link_to fa_icon('pencil-square', class: 'fa-2x'), root_path
-              = link_to fa_icon('trash', class: 'fa-2x'), root_path
+    .row
+      .col-md-10.col-md-offset-1
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Label
+              %th URL
+              %th.text-center Source
+              %th.text-center Action
+          %tbody
+            - null_value = '-'
+            - @semantic_fields.each do |f|
+              %tr
+                %td.col-md-5
+                  = f.label
+                  = null_value if f.label.blank?
+                %td.col-md-4
+                  = link_to "#{f.url}", f.url, target: :blank
+                  = null_value if f.url.blank?
+                %td.col-md-2.text-center
+                  = f.source
+                  = null_value if f.source.blank?
+                %td.col-md-1.text-center
+                  = link_to fa_icon('pencil-square'), root_path
+                  = link_to fa_icon('trash'), root_path
 
 
 

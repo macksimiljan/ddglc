@@ -3,31 +3,30 @@
 
 %section.lexicon-page
   .container
-    .page-header
-      %h1.lexicon-headline
-        Usage Categories
-        %small= link_to 'Lexicon', '/lexicon/about'
+    = render partial: 'shared/lexicon_navigation', locals: {title: 'Usage Categories'}
 
     .row
       .col-md-12
         = link_to fa_icon('plus', class: 'fa-2x'), root_path
 
-    %table.table.table-hover
-      %thead
-        %tr
-          %th Code
-          %th Label
-          %th Action
-      %tbody
-        - @usage_categories.each do |category|
-          %tr
-            %td
-              = category.code
-            %td
-              = optional_field category.label
-            %td
-              = link_to fa_icon('pencil-square'), root_path
-              = link_to fa_icon('trash'), root_path
+    .row
+      .col-md-6.col-md-offset-1
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Code
+              %th Label
+              %th.text-center Action
+          %tbody
+            - @usage_categories.each do |category|
+              %tr
+                %td
+                  = category.code
+                %td
+                  = optional_field category.label
+                %td.text-center
+                  = link_to fa_icon('pencil-square'), root_path
+                  = link_to fa_icon('trash'), root_path
 
 
 

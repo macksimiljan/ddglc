@@ -61,10 +61,7 @@
                   .col-md-3.lexicon-field-attribute
                     Language
                   .col-md-8.lexicon-field-value
-                    - if @lemma.language
-                      = @lemma.language.code
-                    - else
-                      = '-'
+                    = optional_field @lemma.language&.code
 
 
           -# semantic fields
