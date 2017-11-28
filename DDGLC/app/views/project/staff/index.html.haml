@@ -7,3 +7,23 @@
       %h1.project-headline
         Staff
         %small Project
+
+    .row
+      .col-md-4
+        .row
+          .col-md-12.staff-image
+            .missing-image= fa_icon('user', class: 'fa-5x text-muted')
+        .row
+          .col-md-12.staff-text
+            %h3
+              John Smith
+              %br
+              %small Researcher
+            %p
+              Donec facilisis venenatis neque.
+              Sed auctor quam arcu, a rhoncus justo vulputate sit amet.
+              Maecenas gravida, mauris id dapibus consectetur, ligula diam gravida lorem, ut posuere tortor lectus at nunc.
+              Proin dui ante, ultricies quis mollis feugiat, ultrices vel metus. Vestibulum vitae pulvinar quam, ac vulputate mi.
+            %p
+              Contact:
+              = mail_to '#', fa_icon('envelope')
