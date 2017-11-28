@@ -12,6 +12,7 @@ module LemmaFilter
         search_for_source
         sorted_by
         with_any_created_by_ids
+        with_any_language_ids
         with_any_part_of_speech_ids
         with_any_updated_by_ids
       ]
@@ -66,6 +67,10 @@ module LemmaFilter
 
     scope :with_any_created_by_ids, (lambda { |created_by_ids|
       where(created_by_id: [*created_by_ids])
+    })
+
+    scope :with_any_language_ids, (lambda { |language_ids|
+      where(language_id: [*language_ids])
     })
 
     scope :with_any_updated_by_ids, (lambda { |updated_by_ids|

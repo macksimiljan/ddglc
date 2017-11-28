@@ -17,28 +17,35 @@
         %li
           .panel.panel-default.panel-lemma
             .row
-              .col-md-4
+              .col-md-12
                 %span.coptic-greek.lemma-label= link_to lemma.label, lemma_path(lemma)
-              .col-md-4
-                = optional_field lemma.part_of_speech&.label
-                - if lemma.language
-                  = "(#{lemma.language.code})"
-              .col-md-3
-                sublemmas:
-                = lemma.sublemmas.count
-              .col-md-1
-                = link_to lemma_path(lemma) do
-                  = fa_icon('eye')
             .row
+              .col-md-5
+                .row
+                  .col-md-12
+                    %i= optional_field lemma.meaning
+                .row
+                  .col-md-12
+                    = fa_icon('sticky-note-o', class: 'text-muted panel-lemma-icon')
+                    = optional_field lemma.source
               .col-md-4
-                %i= lemma.meaning
-              .col-md-4
-                = optional_field lemma.source
+                .row
+                  .col-md-12
+                    = fa_icon('tag', class: 'text-muted panel-lemma-icon')
+                    = optional_field lemma.part_of_speech&.label&.titleize
+                .row
+                  .col-md-12
+                    = fa_icon('globe', class: 'text-muted panel-lemma-icon')
+                    = optional_field lemma&.language&.code&.titleize
               .col-md-3
-                = lemma.updated_at.strftime('update: %b %Y')
-              .col-md-1
-                = link_to edit_lemma_path(lemma) do
-                  = fa_icon('edit')
+                .row
+                  .col-md-12
+                    sublemmas:
+                    = lemma.sublemmas.count
+                .row
+                  .col-md-12
+                    = lemma.updated_at.strftime('update: %b %Y')
+
 .row
   .col-md-12.text-center
     = paginate @lemmas, window: 3

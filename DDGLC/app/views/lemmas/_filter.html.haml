@@ -19,19 +19,34 @@
       = f.text_field :search_for_meaning, class: 'filterrific-periodically-observed form-control', placeholder: '...'
   .row
     .col-md-12.form-group
-      %label.filter-label Source
+      %label.filter-label
+        = fa_icon('sticky-note-o', class: 'text-muted panel-lemma-icon')
+        Source
       = f.text_field :search_for_source, class: 'filterrific-periodically-observed form-control', placeholder: '...'
   .row
     .col-md-12.form-group
-      %label.filter-label Part of Speech
+      %label.filter-label
+        = fa_icon('tag', class: 'text-muted panel-lemma-icon')
+        Part of Speech
       = f.select :with_any_part_of_speech_ids, @filterrifc.select_options[:with_part_of_speech_id], { include_blank: '...' }, class: 'form-control'
   .row
     .col-md-12.form-group
-      %label.filter-label Created by
+      %label.filter-label
+        = fa_icon('globe', class: 'text-muted panel-lemma-icon')
+        Language
+      = f.select :with_any_language_ids, @filterrifc.select_options[:with_any_language_ids], { include_blank: '...' }, class: 'form-control'
+  %hr
+  .row
+    .col-md-12.form-group
+      %label.filter-label
+        = fa_icon('user-o', class: 'text-muted panel-lemma-icon')
+        Created by
       = f.select :with_any_created_by_ids, @filterrifc.select_options[:with_any_created_by_ids], { include_blank: '...' }, class: 'form-control'
   .row
     .col-md-12.form-group
-      %label.filter-label Last update by
+      %label.filter-label
+        = fa_icon('user-o', class: 'text-muted panel-lemma-icon')
+        Last update by
       = f.select :with_any_updated_by_ids, @filterrifc.select_options[:with_any_updated_by_ids], { include_blank: '...' }, class: 'form-control'
   %hr
     .row

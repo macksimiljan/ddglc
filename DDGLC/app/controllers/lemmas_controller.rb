@@ -9,6 +9,7 @@ class LemmasController < ApplicationController
       params[:filterrific],
       select_options: {
         sorted_by: Lemma.options_for_sorted_by,
+        with_any_language_ids: Language.options_for_select,
         with_part_of_speech_id: PartOfSpeech.options_for_select,
         with_any_created_by_ids: User.options_for_select('lemmas', 'created_by_id'),
         with_any_updated_by_ids: User.options_for_select('lemmas', 'updated_by_id')
