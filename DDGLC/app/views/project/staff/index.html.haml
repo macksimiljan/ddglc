@@ -3,10 +3,7 @@
 
 %section
   .container
-    .page-header
-      %h1.project-headline
-        Staff
-        %small Project
+    = render partial: 'shared/project_navigation', locals: {is_staff: true}
 
     .row
       .col-md-4

@@ -1,4 +1,5 @@
 - title ||= nil
+- is_lexicon ||= false
 - is_lemma ||= false
 - is_sublemma ||= false
 - is_usage ||= false
@@ -7,7 +8,8 @@
     - if title
       %span= title
     %span
-      %small= link_to 'Lexicon', '/lexicon/about'
+      %small= link_to 'Lexicon', '/lexicon/about' unless is_lexicon
+      = "Lexicon" if is_lexicon
     %span
       %small= link_to 'Greek Lemma', lemmas_path unless is_lemma
       = 'Greek Lemma' if is_lemma

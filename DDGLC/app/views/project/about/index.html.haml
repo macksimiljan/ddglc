@@ -1,12 +1,9 @@
 - content_for :page_title do
-  About
+  Project
 
 %section
   .container
-    .page-header
-      %h1.project-headline
-        About
-        %small Project
+    = render partial: 'shared/project_navigation', locals: {is_about: true}
 
     .row
       .col-md-8.col-md-offset-2
